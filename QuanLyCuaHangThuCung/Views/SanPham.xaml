@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="QuanLyCuaHangThuCung.Views.SanPham"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+             mc:Ignorable="d" Height="414" Width="637">
+    <Grid Background="#FFFCE3B4" Width="637" Height="414">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="34*"/>
+        </Grid.RowDefinitions>
+        <Rectangle HorizontalAlignment="Center" Height="148" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="617" Fill="White" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
+        <Label Content="Sản phẩm" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Tên sản phẩm:" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Margin="35,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110" Height="22"/>
+        <Label Content="Đơn vị tính:" HorizontalAlignment="Left" Margin="291,46,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Số lượng:" HorizontalAlignment="Left" Margin="399,46,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Margin="399,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="84" Height="22"/>
+        <Label Content="Đơn giá:" HorizontalAlignment="Left" Margin="509,46,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Margin="509,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="22"/>
+        <ComboBox HorizontalAlignment="Left" Margin="291,75,0,0" VerticalAlignment="Top" Width="81"/>
+        <DataGrid Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Background="White"/>
+        <Button Content="Thêm mới" HorizontalAlignment="Left" Margin="182,122,0,0" VerticalAlignment="Top" Height="23" Width="77" BorderBrush="#FF2181DF" Background="#FF9FC7EE"/>
+        <Button Content="Sửa" HorizontalAlignment="Left" Margin="295,122,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFFAEE7F"/>
+        <Button Content="Xoá" HorizontalAlignment="Left" Margin="410,122,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFF47B60"/>
+        <Label Content="Xuất xứ:" HorizontalAlignment="Left" Margin="173,46,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Margin="173,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="99" Height="22"/>
+
+    </Grid>
+</UserControl>
