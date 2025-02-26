@@ -4,13 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyCuaHangThuCung"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FFE6440C">
         <Rectangle HorizontalAlignment="Left" Height="414" Margin="153,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="637" Fill="#FFFFDEA0" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
         <Image Margin="14,10,660,314" Source="/Image1.png" Stretch="Fill"/>
-        <Rectangle HorizontalAlignment="Left" Height="120" Margin="172,30,0,0" Stroke="Black" VerticalAlignment="Top" Width="595" Fill="#FFFFFAE5" StrokeThickness="0"/>
-        <Button Content="Trang chủ" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Height="33" Width="130" Background="{x:Null}" BorderThickness="0,0,0,0" FontSize="16" FontWeight="Bold" Foreground="White"/>
-
+        <Rectangle HorizontalAlignment="Left" Height="90" Margin="172,30,0,0" Stroke="Black" VerticalAlignment="Top" Width="595" Fill="#FFFFFAE5" StrokeThickness="0"/>
+        <Button HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"
+            Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0" Focusable="False" OpacityMask="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}">
+            <StackPanel Orientation="Horizontal" Focusable="True">
+                <materialDesign:PackIcon Kind="HomeAccount" Width="20" Height="20"/>
+                <TextBlock Text="Trang chủ" Margin="5,0,0,0" />
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top"
+            Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0" Focusable="False">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Hanger" Width="20" Height="20" />
+                <TextBlock Text="Sản phẩm" Margin="5,0,0,0"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top"
+            Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Devices" Width="20" Height="20" />
+                <TextBlock Text="Dịch vụ" Margin="5,0,10,0"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top"
+        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="CustomerService" Width="20" Height="20" />
+                <TextBlock Text="Khách hàng" Margin="5,0,-18,0"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top"
+        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="ChartBar" Width="20" Height="20" />
+                <TextBlock Text="Báo cáo" Margin="5,0,10,0"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top"
+        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="AccountBoxMultiple" Width="20" Height="20" />
+                <TextBlock Text="Nhân viên" Margin="5,0,-5,0"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top"
+    Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Account" Width="20" Height="20" />
+                <TextBlock Text="Tài khoản" Margin="5,0,0,0"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
