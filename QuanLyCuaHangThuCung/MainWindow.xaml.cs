@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyCuaHangThuCung.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,41 @@ namespace QuanLyCuaHangThuCung
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Home();
+        }
+
+        private void Product_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new SanPham();
+        }
+
+        private void Service_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Service();
+        }
+
+        private void Customer_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Customer();
+        }
+
+        private void Report_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Report();
+        }
+
+        private void Employee_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Employee();
+        }
+
+        private void Account_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Account();
         }
     }
 }
