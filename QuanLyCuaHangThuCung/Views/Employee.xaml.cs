@@ -16,14 +16,15 @@ using System.Windows.Shapes;
 namespace QuanLyCuaHangThuCung.Views
 {
     /// <summary>
-    /// Interaction logic for SanPham.xaml
+    /// Interaction logic for KhachHang.xaml
     /// </summary>
-    public partial class SanPham : UserControl
+    public partial class KhachHang : UserControl
     {
-        public SanPham()
+        public KhachHang()
         {
             InitializeComponent();
         }
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
 

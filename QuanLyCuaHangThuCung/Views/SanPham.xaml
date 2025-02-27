@@ -20,12 +20,37 @@
         <Label Content="Đơn giá:" HorizontalAlignment="Left" Margin="509,46,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="509,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="96" Height="22"/>
         <ComboBox HorizontalAlignment="Left" Margin="291,75,0,0" VerticalAlignment="Top" Width="81"/>
-        <DataGrid Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Background="White"/>
-        <Button Content="Thêm mới" HorizontalAlignment="Left" Margin="182,122,0,0" VerticalAlignment="Top" Height="23" Width="77" BorderBrush="#FF2181DF" Background="#FF9FC7EE"/>
-        <Button Content="Sửa" HorizontalAlignment="Left" Margin="295,122,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFFAEE7F"/>
-        <Button Content="Xoá" HorizontalAlignment="Left" Margin="410,122,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFF47B60"/>
+        <Button Content="Thêm mới" HorizontalAlignment="Left" Margin="182,122,0,0" VerticalAlignment="Top" Height="23" Width="77" BorderBrush="#FF2181DF" Background="#FF9FC7EE" Click="Add_Click"/>
+        <Button Content="Sửa" HorizontalAlignment="Left" Margin="295,122,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFFAEE7F" Click="Edit_Click"/>
+        <Button Content="Xoá" HorizontalAlignment="Left" Margin="410,122,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFF47B60" Click="Delete_Click"/>
         <Label Content="Xuất xứ:" HorizontalAlignment="Left" Margin="173,46,0,0" VerticalAlignment="Top" FontSize="14"/>
         <TextBox HorizontalAlignment="Left" Margin="173,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="99" Height="22"/>
+        <Label Content="Danh sách sản phẩm" HorizontalAlignment="Left" Margin="249,171,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
 
+        <DataGrid x:Name="ProductTable" d:ItemsSource="{d:SampleData ItemCount=6}"  AlternatingRowBackground="#E3F2FD" RowBackground="White" 
+          SelectionMode="Single" SelectionUnit="FullRow"
+          BorderBrush="Gray" BorderThickness="1" Margin="10,0,10,10" Grid.Row="1" SelectionChanged="DataGrid_SelectionChanged" Background="{x:Null}">
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#A7C7E7"/>
+                    <Setter Property="Foreground" Value="DarkBlue"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#64B5F6"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
     </Grid>
 </UserControl>
