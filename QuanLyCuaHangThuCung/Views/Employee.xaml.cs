@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyCuaHangThuCung.Views
 {
     /// <summary>
-    /// Interaction logic for KhachHang.xaml
+    /// Interaction logic for Employee.xaml
     /// </summary>
-    public partial class KhachHang : UserControl
+    public partial class Employee : UserControl
     {
-        public KhachHang()
+        public Employee()
         {
             InitializeComponent();
         }

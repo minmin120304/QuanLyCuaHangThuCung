@@ -6,64 +6,96 @@
         xmlns:local="clr-namespace:QuanLyCuaHangThuCung"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="900"
+        MinHeight="450" MinWidth="800">
+
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF625AFF" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Image Margin="14,10,660,314" Source="\Resourses\Image1.png" Stretch="Fill"/>
-        <Button HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Click="Home_Click"
-            Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0" Focusable="False" OpacityMask="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}">
-            <StackPanel Orientation="Horizontal" Focusable="True" HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="HomeAccount" Width="20" Height="20" HorizontalAlignment="Left"/>
-                <TextBlock Text="Trang chủ" Margin="5,0,0,0" HorizontalAlignment="Left" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>
+            <!-- Nội dung chính -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <DockPanel Grid.Column="0" Width="220" LastChildFill="True" Margin="0,0,0,0">
+            <DockPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF625AFF" Offset="1"/>
+                </LinearGradientBrush>
+            </DockPanel.Background>
+            <!-- Logo -->
+            <Image Source="/Resourses/Image1.png" Stretch="Uniform" Height="150" DockPanel.Dock="Top" Margin="0,16,0,0"/>
+
+            <!-- Menu -->
+            <StackPanel DockPanel.Dock="Top" Margin="20">
+                <Button Style="{StaticResource SidebarButton}" Click="Home_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="HomeAccount" Width="30" Height="26"/>
+                        <TextBlock Text="Trang chủ" Margin="5,0,10,0"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button Style="{StaticResource SidebarButton}" Click="Product_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Hanger" Width="30" Height="26"/>
+                        <TextBlock Text="Sản phẩm" Margin="5,0,10,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Service_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Devices" Width="30" Height="26"/>
+                        <TextBlock Text="Dịch vụ" Margin="5,0,30,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Customer_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="CustomerService" Width="30" Height="26"/>
+                        <TextBlock Text="Khách hàng" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Report_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="26"/>
+                        <TextBlock Text="Báo cáo" Margin="5,0,30,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Employee_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountBoxMultiple" Width="30" Height="26"/>
+                        <TextBlock Text="Nhân viên" Margin="5,0,20,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Account_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Account" Width="30" Height="26"/>
+                        <TextBlock Text="Tài khoản" Margin="5,0,20,0"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Click="Product_Click"
-            Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0" Focusable="False">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="Hanger" Width="20" Height="20" HorizontalAlignment="Left" />
-                <TextBlock Text="Sản phẩm" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Click="Service_Click"
-            Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="Devices" Width="20" Height="20" HorizontalAlignment="Left" />
-                <TextBlock Text="Dịch vụ" Margin="5,0,10,0" HorizontalAlignment="Left"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Click="Customer_Click"
-        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="CustomerService" Width="20" Height="20" HorizontalAlignment="Left" />
-                <TextBlock Text="Khách hàng" Margin="5,0,-18,0" HorizontalAlignment="Left"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" Click="Report_Click"
-        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="ChartBar" Width="20" Height="20" HorizontalAlignment="Left" />
-                <TextBlock Text="Báo cáo" Margin="5,0,10,0" HorizontalAlignment="Left"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Click="Employee_Click"
-        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="AccountBoxMultiple" Width="20" Height="20" />
-                <TextBlock Text="Nhân viên" Margin="5,0,-5,0"/>
-            </StackPanel>
-        </Button>
-        <Button HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Click="Account_Click"
-        Height="33" Width="130" Background="{x:Null}" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0,0,0,0">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Account" Width="20" Height="20" />
-                <TextBlock Text="Tài khoản" Margin="5,0,0,0"/>
-            </StackPanel>
-        </Button>
-        <ContentControl x:Name="MainContent" Content="" HorizontalAlignment="Left" Margin="153,0,0,0" VerticalAlignment="Center" Height="414" Width="637"/>
+        </DockPanel>
+
+        <!-- Nội dung chính -->
+        <Grid Grid.Column="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF625AFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Border CornerRadius="20" Margin="20,20,20,20">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF625AFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Viewbox Stretch="Uniform">
+                    <ContentControl x:Name="MainContent"/>
+                </Viewbox>
+            </Border>
+            
+        </Grid>
     </Grid>
 </Window>
