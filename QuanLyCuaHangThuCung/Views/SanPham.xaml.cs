@@ -99,10 +99,27 @@ namespace QuanLyCuaHangThuCung.Views
             {
                 productName = tenSP_input.Text,
                 origin = xuatXu_input.Text,
-                unit = ListDV.SelectedIndex.ToString(),
+                //unit = ListDV.SelectedItem.ToString(),
                 quantity = quantity,
                 price = price
             };
+
+            if (ListDV.SelectedItem != null)
+            {
+                // Kiểm tra xem SelectedItem có phải là ComboBoxItem không
+                if (ListDV.SelectedItem is ComboBoxItem item)
+                {
+                    product.unit = item.Content.ToString();
+                }
+                else
+                {
+                    product.unit = ListDV.SelectedItem.ToString();
+                }
+            }
+            else
+            {
+                product.unit = "Không xác định"; // Giá trị mặc định
+            }
 
             db.Product.Add(product);
             db.SaveChanges();
@@ -126,7 +143,22 @@ namespace QuanLyCuaHangThuCung.Views
 
             product.productName = tenSP_input.Text;
             product.origin = xuatXu_input.Text;
-            product.unit = ListDV.SelectedItem.ToString();
+            if (ListDV.SelectedItem != null)
+            {
+                // Kiểm tra xem SelectedItem có phải là ComboBoxItem không
+                if (ListDV.SelectedItem is ComboBoxItem item)
+                {
+                    product.unit = item.Content.ToString();
+                }
+                else
+                {
+                    product.unit = ListDV.SelectedItem.ToString();
+                }
+            }
+            else
+            {
+                product.unit = "Không xác định"; // Giá trị mặc định
+            }
             product.quantity = int.Parse(SL_input.Text);
             product.price = double.Parse(gia_input.Text);
 
