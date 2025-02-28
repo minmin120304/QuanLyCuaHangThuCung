@@ -78,9 +78,24 @@
 
         <!-- Nội dung chính -->
         <Grid Grid.Column="1">
-            <Viewbox Stretch="Uniform">
-                <ContentControl x:Name="MainContent"/>
-            </Viewbox>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF625AFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Border CornerRadius="20" Margin="20,20,20,20">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF625AFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Viewbox Stretch="Uniform">
+                    <ContentControl x:Name="MainContent"/>
+                </Viewbox>
+            </Border>
+            
         </Grid>
     </Grid>
 </Window>
