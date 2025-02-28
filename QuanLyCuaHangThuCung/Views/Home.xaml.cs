@@ -16,33 +16,13 @@ using System.Windows.Shapes;
 namespace QuanLyCuaHangThuCung.Views
 {
     /// <summary>
-    /// Interaction logic for KhachHang.xaml
+    /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class KhachHang : UserControl
+    public partial class Home : UserControl
     {
-        public KhachHang()
+        public Home()
         {
             InitializeComponent();
-        }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
