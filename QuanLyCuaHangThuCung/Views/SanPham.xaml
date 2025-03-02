@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
              mc:Ignorable="d" Height="450">
 
@@ -14,7 +15,8 @@
             </Grid.RowDefinitions>
 
             <!-- Form nhập liệu -->
-            <Border Grid.Row="0" Padding="10" CornerRadius="10" Background="White" Margin="10">
+            <Border Grid.Row="0" Padding="10" CornerRadius="10" Background="White" Margin="10" 
+                    materialDesign:ShadowAssist.ShadowDepth="Depth3">
                 <StackPanel>
                     <TextBlock Text="Sản phẩm" FontWeight="Bold" FontSize="16"/>
                     <WrapPanel>
@@ -65,11 +67,12 @@
                 <TextBlock Grid.Row="0" Text="Danh sách sản phẩm" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="ProductTable" AutoGenerateColumns="False" ItemsSource="{Binding ProductList}" AlternatingRowBackground="#E3F2FD"
+                    <DataGrid x:Name="ProductTable" AutoGenerateColumns="False" ItemsSource="{Binding Product}" AlternatingRowBackground="#E3F2FD"
                                 SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
                                 Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                                 LoadingRow="ProductTable_LoadingRow" RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
                                 CanUserAddRows="False" >
+
                         <DataGrid.Resources>
                             <!-- Style căn giữa tiêu đề -->
                             <Style TargetType="DataGridColumnHeader">
@@ -82,6 +85,9 @@
                                 <Setter Property="VerticalAlignment" Value="Center"/>
                             </Style>
                         </DataGrid.Resources>
+                        <DataGrid.Effect>
+                            <DropShadowEffect Color="Black" Opacity="0.5" BlurRadius="8" ShadowDepth="4"/>
+                        </DataGrid.Effect>
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
