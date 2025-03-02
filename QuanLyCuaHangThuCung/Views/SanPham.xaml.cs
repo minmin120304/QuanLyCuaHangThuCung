@@ -1,5 +1,4 @@
-﻿using QuanLyCuaHangThuCung.CSDL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +20,7 @@ namespace QuanLyCuaHangThuCung.Views
     /// </summary>
     public partial class SanPham : UserControl
     {
-        ProductList db = new ProductList();
+        AppDbContext db = new AppDbContext();
         public SanPham()
         {
             InitializeComponent();
@@ -99,10 +98,27 @@ namespace QuanLyCuaHangThuCung.Views
             {
                 productName = tenSP_input.Text,
                 origin = xuatXu_input.Text,
-                unit = ListDV.SelectedIndex.ToString(),
+                //unit = ListDV.SelectedItem.ToString(),
                 quantity = quantity,
                 price = price
             };
+
+            if (ListDV.SelectedItem != null)
+            {
+                // Kiểm tra xem SelectedItem có phải là ComboBoxItem không
+                if (ListDV.SelectedItem is ComboBoxItem item)
+                {
+                    product.unit = item.Content.ToString();
+                }
+                else
+                {
+                    product.unit = ListDV.SelectedItem.ToString();
+                }
+            }
+            else
+            {
+                product.unit = "Không xác định"; // Giá trị mặc định
+            }
 
             db.Product.Add(product);
             db.SaveChanges();
@@ -126,7 +142,22 @@ namespace QuanLyCuaHangThuCung.Views
 
             product.productName = tenSP_input.Text;
             product.origin = xuatXu_input.Text;
-            product.unit = ListDV.SelectedItem.ToString();
+            if (ListDV.SelectedItem != null)
+            {
+                // Kiểm tra xem SelectedItem có phải là ComboBoxItem không
+                if (ListDV.SelectedItem is ComboBoxItem item)
+                {
+                    product.unit = item.Content.ToString();
+                }
+                else
+                {
+                    product.unit = ListDV.SelectedItem.ToString();
+                }
+            }
+            else
+            {
+                product.unit = "Không xác định"; // Giá trị mặc định
+            }
             product.quantity = int.Parse(SL_input.Text);
             product.price = double.Parse(gia_input.Text);
 
@@ -156,9 +187,17 @@ namespace QuanLyCuaHangThuCung.Views
                 tenSP_input.Text = product.productName;
                 xuatXu_input.Text = product.origin;
                 SL_input.Text = product.quantity.ToString();
-                ListDV.SelectedItem = product.unit;
+                //ListDV.SelectedValue = product.unit;
                 gia_input.Text = product.price.ToString();
-           }
+                foreach (ComboBoxItem item in ListDV.Items)
+                {
+                    if ((string)item.Content == product.unit)
+                    {
+                        ListDV.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
         }
 
         private void ProductTable_LoadingRow(object sender, DataGridRowEventArgs e)

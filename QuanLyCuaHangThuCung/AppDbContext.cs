@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuanLyCuaHangThuCung.CSDL
+namespace QuanLyCuaHangThuCung
 {
-     class ProductList : DbContext
+    public class AppDbContext : DbContext
     {
-        public ProductList() : base("name=MyConectionString") { }
+        public AppDbContext() : base("name=MyConectionString") { }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Customer> Customer { get; set; }
     }
 }

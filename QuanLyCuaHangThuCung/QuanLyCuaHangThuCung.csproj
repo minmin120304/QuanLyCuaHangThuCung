@@ -76,13 +76,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CSDL\ProductList.cs" />
+    <Compile Include="AppDbContext.cs" />
     <Compile Include="IndexConverter.cs" />
     <Compile Include="Migrations\202502280913074_Product-Test.cs" />
     <Compile Include="Migrations\202502280913074_Product-Test.Designer.cs">
       <DependentUpon>202502280913074_Product-Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503011029398_Cus-Test.cs" />
+    <Compile Include="Migrations\202503011029398_Cus-Test.Designer.cs">
+      <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -162,6 +167,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202502280913074_Product-Test.resx">
       <DependentUpon>202502280913074_Product-Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503011029398_Cus-Test.resx">
+      <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

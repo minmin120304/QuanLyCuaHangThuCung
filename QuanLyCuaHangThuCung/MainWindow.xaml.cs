@@ -26,6 +26,7 @@ namespace QuanLyCuaHangThuCung
         public MainWindow()
         {
             InitializeComponent();
+            MainContent.Content = new Home();
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
