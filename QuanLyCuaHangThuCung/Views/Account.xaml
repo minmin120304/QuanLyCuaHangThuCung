@@ -4,55 +4,81 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
-             mc:Ignorable="d" Height="414" Width="637">
-    <Grid Background="#FFFCE3B4" Width="637" Height="414">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="34*"/>
-        </Grid.RowDefinitions>
-        <Rectangle HorizontalAlignment="Center" Height="156" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="617" Fill="White" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
-        <Label Content="Tài khoản" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Họ và tên:" HorizontalAlignment="Left" Margin="35,40,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="35,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110" Height="22"/>
-        <Label Content="Số điện thoại:" HorizontalAlignment="Left" Margin="482,40,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox HorizontalAlignment="Left" Margin="482,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="118" Height="22"/>
-        <Button Content="Thêm mới" HorizontalAlignment="Left" Margin="182,130,0,0" VerticalAlignment="Top" Height="23" Width="77" BorderBrush="#FF2181DF" Background="#FF9FC7EE" Click="Add_Click"/>
-        <Button Content="Sửa" HorizontalAlignment="Left" Margin="295,130,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFFAEE7F" Click="Edit_Click"/>
-        <Button Content="Xoá" HorizontalAlignment="Left" Margin="410,130,0,0" VerticalAlignment="Top" Height="23" Width="77" Background="#FFF47B60" Click="Delete_Click"/>
-        <Label Content="Địa chỉ:" HorizontalAlignment="Left" Margin="173,40,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label Content="Danh sách khách hàng" HorizontalAlignment="Left" Margin="249,171,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+             mc:Ignorable="d" Height="450">
 
-        <DataGrid x:Name="ProductTable" d:ItemsSource="{d:SampleData ItemCount=6}"  AlternatingRowBackground="#E3F2FD" RowBackground="White" 
-          SelectionMode="Single" SelectionUnit="FullRow"
-          BorderBrush="Gray" BorderThickness="1" Margin="10,0,10,10" Grid.Row="1" SelectionChanged="DataGrid_SelectionChanged" Background="{x:Null}">
+    <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8">
+        <Grid Background="#FFFCE3B4" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <DataGrid.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#A7C7E7"/>
-                    <Setter Property="Foreground" Value="DarkBlue"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="Padding" Value="4"/>
-                </Style>
-            </DataGrid.Resources>
+            <!-- Form nhập liệu -->
+            <Border Grid.Row="0" Padding="10" CornerRadius="10" Background="White" Margin="10">
+                <StackPanel>
+                    <TextBlock Text="Tài khoản" FontWeight="Bold" FontSize="16"/>
+                    <WrapPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Tên tài khoản:" Margin="0,0,0,5"/>
+                            <TextBox x:Name="tenTK_input" Width="120" Height="22"/>
+                        </StackPanel>
+                        <StackPanel Margin="20,10,20,10">
+                            <TextBlock Text="Địa chỉ:" Margin="0,0,0,5"/>
+                            <RichTextBox x:Name="diaChi_input" Width="290" Height="44"/>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="SĐT:" Margin="0,0,0,5"/>
+                            <TextBox x:Name="SDT_input" Width="120" Height="22"/>
+                        </StackPanel>
+                    </WrapPanel>
 
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#64B5F6"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-        </DataGrid>
-        <RichTextBox Margin="173,69,176,96">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text=""/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-    </Grid>
+                    <WrapPanel HorizontalAlignment="Center" Margin="10">
+                        <Button Content="Thêm mới" Background="#FF9FC7EE" Width="90" Height="30" Margin="0,10,30,0" Click="Add_Click"/>
+                        <Button Content="Sửa" Background="#FFFAEE7F" Width="90" Margin="5,10,30,0" Click="Edit_Click"/>
+                        <Button Content="Xoá" Background="#FFF47B60" Width="90" Margin="5,10,0,0" Click="Delete_Click"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Danh sách sản phẩm -->
+            <Grid Grid.Row="1" Margin="10,0,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Chỉ cho tiêu đề -->
+                    <RowDefinition Height="*"/>
+                    <!-- Dành không gian còn lại cho DataGrid -->
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Danh sách tài khoản" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                    <DataGrid x:Name="CustomerTable" AutoGenerateColumns="False" ItemsSource="{Binding Customer}" AlternatingRowBackground="#E3F2FD"
+                                SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
+                                Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
+                                CanUserAddRows="False" >
+                        <DataGrid.Resources>
+                            <!-- Style căn giữa tiêu đề -->
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+
+                            <!-- Style căn giữa nội dung -->
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tên tài khoản" Binding="{Binding customerName}" MinWidth="180" Width="auto"/>
+                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding address}" MinWidth="250" Width="auto"/>
+                            <DataGridTextColumn Header="SĐT" Binding="{Binding phoneNum}" MinWidth="120" Width="auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>
