@@ -13,5 +13,6 @@ namespace QuanLyCuaHangThuCung
         public AppDbContext() : base("name=MyConectionString") { }
         public DbSet<Product> Product { get; set; }
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<Employee> Employee { get; set; }
     }
 }

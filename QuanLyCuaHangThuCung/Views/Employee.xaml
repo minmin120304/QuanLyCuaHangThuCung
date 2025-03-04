@@ -49,7 +49,7 @@
                     <!-- Dành không gian còn lại cho DataGrid -->
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Danh sách nhân viên" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="0" Text="Danh sách" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
                     <DataGrid x:Name="EmployeeTable" AutoGenerateColumns="False" ItemsSource="{Binding Employee}" AlternatingRowBackground="#E3F2FD"
@@ -72,7 +72,7 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding customerName}" MinWidth="180" Width="auto"/>
+                            <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding employeeName}" MinWidth="180" Width="auto"/>
                             <DataGridTextColumn Header="Địa chỉ" Binding="{Binding address}" MinWidth="250" Width="auto"/>
                             <DataGridTextColumn Header="SĐT" Binding="{Binding phoneNum}" MinWidth="120" Width="auto"/>
                         </DataGrid.Columns>
