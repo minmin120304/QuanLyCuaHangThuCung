@@ -72,7 +72,7 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding customerName}" MinWidth="180" Width="auto"/>
+                            <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding employeeName}" MinWidth="180" Width="auto"/>
                             <DataGridTextColumn Header="Địa chỉ" Binding="{Binding address}" MinWidth="250" Width="auto"/>
                             <DataGridTextColumn Header="SĐT" Binding="{Binding phoneNum}" MinWidth="120" Width="auto"/>
                         </DataGrid.Columns>
