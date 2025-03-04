@@ -49,7 +49,7 @@
                     <!-- Dành không gian còn lại cho DataGrid -->
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Danh sách nhân viên" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="0" Text="Danh sách" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
                     <DataGrid x:Name="CustomerTable" AutoGenerateColumns="False" ItemsSource="{Binding Customer}" AlternatingRowBackground="#E3F2FD"
