@@ -86,6 +86,10 @@
     <Compile Include="Migrations\202503011029398_Cus-Test.Designer.cs">
       <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503041053353_All.cs" />
+    <Compile Include="Migrations\202503041053353_All.Designer.cs">
+      <DependentUpon>202503041053353_All.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -171,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503011029398_Cus-Test.resx">
       <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503041053353_All.resx">
+      <DependentUpon>202503041053353_All.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

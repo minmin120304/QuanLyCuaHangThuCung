@@ -69,8 +69,8 @@
                 </Button>
                 <Button Style="{StaticResource SidebarButton}" Click="Account_Click">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Account" Width="30" Height="26"/>
-                        <TextBlock Text="Tài khoản" Margin="5,0,20,0"/>
+                        <materialDesign:PackIcon Kind="CashRegister" Width="30" Height="26"/>
+                        <TextBlock Text="Thanh toán" Margin="5,0,20,0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
