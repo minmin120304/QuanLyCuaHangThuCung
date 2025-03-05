@@ -52,7 +52,7 @@
                 <TextBlock Grid.Row="0" Text="Danh sách loại hình dịch vụ" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="SeviceTypeTable" 
+                    <DataGrid x:Name="ServiceTypeTable" 
                               AutoGenerateColumns="False" 
                               ItemsSource="{Binding Service}" 
                               AlternatingRowBackground="#E3F2FD"
