@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900"
-        MinHeight="600" MinWidth="800">
+        MinHeight="600" MinWidth="900">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -67,10 +67,10 @@
                         <TextBlock Text="Nhân viên" Margin="5,0,20,0"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource SidebarButton}" Click="Account_Click">
+                <Button Style="{StaticResource SidebarButton}" Click="Bill_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CashRegister" Width="30" Height="26"/>
-                        <TextBlock Text="Thanh toán" Margin="5,0,20,0"/>
+                        <TextBlock Text="Hoá đơn" Margin="5,0,20,0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
