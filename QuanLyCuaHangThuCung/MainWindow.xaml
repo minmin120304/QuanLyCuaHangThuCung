@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuanLyCuaHangThuCung"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900"
+        Title="MainWindow" Height="660" Width="937"
         MinHeight="600" MinWidth="900">
 
     <Grid>
@@ -36,11 +36,17 @@
                         <TextBlock Text="Trang chủ" Margin="5,0,10,0"/>
                     </StackPanel>
                 </Button>
-                
+
                 <Button Style="{StaticResource SidebarButton}" Click="Product_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Hanger" Width="30" Height="26"/>
                         <TextBlock Text="Sản phẩm" Margin="5,0,10,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Type_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="PowerSocketTypeI" Width="30" Height="26"/>
+                        <TextBlock Text="Loại hình DV" Margin="5,0,-10,0"/>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource SidebarButton}" Click="Service_Click">
@@ -95,7 +101,7 @@
                     <ContentControl x:Name="MainContent"/>
                 </Viewbox>
             </Border>
-            
+
         </Grid>
     </Grid>
 </Window>

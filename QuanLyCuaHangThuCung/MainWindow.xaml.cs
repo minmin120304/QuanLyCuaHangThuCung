@@ -59,9 +59,14 @@ namespace QuanLyCuaHangThuCung
             MainContent.Content = new Employee();
         }
 
-        private void Account_Click(object sender, RoutedEventArgs e)
+        private void Bill_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new Bill();
+        }
+
+        private void Type_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ServiceType();
         }
     }
 }

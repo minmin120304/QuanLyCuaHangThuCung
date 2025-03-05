@@ -90,7 +90,12 @@
     <Compile Include="Migrations\202503041053353_All.Designer.cs">
       <DependentUpon>202503041053353_All.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503051038211_Servie-Test.cs" />
+    <Compile Include="Migrations\202503051038211_Servie-Test.Designer.cs">
+      <DependentUpon>202503051038211_Servie-Test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
@@ -201,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503041053353_All.resx">
       <DependentUpon>202503041053353_All.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503051038211_Servie-Test.resx">
+      <DependentUpon>202503051038211_Servie-Test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
