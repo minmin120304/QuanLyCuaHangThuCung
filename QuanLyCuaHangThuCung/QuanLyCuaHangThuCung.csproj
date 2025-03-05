@@ -94,6 +94,8 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\ServiceType.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -114,6 +116,9 @@
     </Compile>
     <Compile Include="Views\SanPham.xaml.cs">
       <DependentUpon>SanPham.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceType.xaml.cs">
+      <DependentUpon>ServiceType.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -158,6 +163,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SanPham.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
