@@ -19,29 +19,21 @@
                     <TextBlock Text="Dịch vụ" FontWeight="Bold" FontSize="16"/>
                     <WrapPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Tên sản phẩm:" Margin="0,0,0,5"/>
-                            <TextBox x:Name="tenSP_input" Width="100" Height="22"/>
+                            <TextBlock Text="Tên dịch vụ:" Margin="0,0,0,5"/>
+                            <TextBox x:Name="tenDV_input" Width="100" Height="22"/>
                         </StackPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Xuất xứ:" Margin="0,0,0,5"/>
-                            <TextBox x:Name="xuatXu_input" Width="100" Height="22"/>
-                        </StackPanel>
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Đơn vị tính:" Margin="0,0,0,5"/>
+                            <TextBlock Text="Loại hình:" Margin="0,0,0,5"/>
 
-                            <ComboBox Width="80" Height="22" SelectedIndex="0" x:Name="ListDV">
-                                <ComboBoxItem>Cái</ComboBoxItem>
-                                <ComboBoxItem>Chiếc</ComboBoxItem>
-                                <ComboBoxItem>Bộ</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Margin="10">
-                            <TextBlock Text="Số lượng:" Margin="0,0,0,5"/>
-                            <TextBox x:Name="SL_input" Width="80" Height="22"/>
+                            <ComboBox Width="80" Height="22" SelectedIndex="0" x:Name="ListDV" ItemsSource="{Binding LoaiHinh}"/>
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock Text="Đơn giá:" Margin="0,0,0,5"/>
-                            <TextBox x:Name="gia_input" Width="100" Height="22"/>
+                            <TextBox x:Name="gia_input" Width="80" Height="22"/>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Ghi chú:" Margin="0,0,0,5"/>
+                            <TextBox x:Name="note_input" Width="250" Height="22"/>
                         </StackPanel>
                     </WrapPanel>
 
@@ -62,14 +54,24 @@
                     <!-- Dành không gian còn lại cho DataGrid -->
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Danh sách sản phẩm" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Grid.Row="0" Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="ProductTable" AutoGenerateColumns="False" ItemsSource="{Binding ProductList}" AlternatingRowBackground="#E3F2FD"
-                                SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-                                Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
-                                CanUserAddRows="False" >
+                    <DataGrid x:Name="SeviceTable" 
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding Service}" 
+                              AlternatingRowBackground="#E3F2FD"
+                              SelectionMode="Single" 
+                              SelectionUnit="FullRow" 
+                              BorderBrush="Gray" 
+                              BorderThickness="1"
+                              Background="White" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              RowHeaderWidth="0" 
+                              HeadersVisibility="Column" 
+                              SelectionChanged="DataGrid_SelectionChanged"
+                              CanUserAddRows="False" >
                         <DataGrid.Resources>
                             <!-- Style căn giữa tiêu đề -->
                             <Style TargetType="DataGridColumnHeader">
@@ -85,11 +87,10 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding productName}" MinWidth="180" Width="*"/>
-                            <DataGridTextColumn Header="Xuất xứ" Binding="{Binding origin}" MinWidth="120" Width="*"/>
-                            <DataGridTextColumn Header="Đơn vị tính" Binding="{Binding unit}" MinWidth="80" Width="*"/>
-                            <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="80" Width="*"/>
-                            <DataGridTextColumn Header="Giá sản phẩm" Binding="{Binding price}" MinWidth="100" Width="*"/>
+                            <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding serviceName}" MinWidth="180" Width="*"/>
+                            <DataGridTextColumn Header="Loại hình" Binding="{Binding type}" MinWidth="80" Width="*"/>
+                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="80" Width="*"/>
+                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding note}" MinWidth="250" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>
