@@ -15,5 +15,6 @@ namespace QuanLyCuaHangThuCung
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Service> Service { get; set; }
+        public DbSet<ServiceType> ServiceType { get; set; }
     }
 }
