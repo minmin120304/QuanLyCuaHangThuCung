@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace QuanLyCuaHangThuCung.Models
 {
-    internal class ServiceType
+    [Table("ServiceType")]
+    public class ServiceType
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 0)]
+        public int Id { get; set; }
+
+        [StringLength(50)]
+
+        public string typeID {get; set; }
+        
+        public string typeName { get; set; }
+
+        public string note { get; set; }
     }
 }
