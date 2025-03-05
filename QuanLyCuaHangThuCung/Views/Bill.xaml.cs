@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyCuaHangThuCung.Views
 {
     /// <summary>
-    /// Interaction logic for Account.xaml
+    /// Interaction logic for Bill.xaml
     /// </summary>
-    public partial class Account : UserControl
+    public partial class Bill : UserControl
     {
-        public Account()
+        public Bill()
         {
             InitializeComponent();
         }

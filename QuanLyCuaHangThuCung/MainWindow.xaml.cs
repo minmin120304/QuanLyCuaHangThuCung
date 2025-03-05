@@ -61,7 +61,7 @@ namespace QuanLyCuaHangThuCung
 
         private void Account_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new Account();
+            MainContent.Content = new Bill();
         }
     }
 }

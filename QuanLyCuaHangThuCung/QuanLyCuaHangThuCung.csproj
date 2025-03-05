@@ -97,8 +97,8 @@
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Account.xaml.cs">
-      <DependentUpon>Account.xaml</DependentUpon>
+    <Compile Include="Views\Bill.xaml.cs">
+      <DependentUpon>Bill.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
@@ -114,6 +114,12 @@
     </Compile>
     <Compile Include="Views\SanPham.xaml.cs">
       <DependentUpon>SanPham.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -131,7 +137,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Account.xaml">
+    <Page Include="Views\Bill.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -152,6 +158,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SanPham.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
