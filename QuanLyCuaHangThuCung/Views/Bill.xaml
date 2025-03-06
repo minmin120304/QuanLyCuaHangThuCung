@@ -13,22 +13,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="Hoá đơn" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="Hoá đơn" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="0,14,0,363" Grid.RowSpan="2"/>
 
             <Grid Grid.Row="1" Margin="0,46,0,0" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBox x:Name="search_input" Width="200" Height="22"/>
+                    <Button Content="Tìm kiếm" Background="#FF9FC7EE" Width="90" Height="30" Margin="0,0,0,10" Click="Search_Click" HorizontalAlignment="Right"/>
+                </StackPanel>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" Grid.Column="0" Background="Beige">
-                    
-                </Grid>
             </Grid>
         </Grid>
 
