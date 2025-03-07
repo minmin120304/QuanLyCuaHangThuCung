@@ -16,32 +16,37 @@ using System.Windows.Shapes;
 namespace QuanLyCuaHangThuCung.Views
 {
     /// <summary>
-    /// Interaction logic for Bill.xaml
+    /// Interaction logic for BillForm.xaml
     /// </summary>
-    public partial class Bill : UserControl
+    public partial class BillForm : Window
     {
-        public Bill()
+
+        public BillForm()
         {
             InitializeComponent();
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            BillForm billForm = new BillForm();
-            billForm.ShowDialog(); // Chặn tương tác với MainWindow
-        }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
+        private void AddDV_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void DelDV_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddSP_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelSP_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -51,12 +56,13 @@ namespace QuanLyCuaHangThuCung.Views
 
         }
 
-        private void Loc1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ProductTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
 
         }
 
-        private void Loc2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SpDvTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

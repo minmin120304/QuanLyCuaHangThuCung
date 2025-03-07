@@ -71,10 +71,16 @@
                         </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="STT" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=DataContext.(ItemsControl.Items).IndexOf(DataContext), Converter={StaticResource IndexConverter}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding employeeName}" MinWidth="180" Width="auto"/>
                             <DataGridTextColumn Header="Địa chỉ" Binding="{Binding address}" MinWidth="250" Width="auto"/>
-                            <DataGridTextColumn Header="SĐT" Binding="{Binding phoneNum}" MinWidth="120" Width="auto"/>
+                            <DataGridTextColumn Header="SĐT" Binding="{Binding phoneNum}" MinWidth="130" Width="auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

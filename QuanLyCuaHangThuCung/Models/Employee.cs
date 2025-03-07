@@ -18,10 +18,10 @@ namespace QuanLyCuaHangThuCung.Models
         [StringLength(50)]
         public string employeeName { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string address { get; set; }
 
-        [StringLength(12)]
+        [Required, Phone, StringLength(12)]
         public string phoneNum { get; set; }
     }
 }
