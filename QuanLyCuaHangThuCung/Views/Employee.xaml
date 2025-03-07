@@ -52,11 +52,22 @@
                 <TextBlock Grid.Row="0" Text="Danh sách nhân viên" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="EmployeeTable" AutoGenerateColumns="False" ItemsSource="{Binding Employee}" AlternatingRowBackground="#E3F2FD"
-                                SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-                                Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
-                                CanUserAddRows="False" >
+                    <DataGrid x:Name="EmployeeTable" 
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding Employee}" 
+                              AlternatingRowBackground="#E3F2FD"
+                              SelectionMode="Single" 
+                              SelectionUnit="FullRow" 
+                              BorderBrush="Gray" 
+                              BorderThickness="1"
+                              Background="White" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              RowHeaderWidth="0" 
+                              HeadersVisibility="Column" 
+                              SelectionChanged="DataGrid_SelectionChanged"
+                              CanUserAddRows="False" 
+                              AlternationCount="1000">
                         <DataGrid.Resources>
                             <!-- Style căn giữa tiêu đề -->
                             <Style TargetType="DataGridColumnHeader">
@@ -71,10 +82,10 @@
                         </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="STT" Width="50">
+                            <DataGridTemplateColumn Header="STT" MinWidth="50">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=DataContext.(ItemsControl.Items).IndexOf(DataContext), Converter={StaticResource IndexConverter}}"/>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

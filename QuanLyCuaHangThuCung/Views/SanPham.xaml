@@ -67,12 +67,23 @@
                 <TextBlock Grid.Row="0" Text="Danh sách sản phẩm" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="ProductTable" AutoGenerateColumns="False" ItemsSource="{Binding Product}" AlternatingRowBackground="#E3F2FD"
-                                SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-                                Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                LoadingRow="ProductTable_LoadingRow" RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
-                                CanUserAddRows="False" >
-
+                    <DataGrid x:Name="ProductTable" 
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding Product}" 
+                              AlternatingRowBackground="#E3F2FD"
+                              SelectionMode="Single" 
+                              SelectionUnit="FullRow" 
+                              BorderBrush="Gray" 
+                              BorderThickness="1"
+                              Background="White" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              LoadingRow="ProductTable_LoadingRow" 
+                              RowHeaderWidth="0" 
+                              HeadersVisibility="Column" 
+                              SelectionChanged="DataGrid_SelectionChanged"
+                              CanUserAddRows="False"       
+                              AlternationCount="1000">
                         <DataGrid.Resources>
                             <!-- Style căn giữa tiêu đề -->
                             <Style TargetType="DataGridColumnHeader">
@@ -85,12 +96,15 @@
                                 <Setter Property="VerticalAlignment" Value="Center"/>
                             </Style>
                         </DataGrid.Resources>
-                        <DataGrid.Effect>
-                            <DropShadowEffect Color="Black" Opacity="0.5" BlurRadius="8" ShadowDepth="4"/>
-                        </DataGrid.Effect>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="STT" MinWidth="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding productName}" MinWidth="180" Width="*"/>
                             <DataGridTextColumn Header="Xuất xứ" Binding="{Binding origin}" MinWidth="120" Width="*"/>
                             <DataGridTextColumn Header="Đơn vị tính" Binding="{Binding unit}" MinWidth="80" Width="*"/>

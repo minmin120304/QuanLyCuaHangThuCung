@@ -86,19 +86,20 @@
     <Compile Include="Migrations\202503011029398_Cus-Test.Designer.cs">
       <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503041053353_All.cs" />
-    <Compile Include="Migrations\202503041053353_All.Designer.cs">
-      <DependentUpon>202503041053353_All.cs</DependentUpon>
+    <Compile Include="Migrations\202503071547013_FixProductTable.cs" />
+    <Compile Include="Migrations\202503071547013_FixProductTable.Designer.cs">
+      <DependentUpon>202503071547013_FixProductTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202503051038211_Servie-Test.cs" />
-    <Compile Include="Migrations\202503051038211_Servie-Test.Designer.cs">
-      <DependentUpon>202503051038211_Servie-Test.cs</DependentUpon>
+    <Compile Include="Migrations\202503071639533_FixProductTable2.cs" />
+    <Compile Include="Migrations\202503071639533_FixProductTable2.Designer.cs">
+      <DependentUpon>202503071639533_FixProductTable2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BillDetail.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\IHasID.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\ServiceType.cs" />
@@ -212,11 +213,11 @@
     <EmbeddedResource Include="Migrations\202503011029398_Cus-Test.resx">
       <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503041053353_All.resx">
-      <DependentUpon>202503041053353_All.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503071547013_FixProductTable.resx">
+      <DependentUpon>202503071547013_FixProductTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503051038211_Servie-Test.resx">
-      <DependentUpon>202503051038211_Servie-Test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503071639533_FixProductTable2.resx">
+      <DependentUpon>202503071639533_FixProductTable2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

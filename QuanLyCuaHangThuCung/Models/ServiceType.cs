@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace QuanLyCuaHangThuCung.Models
 {
     [Table("ServiceType")]
-    public class ServiceType
+    public class ServiceType : IHasID
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
-        public int Id { get; set; }
+        [Key]
+        [StringLength(10)]
+        public string Id { get; set; }
 
         [StringLength(50)]
 

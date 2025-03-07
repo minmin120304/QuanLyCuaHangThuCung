@@ -52,11 +52,22 @@
                 <TextBlock Grid.Row="0" Text="Danh sách khách hàng" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="CustomerTable" AutoGenerateColumns="False" ItemsSource="{Binding Customer}" AlternatingRowBackground="#E3F2FD"
-                                SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-                                Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
-                                CanUserAddRows="False" >
+                    <DataGrid x:Name="CustomerTable" 
+                              AutoGenerateColumns="False" 
+                              ItemsSource="{Binding Customer}" 
+                              AlternatingRowBackground="#E3F2FD"
+                              SelectionMode="Single" 
+                              SelectionUnit="FullRow" 
+                              BorderBrush="Gray" 
+                              BorderThickness="1"
+                              Background="White" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="Stretch" 
+                              RowHeaderWidth="0" 
+                              HeadersVisibility="Column" 
+                              SelectionChanged="DataGrid_SelectionChanged"
+                              CanUserAddRows="False" 
+                              AlternationCount="1000">
                         <DataGrid.Resources>
                             <!-- Style căn giữa tiêu đề -->
                             <Style TargetType="DataGridColumnHeader">
@@ -71,7 +82,13 @@
                         </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="STT" MinWidth="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding customerName}" MinWidth="180" Width="auto"/>
                             <DataGridTextColumn Header="Địa chỉ" Binding="{Binding address}" MinWidth="250" Width="auto"/>
                             <DataGridTextColumn Header="SĐT" Binding="{Binding phoneNum}" MinWidth="120" Width="auto"/>

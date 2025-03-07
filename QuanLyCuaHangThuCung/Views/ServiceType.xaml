@@ -66,7 +66,8 @@
                               RowHeaderWidth="0" 
                               HeadersVisibility="Column" 
                               SelectionChanged="DataGrid_SelectionChanged"
-                              CanUserAddRows="False" >
+                              CanUserAddRows="False" 
+                              AlternationCount="1000">
                         <DataGrid.Resources>
                             <!-- Style căn giữa tiêu đề -->
                             <Style TargetType="DataGridColumnHeader">
@@ -81,7 +82,14 @@
                         </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Header="STT" MinWidth="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
                             <DataGridTextColumn Header="Mã loại hình" Binding="{Binding typeID}" MinWidth="80" Width="*"/>
                             <DataGridTextColumn Header="Tên loại hình" Binding="{Binding typeName}" MinWidth="180" Width="*"/>
                             <DataGridTextColumn Header="Ghi chú" Binding="{Binding note}" MinWidth="250" Width="*"/>

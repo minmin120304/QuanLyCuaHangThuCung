@@ -86,7 +86,7 @@ namespace QuanLyCuaHangThuCung.Views
             }
             if (!validateInput()) return;
 
-            int employeeID = ((Models.Employee)EmployeeTable.SelectedItem).Id;
+            string employeeID = ((Models.Employee)EmployeeTable.SelectedItem).Id;
             Models.Employee employee = db.Employee.FirstOrDefault(c => c.Id == employeeID);
   
             if (employee == null) return;
