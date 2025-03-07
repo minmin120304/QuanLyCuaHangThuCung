@@ -18,11 +18,53 @@ namespace QuanLyCuaHangThuCung.Views
     /// <summary>
     /// Interaction logic for BillForm.xaml
     /// </summary>
-    public partial class BillForm : UserControl
+    public partial class BillForm : Window
     {
+
         public BillForm()
         {
             InitializeComponent();
+        }
+
+        private void AddDV_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelDV_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddSP_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelSP_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ProductTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+
+        }
+
+        private void SpDvTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

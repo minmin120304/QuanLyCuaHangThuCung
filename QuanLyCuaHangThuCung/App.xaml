@@ -6,6 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <Application.Resources>
+        <local:IndexConverter x:Key="IndexConverter"/>
+
         <Style x:Key="SidebarButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
@@ -45,6 +47,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
     </Application.Resources>
 
 </Application>

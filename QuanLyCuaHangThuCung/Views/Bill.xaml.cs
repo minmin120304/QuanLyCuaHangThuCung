@@ -27,7 +27,8 @@ namespace QuanLyCuaHangThuCung.Views
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
+            BillForm billForm = new BillForm();
+            billForm.ShowDialog(); // Chặn tương tác với MainWindow
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
@@ -41,6 +42,21 @@ namespace QuanLyCuaHangThuCung.Views
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Loc1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Loc2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

@@ -26,6 +26,8 @@ namespace QuanLyCuaHangThuCung.Models
 
         public int quantity { get; set; }
 
-        public double price { get; set; }
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal price { get; set; }
     }
 }

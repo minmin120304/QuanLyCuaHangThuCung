@@ -1,12 +1,103 @@
-﻿<UserControl x:Class="QuanLyCuaHangThuCung.Views.BillForm"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+﻿<Window x:Class="QuanLyCuaHangThuCung.Views.BillForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+        mc:Ignorable="d" 
+        Title="BillForm"
+        SizeToContent="WidthAndHeight"
+        MinWidth="800"
+        MinHeight="450" ResizeMode="NoResize">
+    <Grid Background="#FFFCE3B4" HorizontalAlignment="Center" Width="800">
+        <Rectangle HorizontalAlignment="Left" Height="104" Margin="456,93,0,0" VerticalAlignment="Top" Width="321" Fill="White"/>
+        <TextBlock Margin="0,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1" HorizontalAlignment="Center"><Run Language="ja-jp" Text="Thêm hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
+
+        <DataGrid x:Name="SpDvTable" AutoGenerateColumns="False" ItemsSource="{Binding Product}" AlternatingRowBackground="#E3F2FD"
+    SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
+    Background="White" 
+    RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="SpDvTable_SelectionChanged"
+    CanUserAddRows="False" Margin="16,184,389,56" >
+            <DataGrid.Resources>
+                <!-- Style căn giữa tiêu đề -->
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+
+                <!-- Style căn giữa nội dung -->
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tên sản phẩm/dịch vụ" Binding="{Binding name}" MinWidth="50" Width="auto"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="50" Width="auto"/>
+                <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="80" Width="auto"/>
+                <DataGridTextColumn Header="Thành tiền" Binding="{Binding sum}" MinWidth="80" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Lưu hoá đơn" HorizontalAlignment="Left" Margin="513,387,0,0" VerticalAlignment="Top" Width="94" Height="30" Background="#FF9FC7EE" Click="Save_Click"/>
+        <Button Content="Xuất hoá đơn" HorizontalAlignment="Left" Margin="633,387,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Text="Danh sách"/><Run Language="ja-jp" Text=" sản phẩm/dịch vụ trong hoá đơn"/><LineBreak/><Run/></TextBlock>
+
+        <TextBlock HorizontalAlignment="Left" Margin="24,64,0,0" TextWrapping="Wrap" Text="Mã hoá đơn" VerticalAlignment="Top"/>
+        <TextBox x:Name="ID_input" ToolTip="Nhập..." HorizontalAlignment="Left" Margin="150,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="112" Height="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="23,123,0,0" TextWrapping="Wrap" Text="Tên khách hàng" VerticalAlignment="Top"/>
+        <TextBox x:Name="tenKH_input" HorizontalAlignment="Left" Margin="150,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="175" Height="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="23,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="N"/><Run Text="hân viên lập hoá đơn"/></TextBlock>
+        <TextBox x:Name="tenNV_input" IsEnabled="False" HorizontalAlignment="Left" Margin="150,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="175" Height="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="469,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Tên sản phẩm"/></TextBlock>
+        <TextBox x:Name="tenSP_input" HorizontalAlignment="Left" Margin="546,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="79" Height="24" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" Margin="297,397,0,0" TextWrapping="Wrap" Text="Chiết khấu" VerticalAlignment="Top"/>
+        <TextBox x:Name="chietKhau_input" HorizontalAlignment="Left" Margin="362,393,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" Height="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="198,397,0,0" TextWrapping="Wrap" Text="VAT" VerticalAlignment="Top"/>
+        <TextBox x:Name="Vat_input" HorizontalAlignment="Left" Margin="226,393,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57" Height="24"/>
+        <TextBlock Margin="467,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1" HorizontalAlignment="Left"><Run Language="ja-jp" Text="Sản phẩm"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="489,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Đơn giá"/></TextBlock>
+        <TextBox x:Name="price_input" IsEnabled="False" HorizontalAlignment="Left" Margin="544,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="79" Height="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="637,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Số lượng"/></TextBlock>
+        <TextBox x:Name="SL_input" HorizontalAlignment="Left" Margin="692,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="62" Height="24"/>
+        <Button Content="Thêm" HorizontalAlignment="Left" Margin="637,165,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddSP_Click"/>
+        <Button Content="Xoá" HorizontalAlignment="Left" Margin="702,165,0,0" VerticalAlignment="Top" Width="63" Height="20" Background="#FF9FC7EE" Click="DelSP_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="17,393,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Tổng tiền: 0đ"/></TextBlock>
+
+        <DataGrid x:Name="ProductTable" AutoGenerateColumns="False" ItemsSource="{Binding Product}" AlternatingRowBackground="#E3F2FD"
+            SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
+            Background="White" 
+            RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="ProductTable_SelectionChanged"
+            CanUserAddRows="False" Margin="457,210,29,56" >
+            <DataGrid.Resources>
+                <!-- Style căn giữa tiêu đề -->
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+
+                <!-- Style căn giữa nội dung -->
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding productName}" MinWidth="120" Width="auto"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="50" Width="auto"/>
+                <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="90" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Rectangle HorizontalAlignment="Left" Height="224" Margin="862,98,0,0" Stroke="Black" VerticalAlignment="Top" Width="444" OpacityMask="#FFEBD9D9"/>
+        <ComboBox x:Name="serviceList" HorizontalAlignment="Left" Margin="533,61,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="Spa"/>
+            <ComboBoxItem Content="Tiêm ngừa"/>
+            <ComboBoxItem Content="Huấn luyện"/>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Margin="460,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"><Run Language="ja-jp" Text="Chọn dịch vụ"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
+        <Button Content="Thêm" HorizontalAlignment="Left" Margin="662,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddDV_Click"/>
+        <Button Content="Xoá" HorizontalAlignment="Left" Margin="725,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="DelDV_Click"/>
+
     </Grid>
-</UserControl>
+</Window>
