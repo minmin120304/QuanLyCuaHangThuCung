@@ -58,7 +58,7 @@ namespace QuanLyCuaHangThuCung.Views
                 MessageBox.Show("Số lượng phải là số nguyên không âm.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (!double.TryParse(gia_input.Text, out double price) || price < 0)
+            if (!decimal.TryParse(gia_input.Text, out decimal price) || price < 0)
             {
                 MessageBox.Show("Giá sản phẩm phải là số thực không âm.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -88,7 +88,7 @@ namespace QuanLyCuaHangThuCung.Views
                 return;
             }
 
-            if (!double.TryParse(gia_input.Text, out double price))
+            if (!decimal.TryParse(gia_input.Text, out decimal price))
             {
                 MessageBox.Show("Đơn giá phải là số thực hợp lệ!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -135,7 +135,7 @@ namespace QuanLyCuaHangThuCung.Views
             }
             if (!validateInput()) return;
 
-            int productId = ((Models.Product)ProductTable.SelectedItem).Id;
+            string productId = ((Models.Product)ProductTable.SelectedItem).Id;
             Models.Product product = db.Product.FirstOrDefault(p => p.Id == productId);
 
             if (product == null) return;
@@ -159,7 +159,7 @@ namespace QuanLyCuaHangThuCung.Views
                 product.unit = "Không xác định"; // Giá trị mặc định
             }
             product.quantity = int.Parse(SL_input.Text);
-            product.price = double.Parse(gia_input.Text);
+            product.price = decimal.Parse(gia_input.Text);
 
             db.SaveChanges();
             MessageBox.Show("Cập nhật sản phẩm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace QuanLyCuaHangThuCung.Models
 {
     [Table("Customer")]
-    public class Customer
+    public class Customer : IHasID
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
-        public int Id { get; set; }
+        [Key]
+        [StringLength(10)]
+        public string Id { get; set; }
 
         [StringLength(50)]
         public string customerName { get; set; }

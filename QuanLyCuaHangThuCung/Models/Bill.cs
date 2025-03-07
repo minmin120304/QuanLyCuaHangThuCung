@@ -6,29 +6,31 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace QuanLyCuaHangThuCung.Models
 {
     [Table("Bill")]
-    public class Bill
+    public class Bill : IHasID
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [StringLength(10)]
+        public string Id { get; set; }
 
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         [Required]
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
 
         [Required]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        //[Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
+        public string State { get; set; }
+
+        //[Column(TypeName = "decimal(18,2)")]
         public decimal? VAT { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
+        //[Column(TypeName = "decimal(18,2)")]
         public decimal? Discount { get; set; }
 
         [ForeignKey("EmployeeId")]

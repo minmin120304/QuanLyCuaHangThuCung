@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 namespace QuanLyCuaHangThuCung.Models
 {
     [Table("Service")]
-    public class Service
+    public class Service : IHasID
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
-        public int Id { get; set; }
+        [Key]
+        [StringLength(10)]
+        public string Id { get; set; }
 
         [StringLength(50)]
         public string serviceName { get; set; }
         
         [Required]
-        public int ServiceTypeId { get; set; }
+        public string ServiceTypeId { get; set; }
 
         public decimal price { get; set; }
 

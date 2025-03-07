@@ -10,11 +10,20 @@
         <Grid Background="#FFFCE3B4">
             <TextBlock HorizontalAlignment="Left" Margin="318,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
 
-            <DataGrid x:Name="BillTable" AutoGenerateColumns="False" ItemsSource="{Binding Employee}" AlternatingRowBackground="#E3F2FD"
-        SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-        Background="White" 
-        RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="DataGrid_SelectionChanged"
-        CanUserAddRows="False" Margin="12,111,8,89" >
+            <DataGrid x:Name="BillTable" 
+                      AutoGenerateColumns="False" 
+                      ItemsSource="{Binding Bill}" 
+                      AlternatingRowBackground="#E3F2FD"
+                      SelectionMode="Single" 
+                      SelectionUnit="FullRow" 
+                      BorderBrush="Gray" 
+                      BorderThickness="1"
+                      Background="White" 
+                      RowHeaderWidth="0" 
+                      HeadersVisibility="Column" 
+                      SelectionChanged="DataGrid_SelectionChanged"
+                      CanUserAddRows="False" Margin="12,111,8,89" 
+                      AlternationCount="1000">
                 <DataGrid.Resources>
                     <!-- Style căn giữa tiêu đề -->
                     <Style TargetType="DataGridColumnHeader">
@@ -29,11 +38,18 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding maHD}" MinWidth="50" Width="auto"/>
-                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding date}" MinWidth="80" Width="auto"/>
-                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding customerName}" MinWidth="200" Width="auto"/>
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Sum}" MinWidth="120" Width="auto"/>
+                    <DataGridTemplateColumn Header="STT" MinWidth="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding Id}" MinWidth="50" Width="auto"/>
+                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding CreatedDate}" MinWidth="80" Width="auto"/>
+                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding CustomerId}" MinWidth="200" Width="auto"/>
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount}" MinWidth="120" Width="auto"/>
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding State}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>

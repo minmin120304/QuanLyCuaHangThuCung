@@ -77,7 +77,7 @@ namespace QuanLyCuaHangThuCung.Views
             }
             if (!validateInput()) return;
 
-            int serviceTypeId = ((Models.ServiceType)ServiceTypeTable.SelectedItem).Id;
+            string serviceTypeId = ((Models.ServiceType)ServiceTypeTable.SelectedItem).Id;
             Models.ServiceType serviceType = db.ServiceType.FirstOrDefault(p => p.Id == serviceTypeId);
 
             if (serviceType == null) return;

@@ -13,11 +13,21 @@
         <Rectangle HorizontalAlignment="Left" Height="104" Margin="456,93,0,0" VerticalAlignment="Top" Width="321" Fill="White"/>
         <TextBlock Margin="0,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1" HorizontalAlignment="Center"><Run Language="ja-jp" Text="Thêm hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
 
-        <DataGrid x:Name="SpDvTable" AutoGenerateColumns="False" ItemsSource="{Binding Product}" AlternatingRowBackground="#E3F2FD"
-    SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-    Background="White" 
-    RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="SpDvTable_SelectionChanged"
-    CanUserAddRows="False" Margin="16,184,389,56" >
+        <DataGrid x:Name="SpDvTable" 
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding BillDetail}" 
+                  AlternatingRowBackground="#E3F2FD"
+                  SelectionMode="Single" 
+                  SelectionUnit="FullRow" 
+                  BorderBrush="Gray" 
+                  BorderThickness="1"
+                  Background="White" 
+                  RowHeaderWidth="0" 
+                  HeadersVisibility="Column" 
+                  SelectionChanged="SpDvTable_SelectionChanged"
+                  CanUserAddRows="False" 
+                  Margin="16,184,389,56" 
+                  AlternationCount="1000">
             <DataGrid.Resources>
                 <!-- Style căn giữa tiêu đề -->
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -32,7 +42,13 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="STT" MinWidth="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Tên sản phẩm/dịch vụ" Binding="{Binding name}" MinWidth="50" Width="auto"/>
                 <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="50" Width="auto"/>
                 <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="80" Width="auto"/>
@@ -64,11 +80,20 @@
         <Button Content="Xoá" HorizontalAlignment="Left" Margin="702,165,0,0" VerticalAlignment="Top" Width="63" Height="20" Background="#FF9FC7EE" Click="DelSP_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="17,393,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Tổng tiền: 0đ"/></TextBlock>
 
-        <DataGrid x:Name="ProductTable" AutoGenerateColumns="False" ItemsSource="{Binding Product}" AlternatingRowBackground="#E3F2FD"
-            SelectionMode="Single" SelectionUnit="FullRow" BorderBrush="Gray" BorderThickness="1"
-            Background="White" 
-            RowHeaderWidth="0" HeadersVisibility="Column" SelectionChanged="ProductTable_SelectionChanged"
-            CanUserAddRows="False" Margin="457,210,29,56" >
+        <DataGrid x:Name="ProductTable" 
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Product}" 
+                  AlternatingRowBackground="#E3F2FD"
+                  SelectionMode="Single" 
+                  SelectionUnit="FullRow" 
+                  BorderBrush="Gray" 
+                  BorderThickness="1"
+                  Background="White" 
+                  RowHeaderWidth="0" 
+                  HeadersVisibility="Column" 
+                  SelectionChanged="ProductTable_SelectionChanged"
+                  CanUserAddRows="False" Margin="457,210,29,56" 
+                  AlternationCount="1000">
             <DataGrid.Resources>
                 <!-- Style căn giữa tiêu đề -->
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -83,18 +108,20 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="STT" Binding="{Binding Id}" MinWidth="50" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="STT" MinWidth="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding productName}" MinWidth="120" Width="auto"/>
                 <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="50" Width="auto"/>
                 <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="90" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
         <Rectangle HorizontalAlignment="Left" Height="224" Margin="862,98,0,0" Stroke="Black" VerticalAlignment="Top" Width="444" OpacityMask="#FFEBD9D9"/>
-        <ComboBox x:Name="serviceList" HorizontalAlignment="Left" Margin="533,61,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
-            <ComboBoxItem Content="Spa"/>
-            <ComboBoxItem Content="Tiêm ngừa"/>
-            <ComboBoxItem Content="Huấn luyện"/>
-        </ComboBox>
+        <ComboBox x:Name="serviceList" HorizontalAlignment="Left" Margin="533,61,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" ItemsSource="{Binding serviceName}"/>
         <TextBlock HorizontalAlignment="Left" Margin="460,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"><Run Language="ja-jp" Text="Chọn dịch vụ"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
         <Button Content="Thêm" HorizontalAlignment="Left" Margin="662,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddDV_Click"/>
         <Button Content="Xoá" HorizontalAlignment="Left" Margin="725,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="DelDV_Click"/>

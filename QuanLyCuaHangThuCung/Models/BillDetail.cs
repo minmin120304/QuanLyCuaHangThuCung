@@ -4,26 +4,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace QuanLyCuaHangThuCung.Models
 {
     [Table("BillDetail")]
-    public class BillDetail
+    public class BillDetail : IHasID
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [StringLength(10)]
+        public string Id { get; set; }
 
         [Required]
-        public int BillId { get; set; }
+        public string BillId { get; set; }
 
-        public int? ProductId { get; set; } // Nếu là sản phẩm
-        public int? ServiceId { get; set; } // Nếu là dịch vụ
+        public string ProductId { get; set; } // Nếu là sản phẩm
+        public string ServiceId { get; set; } // Nếu là dịch vụ
 
         public int? Quantity { get; set; } // Chỉ áp dụng cho sản phẩm
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        //[Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
         [Required]
-        [Column(TypeName = "decimal(18,2)")]
+        //[Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
 
         [ForeignKey("BillId")]

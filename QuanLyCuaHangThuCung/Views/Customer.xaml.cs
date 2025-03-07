@@ -86,7 +86,7 @@ namespace QuanLyCuaHangThuCung.Views
             }
             if (!validateInput()) return;
 
-            int customerID = ((Models.Customer)CustomerTable.SelectedItem).Id;
+            string customerID = ((Models.Customer)CustomerTable.SelectedItem).Id;
             Models.Customer customer = db.Customer.FirstOrDefault(c => c.Id == customerID);
   
             if (customer == null) return;
