@@ -34,6 +34,7 @@ namespace QuanLyCuaHangThuCung
                     entity.Id = GenerateID(entity.GetType());
                 }
             }
+
             return base.SaveChanges();
         }
 
@@ -77,7 +78,8 @@ namespace QuanLyCuaHangThuCung
 
 
             int newIndex = 1;
-            var lastEntityValue = property.GetValue(lastEntity)?.ToString();
+            var lastEntityValue = (lastEntity != null && property != null) ? property.GetValue(lastEntity)?.ToString() : null;
+
             if (lastEntityValue != null && lastEntityValue.Length >= prefix.Length &&
                 int.TryParse(lastEntityValue.Substring(prefix.Length), out int lastNumber))
             {

@@ -24,8 +24,7 @@
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock Text="Loại hình:" Margin="0,0,0,5"/>
-
-                            <ComboBox Width="80" Height="22" SelectedIndex="0" x:Name="ListDV" ItemsSource="{Binding LoaiHinh}"/>
+                            <ComboBox Width="80" Height="22" SelectedIndex="0" x:Name="ListType" ItemsSource="{Binding ListServiceTypes}" DisplayMemberPath="typeName"  SelectedValuePath="Id" SelectedValue="{Binding SelectedService.ServiceTypeId, Mode=TwoWay}"/>
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock Text="Đơn giá:" Margin="0,0,0,5"/>
@@ -57,9 +56,9 @@
                 <TextBlock Grid.Row="0" Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
-                    <DataGrid x:Name="SeviceTable" 
+                    <DataGrid x:Name="ServiceTable" 
                               AutoGenerateColumns="False" 
-                              ItemsSource="{Binding Service}" 
+                              ItemsSource="{Binding Services}" 
                               AlternatingRowBackground="#E3F2FD"
                               SelectionMode="Single" 
                               SelectionUnit="FullRow" 
@@ -96,7 +95,7 @@
                             </DataGridTemplateColumn>
 
                             <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding serviceName}" MinWidth="180" Width="*"/>
-                            <DataGridTextColumn Header="Loại hình" Binding="{Binding typeName}" MinWidth="80" Width="*"/>
+                            <DataGridTextColumn Header="Loại hình" Binding="{Binding ServiceType.typeName}" MinWidth="80" Width="*"/>
                             <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="80" Width="*"/>
                             <DataGridTextColumn Header="Ghi chú" Binding="{Binding note}" MinWidth="250" Width="*"/>
                         </DataGrid.Columns>
