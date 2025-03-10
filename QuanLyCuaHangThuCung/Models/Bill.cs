@@ -11,17 +11,9 @@ namespace QuanLyCuaHangThuCung.Models
         [Key]
         [StringLength(10)]
         public string Id { get; set; }
-
-        [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-
-        [Required]
         public string EmployeeId { get; set; }
-
-        [Required]
         public string CustomerId { get; set; }
-
-        [Required]
         //[Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }
 

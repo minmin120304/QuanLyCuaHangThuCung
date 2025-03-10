@@ -9,20 +9,15 @@ namespace QuanLyCuaHangThuCung.Models
         [Key]
         [StringLength(10)]
         public string Id { get; set; }
-
-        [Required]
         public string BillId { get; set; }
 
         public string ProductId { get; set; } // Nếu là sản phẩm
         public string ServiceId { get; set; } // Nếu là dịch vụ
+        public int Quantity { get; set; } // Chỉ áp dụng cho sản phẩm
 
-        public int? Quantity { get; set; } // Chỉ áp dụng cho sản phẩm
-
-        [Required]
         //[Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
-        [Required]
         //[Column(TypeName = "decimal(18,2)")]
         public decimal TotalPrice { get; set; }
 

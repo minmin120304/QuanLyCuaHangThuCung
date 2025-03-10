@@ -2,10 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using static iTextSharp.text.pdf.events.IndexEvents;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace QuanLyCuaHangThuCung
 {
@@ -35,13 +39,30 @@ namespace QuanLyCuaHangThuCung
                 }
             }
 
-            return base.SaveChanges();
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string errorMsg = $"Property: {validationError.PropertyName} - Error: {validationError.ErrorMessage}";
+                        Console.WriteLine(errorMsg);
+                        sb.AppendLine(errorMsg);
+                    }
+                }
+                MessageBox.Show(sb.ToString(), "Lỗi Validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
         }
 
         private string GenerateID(Type entityType)
         {
-            string prefix = "";
-
+            string prefix;
             if (entityType == typeof(Product)) prefix = "SP";
             else if (entityType == typeof(Customer)) prefix = "KH";
             else if (entityType == typeof(Employee)) prefix = "NV";
@@ -49,43 +70,33 @@ namespace QuanLyCuaHangThuCung
             else if (entityType == typeof(ServiceType)) prefix = "LDV";
             else if (entityType == typeof(Bill)) prefix = "HD";
             else if (entityType == typeof(BillDetail)) prefix = "CTHD";
-
-            var method = typeof(DbContext).GetMethod("Set", Type.EmptyTypes) // Chỉ lấy overload không có tham số
-                              .MakeGenericMethod(entityType);
-
-            var table = method.Invoke(this, null) as IQueryable<object>;
+            else throw new InvalidOperationException("Entity type is not supported");
 
             var property = entityType.GetProperty("Id");
             if (property == null)
                 throw new InvalidOperationException("Entity must have an 'Id' property");
 
-            var parameter = Expression.Parameter(entityType, "e");
-            var propertyAccess = Expression.Property(parameter, "Id");
-            var lambda = Expression.Lambda(propertyAccess, parameter);
+            // Lấy DbSet tương ứng
+            var method = typeof(DbContext).GetMethod("Set", Type.EmptyTypes)?.MakeGenericMethod(entityType);
+            var queryable = method?.Invoke(this, null) as IQueryable<object>;
+            if (queryable == null)
+                throw new InvalidOperationException("Failed to get entity DbSet");
 
-            var orderByMethod = typeof(Queryable)
-                .GetMethods()
-                .First(m => m.Name == "OrderByDescending" && m.GetParameters().Length == 2)
-                .MakeGenericMethod(entityType, property.PropertyType);
+            // Lọc danh sách ID bằng cách lấy trực tiếp giá trị từ property "Id"
+            // Chuyển IQueryable về bộ nhớ trước khi dùng reflection
+            var idList = queryable.AsEnumerable()
+                                  .Select(e => (string)property.GetValue(e, null))
+                                  .Where(id => id != null)
+                                  .ToList();
 
-            var orderedQuery = orderByMethod.Invoke(null, new object[] { table, lambda });
-            var firstMethod = typeof(Queryable)
-                .GetMethods()
-                .First(m => m.Name == "FirstOrDefault" && m.GetParameters().Length == 1)
-                .MakeGenericMethod(entityType);
+            // Lọc ID theo tiền tố và lấy số lớn nhất
+            var maxId = idList
+                .Where(id => id.StartsWith(prefix) && int.TryParse(id.Substring(prefix.Length), out _))
+                .Select(id => int.Parse(id.Substring(prefix.Length)))
+                .DefaultIfEmpty(0)
+                .Max();
 
-            var lastEntity = firstMethod.Invoke(null, new object[] { orderedQuery });
-
-
-            int newIndex = 1;
-            var lastEntityValue = (lastEntity != null && property != null) ? property.GetValue(lastEntity)?.ToString() : null;
-
-            if (lastEntityValue != null && lastEntityValue.Length >= prefix.Length &&
-                int.TryParse(lastEntityValue.Substring(prefix.Length), out int lastNumber))
-            {
-                newIndex = lastNumber + 1;
-            }
-            return $"{prefix}{newIndex:D2}";
+            return $"{prefix}{(maxId + 1):D2}";
         }
     }
 }
