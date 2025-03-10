@@ -38,11 +38,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=5.2.1.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.5.2.1\lib\net462\MaterialDesignColors.dll</HintPath>
@@ -94,6 +100,18 @@
     <Compile Include="Migrations\202503071639533_FixProductTable2.Designer.cs">
       <DependentUpon>202503071639533_FixProductTable2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503101013197_FixProductTable3.cs" />
+    <Compile Include="Migrations\202503101013197_FixProductTable3.Designer.cs">
+      <DependentUpon>202503101013197_FixProductTable3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503101114004_FixProductTable31.cs" />
+    <Compile Include="Migrations\202503101114004_FixProductTable31.Designer.cs">
+      <DependentUpon>202503101114004_FixProductTable31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503101410066_hd.cs" />
+    <Compile Include="Migrations\202503101410066_hd.Designer.cs">
+      <DependentUpon>202503101410066_hd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BillDetail.cs" />
@@ -103,6 +121,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\ServiceType.cs" />
+    <Compile Include="NameConverter.cs" />
     <Compile Include="Views\BillForm.xaml.cs">
       <DependentUpon>BillForm.xaml</DependentUpon>
     </Compile>
@@ -218,6 +237,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503071639533_FixProductTable2.resx">
       <DependentUpon>202503071639533_FixProductTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503101013197_FixProductTable3.resx">
+      <DependentUpon>202503101013197_FixProductTable3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503101114004_FixProductTable31.resx">
+      <DependentUpon>202503101114004_FixProductTable31.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503101410066_hd.resx">
+      <DependentUpon>202503101410066_hd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -47,10 +47,10 @@
                     </DataGridTemplateColumn>
                     
                     <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding Id}" MinWidth="50" Width="auto"/>
-                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding CreatedDate}" MinWidth="80" Width="auto"/>
-                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding CustomerId}" MinWidth="200" Width="auto"/>
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount}" MinWidth="120" Width="auto"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding State}" MinWidth="120" Width="auto"/>
+                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" MinWidth="80" Width="auto"/>
+                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" MinWidth="200" Width="auto"/>
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total}" MinWidth="120" Width="auto"/>
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox HorizontalAlignment="Left" Margin="385,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="25" FontSize="14"/>
