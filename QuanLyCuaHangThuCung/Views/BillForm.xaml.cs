@@ -253,32 +253,56 @@ namespace QuanLyCuaHangThuCung.Views
             currentBill.TotalAmount = totalAmount;
             currentBill.CustomerId = cbKhachHang.SelectedValue?.ToString();
 
-            Db.Bill.Add(currentBill);
+            // Nếu Bill chưa có trong database, cần lưu trước
+            if (Db.Bill.Find(currentBill.Id) == null)
+            {
+                Db.Bill.Add(currentBill);
+                Db.SaveChanges(); // Lưu hóa đơn trước
+            }
 
-            var details = SpDvTable.Items.Cast<BillDetail>().ToList();
-            if (details.Any())
+            // Gán ID hóa đơn vào từng chi tiết hóa đơn
+            foreach (var detail in BillDetails)
             {
-                Db.BillDetail.AddRange(details);
-            }
-            try
-            {
-                Db.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (var validationErrors in ex.EntityValidationErrors)
+                detail.BillId = currentBill.Id; // Đảm bảo mỗi chi tiết có BillId hợp lệ
+                var existingDetail = Db.BillDetail.Find(detail.Id);
+                if (existingDetail == null)
                 {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string errorMsg = $"Property: {validationError.PropertyName} - Error: {validationError.ErrorMessage}";
-                        Console.WriteLine(errorMsg);
-                        sb.AppendLine(errorMsg);
-                    }
+                    Db.BillDetail.Add(detail);
                 }
-                MessageBox.Show(sb.ToString(), "Lỗi Validation", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
             }
+            Db.SaveChanges();
+            //if (BillDetails.Any())
+            //{
+            //    foreach (var detail in BillDetails)
+            //    {
+            //        if (string.IsNullOrEmpty(detail.BillId))
+            //        {
+            //            MessageBox.Show("Lỗi: Mỗi chi tiết hóa đơn phải có một BillId hợp lệ.");
+            //            return;
+            //        }
+            //    }
+            //    Db.BillDetail.AddRange(BillDetails);
+            //}
+
+            //try
+            //{
+            //    Db.SaveChanges();
+            //    MessageBox.Show("Hóa đơn đã được lưu.");
+            //}
+            //catch (DbEntityValidationException ex)
+            //{
+            //    StringBuilder sb = new StringBuilder();
+            //    foreach (var validationErrors in ex.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in validationErrors.ValidationErrors)
+            //        {
+            //            string errorMsg = $"Property: {validationError.PropertyName} - Error: {validationError.ErrorMessage}";
+            //            Console.WriteLine(errorMsg);
+            //            sb.AppendLine(errorMsg);
+            //        }
+            //    }
+            //    MessageBox.Show(sb.ToString(), "Lỗi Validation", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
 
             MessageBox.Show("Hóa đơn đã được lưu.");
         }

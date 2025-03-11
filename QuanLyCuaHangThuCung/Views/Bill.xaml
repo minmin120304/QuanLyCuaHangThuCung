@@ -22,7 +22,7 @@
                       RowHeaderWidth="0" 
                       HeadersVisibility="Column" 
                       SelectionChanged="DataGrid_SelectionChanged"
-                      CanUserAddRows="False" Margin="12,111,8,89" 
+                      CanUserAddRows="False" Margin="12,111,8,51" 
                       AlternationCount="1000">
                 <DataGrid.Resources>
                     <!-- Style căn giữa tiêu đề -->
@@ -53,23 +53,13 @@
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBox HorizontalAlignment="Left" Margin="385,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="25" FontSize="14"/>
-            <Button Content="Tìm" HorizontalAlignment="Left" Margin="553,49,0,0" VerticalAlignment="Top" Width="90" Height="25" Background="#FFD5AEFF"/>
+            <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="385,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="25" FontSize="14"/>
+            <Button Content="Tìm" HorizontalAlignment="Left" Margin="553,49,0,0" VerticalAlignment="Top" Width="90" Height="25" Background="#FFD5AEFF" Click="Find_Click"/>
             <TextBlock HorizontalAlignment="Left" Margin="271,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Danh sách hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
-            <ComboBox SelectedIndex="0" HorizontalAlignment="Left" Margin="72,323,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Loc1_SelectionChanged">
-                <ComboBoxItem>Theo ngày nhập</ComboBoxItem>
-                <ComboBoxItem>Theo trạng thái</ComboBoxItem>
-                <ComboBoxItem>Khoảng giá</ComboBoxItem>
-            </ComboBox>
-            <ComboBox SelectedIndex="0" HorizontalAlignment="Left" Margin="211,323,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Loc2_SelectionChanged">
-                <ComboBoxItem>Mới nhất</ComboBoxItem>
-                <ComboBoxItem>Cũ nhất</ComboBoxItem>
-            </ComboBox>
-            <TextBlock HorizontalAlignment="Left" Margin="27,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Lọc:"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
             <Button Content="Thêm mới" HorizontalAlignment="Left" Margin="110,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF9FC7EE" Click="Add_Click"/>
-            <Button Content="Sửa" HorizontalAlignment="Left" Margin="241,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFFAEE7F" Click="Edit_Click"/>
-            <Button Content="Xoá" HorizontalAlignment="Left" Margin="356,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFF47B60" Click="Delete_Click"/>
-            <Button Content="Xuất file" HorizontalAlignment="Left" Margin="475,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
+            <Button Content="Sửa" HorizontalAlignment="Left" Margin="237,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFFAEE7F" Click="Edit_Click"/>
+            <Button Content="Xoá" HorizontalAlignment="Left" Margin="362,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFF47B60" Click="Delete_Click"/>
+            <Button Content="Xuất file" HorizontalAlignment="Left" Margin="481,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
         </Grid>
     </Border>
 </UserControl>
