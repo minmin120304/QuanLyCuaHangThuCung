@@ -60,12 +60,18 @@ namespace QuanLyCuaHangThuCung.Views
             if (BillTable.SelectedItem != null)
             {
                 dynamic selectedBill = BillTable.SelectedItem;
-                string billId = selectedBill.Id.ToString(); // Ép kiểu về string
+                string billId = selectedBill.Id;
 
                 var bill = Db.Bill.Find(billId);
                 if (bill != null)
                 {
-                    Db.BillDetail.RemoveRange(Db.BillDetail.Where(bd => bd.BillId == billId)); // Dùng billId thay vì bill.Id
+                    // Xóa tất cả BillDetail trước khi xóa Bill
+                    var billDetails = Db.BillDetail.Where(bd => bd.BillId == billId).ToList();
+                    if (billDetails.Any())
+                    {
+                        Db.BillDetail.RemoveRange(billDetails);
+                    }
+
                     Db.Bill.Remove(bill);
                     Db.SaveChanges();
                     LoadBills();
@@ -73,9 +79,12 @@ namespace QuanLyCuaHangThuCung.Views
                 }
                 else
                 {
-                    MessageBox.Show("Vui lòng chọn hóa đơn cần xóa.");
+                    MessageBox.Show("Không tìm thấy hóa đơn để xóa.");
                 }
-
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn cần xóa.");
             }
         }
 
@@ -115,16 +124,31 @@ namespace QuanLyCuaHangThuCung.Views
                 MessageBox.Show("Xuất file PDF thành công.");
             }
         }
-    
 
-        private void Loc1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Find_Click(object sender, RoutedEventArgs e)
         {
+            string searchText = SearchTextBox.Text.Trim(); // Giả sử có TextBox tên SearchTextBox
 
-        }
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var filteredBills = Db.Bill
+                    .Where(b => b.Id.Contains(searchText) ||
+                                Db.Customer.Any(c => c.Id == b.CustomerId && c.customerName.Contains(searchText)))
+                    .Select(b => new
+                    {
+                        Id = b.Id,
+                        Date = b.CreatedDate,
+                        Customer = Db.Customer.FirstOrDefault(c => c.Id == b.CustomerId).customerName,
+                        Total = b.TotalAmount,
+                        Status = b.State
+                    }).ToList();
 
-        private void Loc2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+                BillTable.ItemsSource = filteredBills;
+            }
+            else
+            {
+                LoadBills();
+            }
         }
     }
 }
