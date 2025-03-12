@@ -24,7 +24,11 @@
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock Text="Loại hình:" Margin="0,0,0,5"/>
-                            <ComboBox Width="80" Height="22" SelectedIndex="0" x:Name="ListType" ItemsSource="{Binding ListServiceTypes}" DisplayMemberPath="typeName"  SelectedValuePath="Id" SelectedValue="{Binding SelectedService.ServiceTypeId, Mode=TwoWay}"/>
+                            <ComboBox Width="80" Height="22" SelectedIndex="-1" x:Name="ListType">
+                                <ComboBoxItem>Chăm sóc</ComboBoxItem>
+                                <ComboBoxItem>Huấn luyện</ComboBoxItem>
+                                <ComboBoxItem>Thú y</ComboBoxItem>
+                            </ComboBox>
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock Text="Đơn giá:" Margin="0,0,0,5"/>
@@ -95,8 +99,8 @@
                             </DataGridTemplateColumn>
 
                             <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding serviceName}" MinWidth="180" Width="*"/>
-                            <DataGridTextColumn Header="Loại hình" Binding="{Binding ServiceType.typeName}" MinWidth="80" Width="*"/>
-                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="80" Width="*"/>
+                            <DataGridTextColumn Header="Loại hình" Binding="{Binding serviceType}" MinWidth="80" Width="*"/>
+                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding price, StringFormat=\{0:N0\} VND}" MinWidth="80" Width="*"/>
                             <DataGridTextColumn Header="Ghi chú" Binding="{Binding note}" MinWidth="250" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>

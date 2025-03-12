@@ -25,6 +25,17 @@
                             <TextBox x:Name="tenSP_input" Width="100" Height="22"/>
                         </StackPanel>
                         <StackPanel Margin="10">
+                            <TextBlock Text="Loại sản phẩm:" Margin="0,0,0,5"/>
+                            <ComboBox Width="80" Height="22" SelectedIndex="0" x:Name="ListTypeSP">
+                                <ComboBoxItem>Thức ăn</ComboBoxItem>
+                                <ComboBoxItem>Đồ uống</ComboBoxItem>
+                                <ComboBoxItem>Phụ kiện</ComboBoxItem>
+                                <ComboBoxItem>Trang phục</ComboBoxItem>
+                                <ComboBoxItem>Thuốc</ComboBoxItem>
+                                <ComboBoxItem>Đồ chơi</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10">
                             <TextBlock Text="Xuất xứ:" Margin="0,0,0,5"/>
                             <TextBox x:Name="xuatXu_input" Width="100" Height="22"/>
                         </StackPanel>
@@ -35,6 +46,9 @@
                                 <ComboBoxItem>Cái</ComboBoxItem>
                                 <ComboBoxItem>Chiếc</ComboBoxItem>
                                 <ComboBoxItem>Bộ</ComboBoxItem>
+                                <ComboBoxItem>Túi</ComboBoxItem>
+                                <ComboBoxItem>Hộp</ComboBoxItem>
+                                <ComboBoxItem>Gói</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Margin="10">
@@ -78,7 +92,6 @@
                               Background="White" 
                               HorizontalAlignment="Stretch" 
                               VerticalAlignment="Stretch" 
-                              LoadingRow="ProductTable_LoadingRow" 
                               RowHeaderWidth="0" 
                               HeadersVisibility="Column" 
                               SelectionChanged="DataGrid_SelectionChanged"
@@ -106,10 +119,11 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding productName}" MinWidth="180" Width="*"/>
-                            <DataGridTextColumn Header="Xuất xứ" Binding="{Binding origin}" MinWidth="120" Width="*"/>
+                            <DataGridTextColumn Header="Loại sản phẩm" Binding="{Binding type}" MinWidth="80" Width="*"/>
+                            <DataGridTextColumn Header="Xuất xứ" Binding="{Binding origin}" MinWidth="100" Width="*"/>
                             <DataGridTextColumn Header="Đơn vị tính" Binding="{Binding unit}" MinWidth="80" Width="*"/>
                             <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="80" Width="*"/>
-                            <DataGridTextColumn Header="Giá sản phẩm" Binding="{Binding price}" MinWidth="100" Width="*"/>
+                            <DataGridTextColumn Header="Đơn giá" Binding="{Binding price, StringFormat=\{0:N0\} VND}" MinWidth="100" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </ScrollViewer>

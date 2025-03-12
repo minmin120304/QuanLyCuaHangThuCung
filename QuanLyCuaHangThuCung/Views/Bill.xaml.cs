@@ -104,18 +104,25 @@ namespace QuanLyCuaHangThuCung.Views
                     PdfWriter.GetInstance(doc, fs);
                     doc.Open();
 
+                    // Load font hỗ trợ tiếng Việt
+                    string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "times.ttf");
+                    BaseFont baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                    Font vietnameseFont = new Font(baseFont, 12, Font.NORMAL);
+
                     PdfPTable table = new PdfPTable(4);
-                    table.AddCell("Mã hóa đơn");
-                    table.AddCell("Ngày lập");
-                    table.AddCell("Khách hàng");
-                    table.AddCell("Tổng tiền");
+
+                    // Thêm tiêu đề bảng với font hỗ trợ Unicode
+                    table.AddCell(new PdfPCell(new Phrase("Mã hóa đơn", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Ngày lập", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Khách hàng", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Tổng tiền", vietnameseFont)));
 
                     foreach (dynamic item in BillTable.Items)
                     {
-                        table.AddCell(item.Id.ToString());
-                        table.AddCell(item.Date.ToString());
-                        table.AddCell(item.Customer);
-                        table.AddCell(item.Total.ToString());
+                        table.AddCell(new PdfPCell(new Phrase(item.Id.ToString(), vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(item.Date.ToString(), vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(item.Customer, vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(item.Total.ToString(), vietnameseFont)));
                     }
 
                     doc.Add(table);

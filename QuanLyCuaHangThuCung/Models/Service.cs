@@ -20,13 +20,10 @@ namespace QuanLyCuaHangThuCung.Models
         public string serviceName { get; set; }
         
         [Required]
-        public string ServiceTypeId { get; set; }
+        public string serviceType { get; set; }
 
         public decimal price { get; set; }
 
         public string note { get; set; }
-
-        [ForeignKey("ServiceTypeId")]
-        public virtual ServiceType ServiceType { get; set; }
     }
 }

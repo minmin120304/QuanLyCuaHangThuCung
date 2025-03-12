@@ -15,10 +15,12 @@ namespace QuanLyCuaHangThuCung.Models
 
         [StringLength(50)]
         public string origin { get; set; }
+        public string type { get; set; }
 
         [StringLength(50)]
         public string unit { get; set; }
 
+        [Required]
         public int quantity { get; set; }
 
         [Required]

@@ -195,6 +195,19 @@ namespace QuanLyCuaHangThuCung.Views
         {
             if (SelectedProduct != null && int.TryParse(SL_input.Text, out int quantity))
             {
+                if (quantity <= 0)
+                {
+                    MessageBox.Show("Số lượng phải lớn hơn 0!");
+                    return;
+                }
+
+                // Kiểm tra số lượng tồn kho
+                if (SelectedProduct.quantity < quantity)
+                {
+                    MessageBox.Show("Số lượng hiện có không đủ!");
+                    return;
+                }
+
                 totalAmount += SelectedProduct.price * quantity;
 
                 var detail = new BillDetail
@@ -208,12 +221,13 @@ namespace QuanLyCuaHangThuCung.Views
                     TotalPrice = SelectedProduct.price * quantity
                 };
 
-                // Debug
-                Console.WriteLine($"Thêm Sản phẩm: {detail.Product?.productName}, Dịch vụ: {detail.Service?.serviceName}");
+                SelectedProduct.quantity -= quantity;
+                Db.Entry(SelectedProduct).State = EntityState.Modified;
+                Db.SaveChanges();
 
                 BillDetails.Add(detail);
                 SpDvTable.Items.Refresh(); // Cập nhật bảng
-
+                LoadProducts(); // Cập nhật danh sách sản phẩm
                 UpdateTotal();
             }
             resetInput();
@@ -222,16 +236,29 @@ namespace QuanLyCuaHangThuCung.Views
 
         private void DelSP_Click(object sender, RoutedEventArgs e)
         {
-            if (SpDvTable.SelectedItem != null)
+            if (SpDvTable.SelectedItem is BillDetail selected)
             {
-                var selected = (BillDetail)SpDvTable.SelectedItem;
                 totalAmount -= selected.TotalPrice;
+                if (selected.Product != null)
+                {
+                    var product = Db.Product.Find(selected.Product.Id);
+                    if (product != null)
+                    {
+                        product.quantity += selected.Quantity;
+                        Db.Entry(product).State = EntityState.Modified;
+                        Db.SaveChanges();
+                    }
+                }
                 BillDetails.Remove(selected);
                 SpDvTable.Items.Refresh();
+                LoadProducts();
                 UpdateTotal();
+                SpDvTable.SelectedIndex = -1; // Hủy chọn
             }
             resetInput();
         }
+
+
         private void UpdateTotal()
         {
             decimal discount = 0;
@@ -271,38 +298,6 @@ namespace QuanLyCuaHangThuCung.Views
                 }
             }
             Db.SaveChanges();
-            //if (BillDetails.Any())
-            //{
-            //    foreach (var detail in BillDetails)
-            //    {
-            //        if (string.IsNullOrEmpty(detail.BillId))
-            //        {
-            //            MessageBox.Show("Lỗi: Mỗi chi tiết hóa đơn phải có một BillId hợp lệ.");
-            //            return;
-            //        }
-            //    }
-            //    Db.BillDetail.AddRange(BillDetails);
-            //}
-
-            //try
-            //{
-            //    Db.SaveChanges();
-            //    MessageBox.Show("Hóa đơn đã được lưu.");
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    StringBuilder sb = new StringBuilder();
-            //    foreach (var validationErrors in ex.EntityValidationErrors)
-            //    {
-            //        foreach (var validationError in validationErrors.ValidationErrors)
-            //        {
-            //            string errorMsg = $"Property: {validationError.PropertyName} - Error: {validationError.ErrorMessage}";
-            //            Console.WriteLine(errorMsg);
-            //            sb.AppendLine(errorMsg);
-            //        }
-            //    }
-            //    MessageBox.Show(sb.ToString(), "Lỗi Validation", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
 
             MessageBox.Show("Hóa đơn đã được lưu.");
         }
@@ -318,25 +313,34 @@ namespace QuanLyCuaHangThuCung.Views
                     Document doc = new Document();
                     PdfWriter.GetInstance(doc, fs);
                     doc.Open();
+
                     if (currentBill == null)
                     {
                         MessageBox.Show("Chưa có hóa đơn để xuất.");
                         return;
                     }
-                    doc.Add(new Paragraph($"Hóa đơn: {currentBill.Id}"));
-                    doc.Add(new Paragraph($"Ngày: {currentBill.CreatedDate}"));
-                    doc.Add(new Paragraph($"Tổng tiền: {totalAmount:C}"));
+
+                    // Load font hỗ trợ tiếng Việt
+                    string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "times.ttf");
+                    BaseFont baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                    Font vietnameseFont = new Font(baseFont, 12, Font.NORMAL);
+
+                    doc.Add(new Paragraph($"Hóa đơn: {currentBill.Id}", vietnameseFont));
+                    doc.Add(new Paragraph($"Ngày: {currentBill.CreatedDate}", vietnameseFont));
+                    doc.Add(new Paragraph($"Tổng tiền: {totalAmount:C}", vietnameseFont));
 
                     PdfPTable table = new PdfPTable(3);
-                    table.AddCell("Tên sản phẩm/Dịch vụ");
-                    table.AddCell("Số lượng");
-                    table.AddCell("Giá");
+
+                    // Thêm tiêu đề bảng với font hỗ trợ tiếng Việt
+                    table.AddCell(new PdfPCell(new Phrase("Tên sản phẩm/Dịch vụ", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Số lượng", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Giá", vietnameseFont)));
 
                     foreach (BillDetail bd in SpDvTable.Items)
                     {
-                        table.AddCell(bd.ProductId ?? bd.ServiceId);
-                        table.AddCell(bd.Quantity.ToString());
-                        table.AddCell(bd.TotalPrice.ToString());
+                        table.AddCell(new PdfPCell(new Phrase(bd.ProductId ?? bd.ServiceId, vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(bd.Quantity.ToString(), vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(bd.TotalPrice.ToString(), vietnameseFont)));
                     }
 
                     doc.Add(table);
@@ -345,6 +349,27 @@ namespace QuanLyCuaHangThuCung.Views
                 MessageBox.Show("Xuất hóa đơn thành công.");
             }
         }
+        private void SpDvTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SpDvTable.SelectedItem is BillDetail selectedDetail)
+            {
+                if (selectedDetail.Product != null) // Nếu là sản phẩm
+                {
+                    tenSP_input.Text = selectedDetail.Product.productName;
+                    price_input.Text = selectedDetail.UnitPrice.ToString();
+                    SL_input.Text = selectedDetail.Quantity.ToString();
+                    serviceList.SelectedIndex = -1; // Hủy chọn dịch vụ
+                }
+                else if (selectedDetail.Service != null) // Nếu là dịch vụ
+                {
+                    tenSP_input.Text = "";
+                    price_input.Text = "";
+                    SL_input.Text = "0"; // Dịch vụ không có số lượng
+                    serviceList.SelectedItem = selectedDetail.Service;
+                }
+            }
+        }
+
 
         private void rbKhachQuen_CheckedChanged(object sender, EventArgs e)
         {

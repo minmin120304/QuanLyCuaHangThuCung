@@ -1,37 +1,50 @@
-﻿using QuanLyCuaHangThuCung.Models;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace QuanLyCuaHangThuCung.Views
 {
+    /// <summary>
+    /// Interaction logic for Service.xaml
+    /// </summary>
     public partial class Service : UserControl
     {
-        private AppDbContext _context;
-        public ObservableCollection<QuanLyCuaHangThuCung.Models.ServiceType> ListServiceTypes { get; set; }
-        public ObservableCollection<QuanLyCuaHangThuCung.Models.Service> Services { get; set; }
-        public QuanLyCuaHangThuCung.Models.Service SelectedService { get; set; }
-
+        AppDbContext db = new AppDbContext();
         public Service()
         {
             InitializeComponent();
-            _context = new AppDbContext();
-            LoadData();
-            DataContext = this;
+            ServiceTable.ItemsSource = db.Service.ToList();
         }
-
-        private void LoadData()
+        private bool validateInput()
         {
-            ListServiceTypes = new ObservableCollection<QuanLyCuaHangThuCung.Models.ServiceType>(
-                _context.ServiceType.ToList()
-            );
-
-            Services = new ObservableCollection<QuanLyCuaHangThuCung.Models.Service>(
-                _context.Service.Include("ServiceType").ToList()
-            );
+            if (string.IsNullOrEmpty(tenDV_input.Text))
+            {
+                MessageBox.Show("Tên dịch vụ không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(note_input.Text))
+            {
+                MessageBox.Show("Ghi chú không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(ListType.Text))
+            {
+                MessageBox.Show("Loại hình dịch vụ không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(gia_input.Text))
+            {
+                MessageBox.Show("Giá không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (!decimal.TryParse(gia_input.Text, out decimal price) || price < 0)
+            {
+                MessageBox.Show("Giá dịch vụ phải là số thực không âm.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
+
         void resetInput()
         {
             tenDV_input.Text = "";
@@ -41,45 +54,40 @@ namespace QuanLyCuaHangThuCung.Views
             ListType.SelectedIndex = -1;
             ServiceTable.SelectedIndex = -1;
             ServiceTable.SelectedItem = null;
-            ServiceTable.ItemsSource = _context.Service.ToList();
+            ServiceTable.ItemsSource = db.Service.ToList();
         }
-
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!validateInput()) return;
+
+            if (!decimal.TryParse(gia_input.Text, out decimal price))
             {
-                if (string.IsNullOrWhiteSpace(tenDV_input.Text) || ListType.SelectedValue == null || string.IsNullOrWhiteSpace(gia_input.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                if (!decimal.TryParse(gia_input.Text, out decimal price))
-                {
-                    MessageBox.Show("Đơn giá phải là số hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                var newService = new QuanLyCuaHangThuCung.Models.Service
-                {
-                    Id = null, // ID sẽ được tự động tạo trong SaveChanges
-                    serviceName = tenDV_input.Text,
-                    ServiceTypeId = ListType.SelectedValue.ToString(),
-                    price = price,
-                    note = note_input.Text
-                };
-
-                _context.Service.Add(newService);
-                _context.SaveChanges();
-                Services.Add(newService);
-
-                MessageBox.Show("Thêm dịch vụ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadData();
+                MessageBox.Show("Đơn giá phải là số thực hợp lệ!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            catch (Exception ex)
+
+            Models.Service service = new Models.Service()
             {
-                MessageBox.Show("Lỗi khi thêm dịch vụ: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                serviceName = tenDV_input.Text,
+                note = note_input.Text,
+                price = price
+            };
+
+            if (ListType.SelectedItem != null)
+            {
+                if (ListType.SelectedItem is ComboBoxItem item1)
+                {
+                    service.serviceType = item1.Content.ToString();
+                }
+                else
+                {
+                    service.serviceType = ListType.SelectedItem?.ToString() ?? "";
+                }
             }
+
+            db.Service.Add(service);
+            db.SaveChanges();
+            MessageBox.Show("Thêm dịch vụ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             resetInput();
         }
 
@@ -87,39 +95,33 @@ namespace QuanLyCuaHangThuCung.Views
         {
             if (ServiceTable.SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn một dịch vụ để sửa.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn dịch vụ để sửa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            if (!validateInput()) return;
 
-            try
+            string serviceId = ((Models.Service)ServiceTable.SelectedItem).Id;
+            Models.Service service = db.Service.FirstOrDefault(p => p.Id == serviceId);
+
+            if (service == null) return;
+
+            service.serviceName = tenDV_input.Text;
+            service.note = note_input.Text;
+            if (ListType.SelectedItem != null)
             {
-                var serviceToUpdate = (QuanLyCuaHangThuCung.Models.Service)ServiceTable.SelectedItem;
-                serviceToUpdate.serviceName = tenDV_input.Text;
-                serviceToUpdate.ServiceTypeId = ListType.SelectedValue.ToString();
-                serviceToUpdate.price = decimal.Parse(gia_input.Text);
-                serviceToUpdate.note = note_input.Text;
-
-                _context.SaveChanges();
-                var index = Services.IndexOf(serviceToUpdate);
-                if (index >= 0)
+                if (ListType.SelectedItem is ComboBoxItem item1)
                 {
-                    Services[index] = new QuanLyCuaHangThuCung.Models.Service
-                    {
-                        Id = serviceToUpdate.Id, // Giữ nguyên ID
-                        serviceName = tenDV_input.Text,
-                        ServiceTypeId = ListType.SelectedValue.ToString(),
-                        price = decimal.Parse(gia_input.Text),
-                        note = note_input.Text
-                    };
+                    service.serviceType = item1.Content.ToString();
                 }
+                else
+                {
+                    service.serviceType = ListType.SelectedItem?.ToString() ?? "";
+                }
+            }
+            service.price = decimal.Parse(gia_input.Text);
 
-                MessageBox.Show("Cập nhật dịch vụ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                LoadData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi cập nhật dịch vụ: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            db.SaveChanges();
+            MessageBox.Show("Cập nhật dịch vụ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             resetInput();
         }
 
@@ -127,43 +129,31 @@ namespace QuanLyCuaHangThuCung.Views
         {
             if (ServiceTable.SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn một dịch vụ để xoá.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn dịch vụ để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
-            var serviceToDelete = (QuanLyCuaHangThuCung.Models.Service)ServiceTable.SelectedItem;
-
-            MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá dịch vụ '{serviceToDelete.serviceName}' không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    _context.Service.Remove(serviceToDelete);
-                    _context.SaveChanges();
-
-                    // Cập nhật lại danh sách dịch vụ
-                    LoadData(); // Đọc lại dữ liệu từ CSDL
-                    MessageBox.Show("Xóa dịch vụ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi xoá dịch vụ: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.No) return;
+            db.Service.Remove((Models.Service)ServiceTable.SelectedItem);
+            db.SaveChanges();
+            MessageBox.Show("Xóa dịch vụ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             resetInput();
         }
 
-
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ServiceTable.SelectedItem != null)
+            if (ServiceTable.SelectedItem is Models.Service service)
             {
-                SelectedService = (QuanLyCuaHangThuCung.Models.Service)ServiceTable.SelectedItem;
-                tenDV_input.Text = SelectedService.serviceName;
-                ListType.SelectedValue = SelectedService.ServiceTypeId;
-                gia_input.Text = SelectedService.price.ToString();
-                note_input.Text = SelectedService.note;
+                tenDV_input.Text = service.serviceName;
+                note_input.Text = service.note;
+                gia_input.Text = service.price.ToString();
+                foreach (ComboBoxItem item in ListType.Items)
+                {
+                    if ((string)item.Content == service.serviceType)
+                    {
+                        ListType.SelectedItem = item;
+                        break;
+                    }
+                }
             }
         }
     }
