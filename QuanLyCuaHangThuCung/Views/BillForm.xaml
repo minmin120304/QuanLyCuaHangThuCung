@@ -26,7 +26,8 @@
                   HeadersVisibility="Column" 
                   CanUserAddRows="False" 
                   Margin="16,189,389,46" 
-                  AlternationCount="1000" Width="395" Height="221">
+                  AlternationCount="1000" Width="395" Height="221"
+                  SelectionChanged="SpDvTable_SelectionChanged">
             <DataGrid.Resources>
                 <!-- Style căn giữa tiêu đề -->
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -54,8 +55,8 @@
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" MinWidth="50" Width="auto"/>
-                <DataGridTextColumn Header="Đơn giá" Binding="{Binding UnitPrice}" MinWidth="80" Width="auto"/>
-                <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice}" MinWidth="80" Width="auto"/>
+                <DataGridTextColumn Header="Đơn giá" Binding="{Binding UnitPrice, StringFormat=\{0:N0\} VND}" MinWidth="80" Width="auto"/>
+                <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice, StringFormat=\{0:N0\} VND}" MinWidth="80" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Lưu hoá đơn" HorizontalAlignment="Left" Margin="513,414,0,0" VerticalAlignment="Top" Width="94" Height="30" Background="#FF9FC7EE" Click="Save_Click"/>
@@ -75,7 +76,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="637,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Số lượng"/></TextBlock>
         <TextBox x:Name="SL_input" HorizontalAlignment="Left" Margin="692,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="62" Height="24"/>
         <Button Content="Thêm" HorizontalAlignment="Left" Margin="637,165,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddSP_Click"/>
-        <Button Content="Xoá" HorizontalAlignment="Left" Margin="702,165,0,0" VerticalAlignment="Top" Width="63" Height="20" Background="#FF9FC7EE" Click="DelSP_Click"/>
+        <Button Content="Xoá" x:Name="XoaSPBtn" HorizontalAlignment="Left" Margin="702,165,0,0" VerticalAlignment="Top" Width="63" Height="20" Background="#FFF47B60" Click="DelSP_Click"/>
 
         <DataGrid x:Name="ProductTable" 
                   AutoGenerateColumns="False" 
@@ -114,14 +115,14 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding productName}" MinWidth="120" Width="auto"/>
                 <DataGridTextColumn Header="Số lượng" Binding="{Binding quantity}" MinWidth="50" Width="auto"/>
-                <DataGridTextColumn Header="Đơn giá" Binding="{Binding price}" MinWidth="90" Width="auto"/>
+                <DataGridTextColumn Header="Đơn giá" Binding="{Binding price, StringFormat=\{0:N0\} VND}" MinWidth="90" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
         <Rectangle HorizontalAlignment="Left" Height="224" Margin="862,98,0,0" Stroke="Black" VerticalAlignment="Top" Width="444" OpacityMask="#FFEBD9D9"/>
         <ComboBox x:Name="serviceList" HorizontalAlignment="Left" Margin="533,61,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" ItemsSource="{Binding serviceName}" />
         <TextBlock HorizontalAlignment="Left" Margin="460,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"><Run Language="ja-jp" Text="Chọn dịch vụ"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
         <Button Content="Thêm" HorizontalAlignment="Left" Margin="662,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddDV_Click"/>
-        <Button Content="Xoá" HorizontalAlignment="Left" Margin="725,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="DelDV_Click"/>
+        <Button Content="Xoá" Background="#FFF47B60" HorizontalAlignment="Left" Margin="725,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Click="DelDV_Click"/>
         <RadioButton x:Name="rbKhachQuen"  Content="Khách quen" HorizontalAlignment="Left" Margin="291,100,0,0" VerticalAlignment="Top" Checked="rbKhachQuen_CheckedChanged"/>
         <RadioButton x:Name="rbKhachVangLai" Content="Khách vãng lai" HorizontalAlignment="Left" Margin="291,124,0,0" VerticalAlignment="Top" Checked="rbKhachVangLai_CheckedChanged"/>
         <Label x:Name="totalLabel" Content="Tổng tiền: 0đ" HorizontalAlignment="Left" Margin="16,418,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>

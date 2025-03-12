@@ -48,6 +48,11 @@ namespace QuanLyCuaHangThuCung.Views
                 MessageBox.Show("Đơn vị không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+            if (string.IsNullOrEmpty(ListTypeSP.Text))
+            {
+                MessageBox.Show("Loại sản phẩm không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
             if (string.IsNullOrEmpty(gia_input.Text))
             {
                 MessageBox.Show("Giá không được để trống", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -74,6 +79,7 @@ namespace QuanLyCuaHangThuCung.Views
             gia_input.Text = "";
 
             ListDV.SelectedIndex = -1;
+            ListTypeSP.SelectedIndex = -1;
             ProductTable.SelectedIndex = -1;
             ProductTable.SelectedItem = null;
             ProductTable.ItemsSource = db.Product.ToList();
@@ -98,12 +104,11 @@ namespace QuanLyCuaHangThuCung.Views
             {
                 productName = tenSP_input.Text,
                 origin = xuatXu_input.Text,
-                //unit = ListDV.SelectedItem.ToString(),
                 quantity = quantity,
                 price = price
             };
 
-            if (ListDV.SelectedItem != null)
+            if (ListDV.SelectedItem != null || ListTypeSP.SelectedItem != null)
             {
                 // Kiểm tra xem SelectedItem có phải là ComboBoxItem không
                 if (ListDV.SelectedItem is ComboBoxItem item)
@@ -112,12 +117,16 @@ namespace QuanLyCuaHangThuCung.Views
                 }
                 else
                 {
-                    product.unit = ListDV.SelectedItem.ToString();
+                    product.unit = ListDV.SelectedItem?.ToString() ?? "";
                 }
-            }
-            else
-            {
-                product.unit = "Không xác định"; // Giá trị mặc định
+                if (ListTypeSP.SelectedItem is ComboBoxItem item1)
+                {
+                    product.type = item1.Content.ToString();
+                }
+                else
+                {
+                    product.type = ListTypeSP.SelectedItem?.ToString()?? "";
+                }
             }
 
             db.Product.Add(product);
@@ -142,7 +151,7 @@ namespace QuanLyCuaHangThuCung.Views
 
             product.productName = tenSP_input.Text;
             product.origin = xuatXu_input.Text;
-            if (ListDV.SelectedItem != null)
+            if (ListDV.SelectedItem != null || ListTypeSP.SelectedItem != null)
             {
                 // Kiểm tra xem SelectedItem có phải là ComboBoxItem không
                 if (ListDV.SelectedItem is ComboBoxItem item)
@@ -151,12 +160,16 @@ namespace QuanLyCuaHangThuCung.Views
                 }
                 else
                 {
-                    product.unit = ListDV.SelectedItem.ToString();
+                    product.unit = ListDV.SelectedItem?.ToString() ?? "";
                 }
-            }
-            else
-            {
-                product.unit = "Không xác định"; // Giá trị mặc định
+                if (ListTypeSP.SelectedItem is ComboBoxItem item1)
+                {
+                    product.type = item1.Content.ToString();
+                }
+                else
+                {
+                    product.type = ListTypeSP.SelectedItem?.ToString() ?? "";
+                }
             }
             product.quantity = int.Parse(SL_input.Text);
             product.price = decimal.Parse(gia_input.Text);
@@ -187,7 +200,6 @@ namespace QuanLyCuaHangThuCung.Views
                 tenSP_input.Text = product.productName;
                 xuatXu_input.Text = product.origin;
                 SL_input.Text = product.quantity.ToString();
-                //ListDV.SelectedValue = product.unit;
                 gia_input.Text = product.price.ToString();
                 foreach (ComboBoxItem item in ListDV.Items)
                 {
@@ -197,17 +209,15 @@ namespace QuanLyCuaHangThuCung.Views
                         break;
                     }
                 }
+                foreach (ComboBoxItem item in ListTypeSP.Items)
+                {
+                    if ((string)item.Content == product.type)
+                    {
+                        ListTypeSP.SelectedItem = item;
+                        break;
+                    }
+                }
             }
-        }
-
-        private void ProductTable_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            e.Row.Header = (e.Row.GetIndex() + 1).ToString(); // STT bắt đầu từ 1
-        }
-
-        private void ProductTable_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
         }
     }
 }

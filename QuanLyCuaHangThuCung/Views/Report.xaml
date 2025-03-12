@@ -3,14 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:oxy="http://oxyplot.org/wpf"
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
              mc:Ignorable="d" Height="414" Width="637">
     <Grid Background="#FFFCE3B4" Width="637" Height="414">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="34*"/>
-        </Grid.RowDefinitions>
-        <Rectangle HorizontalAlignment="Center" Height="156" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="617" Fill="White" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
         <Label Content="Báo cáo" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,57,0,270">
+            <Button Content="Khách hàng" Height="31" Width="71"/>
+            <Button Content="Sản phẩm" Height="31" Width="70" Margin="40,0,40,0"/>
+            <Button Content="Doanh thu" Height="31" Width="71" Click="DoanhThu_Click"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,144,0,207" Width="318">
+            <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV" Margin="10">
+                <ComboBoxItem>Theo tuần</ComboBoxItem>
+                <ComboBoxItem>Theo tháng</ComboBoxItem>
+                <ComboBoxItem>Theo năm</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV_Copy" Margin="10">
+                <ComboBoxItem Content="Chọn tháng"/>
+                <ComboBoxItem Content="Theo tháng"/>
+                <ComboBoxItem Content="Theo năm"/>
+            </ComboBox>
+            <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV_Copy1" Margin="10">
+                <ComboBoxItem Content="Chọn năm"/>
+                <ComboBoxItem Content="Theo tháng"/>
+                <ComboBoxItem Content="Theo năm"/>
+            </ComboBox>
+        </StackPanel>
+
+        <oxy:PlotView Model="{Binding MyPlotModel}" Margin="104,207,103,34"/>
     </Grid>
 </UserControl>

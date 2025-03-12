@@ -43,12 +43,6 @@
                         <TextBlock Text="Sản phẩm" Margin="5,0,10,0"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource SidebarButton}" Click="Type_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="PowerSocketTypeI" Width="30" Height="26"/>
-                        <TextBlock Text="Loại hình DV" Margin="5,0,-10,0"/>
-                    </StackPanel>
-                </Button>
                 <Button Style="{StaticResource SidebarButton}" Click="Service_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Devices" Width="30" Height="26"/>
@@ -76,7 +70,7 @@
                 <Button Style="{StaticResource SidebarButton}" Click="Bill_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CashRegister" Width="30" Height="26"/>
-                        <TextBlock Text="Hoá đơn" Margin="5,0,20,0"/>
+                        <TextBlock Text="Đơn hàng" Margin="5,0,20,0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

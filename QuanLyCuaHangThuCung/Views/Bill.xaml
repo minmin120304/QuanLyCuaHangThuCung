@@ -49,7 +49,7 @@
                     <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding Id}" MinWidth="50" Width="auto"/>
                     <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" MinWidth="80" Width="auto"/>
                     <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" MinWidth="200" Width="auto"/>
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total}" MinWidth="120" Width="auto"/>
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total, StringFormat=\{0:N0\} VND}" MinWidth="120" Width="auto"/>
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>

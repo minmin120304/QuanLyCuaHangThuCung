@@ -20,7 +20,6 @@ namespace QuanLyCuaHangThuCung
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Service> Service { get; set; }
-        public DbSet<ServiceType> ServiceType { get; set; }
         public DbSet<Bill> Bill { get; set; }
         public DbSet<BillDetail> BillDetail { get; set; }
 
@@ -67,7 +66,6 @@ namespace QuanLyCuaHangThuCung
             else if (entityType == typeof(Customer)) prefix = "KH";
             else if (entityType == typeof(Employee)) prefix = "NV";
             else if (entityType == typeof(Service)) prefix = "DV";
-            else if (entityType == typeof(ServiceType)) prefix = "LDV";
             else if (entityType == typeof(Bill)) prefix = "HD";
             else if (entityType == typeof(BillDetail)) prefix = "CTHD";
             else throw new InvalidOperationException("Entity type is not supported");
