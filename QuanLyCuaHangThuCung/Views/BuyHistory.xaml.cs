@@ -1,47 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using QuanLyCuaHangThuCung.Models;
 
 namespace QuanLyCuaHangThuCung.Views
 {
-    /// <summary>
-    /// Interaction logic for BuyHistory.xaml
-    /// </summary>
     public partial class BuyHistory : Window
     {
+        private string customerId; // ID của khách hàng được chọn
         private AppDbContext Db = new AppDbContext();
-        public ObservableCollection<Models.BillDetail> BillDetails { get; set; } = new ObservableCollection<Models.BillDetail>();
-        public ObservableCollection<Models.Customer> Customer { get; set; } = new ObservableCollection<Models.Customer>();
 
-        public BuyHistory()
+        public BuyHistory(string selectedCustomerId)
         {
             InitializeComponent();
+            customerId = selectedCustomerId;
+            LoadBuyHistory();
         }
 
-        public BuyHistory(Customer Id)
+        private void LoadBuyHistory()
         {
-            InitializeComponent();
-        }
+            try
+            {
+                // Lấy danh sách hóa đơn của khách hàng dựa trên customerId
+                var bills = Db.Bill
+                    .Where(b => b.CustomerId == customerId)
+                    .Select(b => new
+                    {
+                        BillId = b.Id,
+                        DateBuy = b.CreatedDate,
+                        TotalPrice = b.TotalAmount,
+                        Note = b.Note
+                    }).ToList();
 
-        private void LoadData(string cusID)
-        {
-            
-        }
-
-        private void SpDvTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+                if (bills.Any())
+                {
+                    ListBuy.ItemsSource = bills;
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy lịch sử mua hàng cho khách hàng này!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải lịch sử mua hàng: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

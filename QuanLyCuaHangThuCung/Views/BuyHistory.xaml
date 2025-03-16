@@ -10,7 +10,7 @@
         <TextBlock HorizontalAlignment="Center" Margin="0,29,0,0" TextWrapping="Wrap" Text="Lịch sử mua hàng" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
         <DataGrid x:Name="SpDvTable" 
             AutoGenerateColumns="False" 
-            ItemsSource="{Binding BillDetails}" 
+            ItemsSource="{Binding ListBuy}" 
             AlternatingRowBackground="#E3F2FD"
             SelectionMode="Single" 
             SelectionUnit="FullRow" 
@@ -21,8 +21,7 @@
             HeadersVisibility="Column" 
             CanUserAddRows="False" 
             Margin="16,76,19,24" 
-            AlternationCount="1000"
-            SelectionChanged="SpDvTable_SelectionChanged">
+            AlternationCount="1000">
             <DataGrid.Resources>
                 <!-- Style căn giữa tiêu đề -->
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -44,7 +43,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding Quantity}" MinWidth="50" Width="auto"/>
+                <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding BillId}" MinWidth="50" Width="auto"/>
                 <DataGridTextColumn Header="Ngày mua" Binding="{Binding DateBuy}" MinWidth="120" Width="auto"/>
                 <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalPrice, StringFormat=\{0:N0\} VND}" MinWidth="100" Width="auto"/>
                 <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" MinWidth="160" Width="auto"/>

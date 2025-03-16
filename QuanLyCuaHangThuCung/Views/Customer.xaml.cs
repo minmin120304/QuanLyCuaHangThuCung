@@ -139,8 +139,16 @@ namespace QuanLyCuaHangThuCung.Views
 
         private void LS_Click(object sender, RoutedEventArgs e)
         {
-            BuyHistory buyHistory = new BuyHistory();
-            buyHistory.ShowDialog();
+            if (CustomerTable.SelectedItem is Models.Customer selectedCustomer)
+            {
+                string customerId = selectedCustomer.Id;
+                BuyHistory buyHistoryWindow = new BuyHistory(customerId);
+                buyHistoryWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một khách hàng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
