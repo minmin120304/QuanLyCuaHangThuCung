@@ -8,13 +8,13 @@
              mc:Ignorable="d" Height="414" Width="637">
     <Grid Background="#FFFCE3B4" Width="637" Height="414">
         <Label Content="Báo cáo" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,57,0,270">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,57,0,304">
             <Button Content="Khách hàng" Height="31" Width="71"/>
             <Button Content="Sản phẩm" Height="31" Width="70" Margin="40,0,40,0"/>
             <Button Content="Doanh thu" Height="31" Width="71" Click="DoanhThu_Click"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,144,0,207" Width="318">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,110,0,257" Width="318">
             <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV" Margin="10">
                 <ComboBoxItem>Theo tuần</ComboBoxItem>
                 <ComboBoxItem>Theo tháng</ComboBoxItem>
@@ -32,6 +32,13 @@
             </ComboBox>
         </StackPanel>
 
-        <oxy:PlotView Model="{Binding MyPlotModel}" Margin="104,207,103,34"/>
+        <oxy:PlotView Model="{Binding RevenueChart}" Margin="51,157,51,164" Width="535"/>
+        
+        <DataGrid x:Name="DoanhThuTable" Margin="54,263,69,22">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tháng" Binding="{Binding Month}" Width="100"/>
+                <DataGridTextColumn Header="Doanh thu (VND)" Binding="{Binding TotalRevenue, StringFormat=N0}" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
