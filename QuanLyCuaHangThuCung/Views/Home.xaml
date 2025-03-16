@@ -5,12 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
              mc:Ignorable="d" Height="414" Width="637">
-    <Grid Background="#FFFCE3B4" Width="637" Height="414">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="34*"/>
-        </Grid.RowDefinitions>
-        <Rectangle HorizontalAlignment="Center" Height="156" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="617" Fill="White" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
-        <Label Content="Trang chủ" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-    </Grid>
+    <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8">
+        <Grid Background="#FFFCE3B4" Width="637" Height="414">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="34*"/>
+            </Grid.RowDefinitions>
+            <Rectangle HorizontalAlignment="Center" Height="156" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="617" Fill="White" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
+            <Label Content="Trang chủ" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        </Grid>
+    </Border>
 </UserControl>
