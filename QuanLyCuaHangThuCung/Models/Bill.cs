@@ -14,23 +14,14 @@ namespace QuanLyCuaHangThuCung.Models
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string EmployeeId { get; set; }
         public string CustomerId { get; set; }
-        //[Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }
-
-        public string State { get; set; }
-
-        //[Column(TypeName = "decimal(18,2)")]
-        public decimal? VAT { get; set; }
-
-        //[Column(TypeName = "decimal(18,2)")]
-        public decimal? Discount { get; set; }
+        public string Note { get; set; }
 
         [ForeignKey("EmployeeId")]
         public virtual Employee Employee { get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
-
-        public virtual ICollection<BillDetail> BillDetails { get; set; }
+        public virtual ICollection<BillDetail> BillDetails { get; set; } = new List<BillDetail>();
     }
 }

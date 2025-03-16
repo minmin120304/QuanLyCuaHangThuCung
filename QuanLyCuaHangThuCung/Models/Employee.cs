@@ -23,5 +23,7 @@ namespace QuanLyCuaHangThuCung.Models
 
         [Required, Phone, StringLength(12)]
         public string phoneNum { get; set; }
+        
+        public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
     }
 }

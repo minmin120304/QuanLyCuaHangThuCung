@@ -29,7 +29,7 @@ namespace QuanLyCuaHangThuCung.Views
                     Date = b.CreatedDate,
                     Customer = Db.Customer.FirstOrDefault(c => c.Id == b.CustomerId).customerName,
                     Total = b.TotalAmount,
-                    Status = b.State
+                    Note = b.Note
                 }).ToList();
         }
 
@@ -147,7 +147,7 @@ namespace QuanLyCuaHangThuCung.Views
                         Date = b.CreatedDate,
                         Customer = Db.Customer.FirstOrDefault(c => c.Id == b.CustomerId).customerName,
                         Total = b.TotalAmount,
-                        Status = b.State
+                        Note = b.Note
                     }).ToList();
 
                 BillTable.ItemsSource = filteredBills;
