@@ -50,7 +50,7 @@
                     <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" MinWidth="80" Width="auto"/>
                     <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" MinWidth="200" Width="auto"/>
                     <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total, StringFormat=\{0:N0\} VND}" MinWidth="120" Width="auto"/>
-                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" MinWidth="120" Width="auto"/>
+                    <DataGridTextColumn Header="Ghi chú" Binding="{Binding Status}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="385,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="25" FontSize="14"/>

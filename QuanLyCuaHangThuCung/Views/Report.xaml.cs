@@ -1,51 +1,53 @@
-﻿using OxyPlot.Axes;
-using OxyPlot.Series;
-using OxyPlot;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+using System.Collections.Generic;
+using System.Windows.Controls; // Thay thế bằng context của bạn
 
 namespace QuanLyCuaHangThuCung.Views
 {
-    /// <summary>
-    /// Interaction logic for Report.xaml
-    /// </summary>
     public partial class Report : UserControl
     {
-        public PlotModel MyPlotModel { get; set; }
+        private AppDbContext Db = new AppDbContext(); // Đảm bảo có DbContext
+
         public Report()
         {
             InitializeComponent();
-            MyPlotModel = new PlotModel { Title = "Biểu đồ cột" };
-
-            var categoryAxis = new CategoryAxis { Position = AxisPosition.Bottom };
-            categoryAxis.Labels.AddRange(new List<string> { "A", "B", "C", "D" });
-
-            var valueAxis = new LinearAxis { Position = AxisPosition.Left, Minimum = 0, Maximum = 100 };
-
-            var barSeries = new BarSeries
-            {
-                ItemsSource = new List<BarItem> {
-                    new BarItem { Value = 30 },
-                    new BarItem { Value = 70 },
-                    new BarItem { Value = 50 },
-                    new BarItem { Value = 90 }
-                }
-            };
-
-
-            MyPlotModel.Axes.Add(categoryAxis);
-            MyPlotModel.Axes.Add(valueAxis);
-            MyPlotModel.Series.Add(barSeries);
+            LoadData();
         }
 
-        private void DoanhThu_Click(object sender, RoutedEventArgs e)
+        private void LoadData()
         {
+            var data = GetRevenueByMonth(2024);
+            DoanhThuTable.ItemsSource = data;
+        }
 
+        private List<RevenueReport> GetRevenueByMonth(int year)
+        {
+            var result = Db.Bill
+                .Where(b => b.CreatedDate.Year == year)
+                .GroupBy(b => b.CreatedDate.Month)
+                .Select(g => new RevenueReport
+                {
+                    Month = g.Key,
+                    TotalRevenue = g.Sum(b => (decimal)b.TotalAmount)
+                })
+                .OrderBy(r => r.Month)
+                .ToList();
+
+            return result;
+        }
+
+        private void DoanhThu_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            
         }
     }
+
+    // Model để chứa dữ liệu báo cáo doanh thu
+    public class RevenueReport
+    {
+        public int Month { get; set; }
+        public decimal TotalRevenue { get; set; }
+    }
+
 }

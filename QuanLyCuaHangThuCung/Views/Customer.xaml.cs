@@ -132,5 +132,15 @@ namespace QuanLyCuaHangThuCung.Views
             e.Row.Header = (e.Row.GetIndex() + 1).ToString(); // STT bắt đầu từ 1
         }
 
+        private void BoChon_Click(object sender, RoutedEventArgs e)
+        {
+            resetInput();
+        }
+
+        private void LS_Click(object sender, RoutedEventArgs e)
+        {
+            BuyHistory buyHistory = new BuyHistory();
+            buyHistory.ShowDialog();
+        }
     }
 }

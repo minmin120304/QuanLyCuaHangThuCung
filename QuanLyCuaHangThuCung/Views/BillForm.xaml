@@ -61,7 +61,7 @@
         </DataGrid>
         <Button Content="Lưu hoá đơn" HorizontalAlignment="Left" Margin="513,414,0,0" VerticalAlignment="Top" Width="94" Height="30" Background="#FF9FC7EE" Click="Save_Click"/>
         <Button Content="Xuất hoá đơn" HorizontalAlignment="Left" Margin="633,414,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="48,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Text="Danh sách"/><Run Language="ja-jp" Text=" sản phẩm/dịch vụ trong hoá đơn"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="48,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Text="Danh sách sản phẩm/dịch vụ trong hoá đơn"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="23,110,0,0" TextWrapping="Wrap" Text="Tên khách hàng" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbKhachHang" IsEnabled="False" HorizontalAlignment="Left" Margin="121,106,0,0" Text="" VerticalAlignment="Top" Width="156" Height="24" DisplayMemberPath="customerName" SelectedValuePath="Id"/>
         <TextBlock HorizontalAlignment="Left" Margin="23,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="N"/><Run Text="hân viên lập hoá đơn"/></TextBlock>

@@ -22,6 +22,7 @@ namespace QuanLyCuaHangThuCung
         public DbSet<Service> Service { get; set; }
         public DbSet<Bill> Bill { get; set; }
         public DbSet<BillDetail> BillDetail { get; set; }
+        public DbSet<BuyHistory> BuyHistory { get; set; }
 
         public override int SaveChanges()
         {
@@ -68,6 +69,7 @@ namespace QuanLyCuaHangThuCung
             else if (entityType == typeof(Service)) prefix = "DV";
             else if (entityType == typeof(Bill)) prefix = "HD";
             else if (entityType == typeof(BillDetail)) prefix = "CTHD";
+            else if (entityType == typeof(BuyHistory)) prefix = "LSMH";
             else throw new InvalidOperationException("Entity type is not supported");
 
             var property = entityType.GetProperty("Id");

@@ -130,17 +130,30 @@
     <Compile Include="Migrations\202503120651576_AllUC.Designer.cs">
       <DependentUpon>202503120651576_AllUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503120802515_AllUC2.cs" />
+    <Compile Include="Migrations\202503120802515_AllUC2.Designer.cs">
+      <DependentUpon>202503120802515_AllUC2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202503160828048_AllUCTest.cs" />
+    <Compile Include="Migrations\202503160828048_AllUCTest.Designer.cs">
+      <DependentUpon>202503160828048_AllUCTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BillDetail.cs" />
+    <Compile Include="Models\BuyHistory.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IHasID.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="NameConverter.cs" />
+    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="Views\BillForm.xaml.cs">
       <DependentUpon>BillForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuyHistory.xaml.cs">
+      <DependentUpon>BuyHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -176,6 +189,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\BillForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuyHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +262,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503120651576_AllUC.resx">
       <DependentUpon>202503120651576_AllUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503120802515_AllUC2.resx">
+      <DependentUpon>202503120802515_AllUC2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503160828048_AllUCTest.resx">
+      <DependentUpon>202503160828048_AllUCTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
