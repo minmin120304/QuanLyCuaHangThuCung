@@ -8,7 +8,7 @@
         Title="BuyHistory" Height="335" Width="538">
     <Grid Margin="0,0,0,-6" Background="#FFF9FFBC">
         <TextBlock HorizontalAlignment="Center" Margin="0,29,0,0" TextWrapping="Wrap" Text="Lịch sử mua hàng" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <DataGrid x:Name="SpDvTable" 
+        <DataGrid x:Name="ListBuy" 
             AutoGenerateColumns="False" 
             ItemsSource="{Binding ListBuy}" 
             AlternatingRowBackground="#E3F2FD"
