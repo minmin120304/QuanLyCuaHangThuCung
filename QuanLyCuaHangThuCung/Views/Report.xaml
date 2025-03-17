@@ -6,39 +6,104 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
              mc:Ignorable="d" Height="414" Width="637">
-    <Grid Background="#FFFCE3B4" Width="637" Height="414">
-        <Label Content="Báo cáo" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,57,0,304">
-            <Button Content="Khách hàng" Height="31" Width="71"/>
-            <Button Content="Sản phẩm" Height="31" Width="70" Margin="40,0,40,0"/>
-            <Button Content="Doanh thu" Height="31" Width="71" Click="DoanhThu_Click"/>
-        </StackPanel>
+    <Grid Width="637" Height="414" >
+        <Border CornerRadius="20" Padding="15" Background="Beige">
+            <TabControl>
+                <!-- Tab Kho hàng -->
+                <TabItem Header="Kho hàng" Padding="8" FontSize="14">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,110,0,257" Width="318">
-            <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV" Margin="10">
-                <ComboBoxItem>Theo tuần</ComboBoxItem>
-                <ComboBoxItem>Theo tháng</ComboBoxItem>
-                <ComboBoxItem>Theo năm</ComboBoxItem>
-            </ComboBox>
-            <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV_Copy" Margin="10">
-                <ComboBoxItem Content="Chọn tháng"/>
-                <ComboBoxItem Content="Theo tháng"/>
-                <ComboBoxItem Content="Theo năm"/>
-            </ComboBox>
-            <ComboBox Height="22" SelectedIndex="0" x:Name="ListDV_Copy1" Margin="10">
-                <ComboBoxItem Content="Chọn năm"/>
-                <ComboBoxItem Content="Theo tháng"/>
-                <ComboBoxItem Content="Theo năm"/>
-            </ComboBox>
-        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" >
+                            <TextBox Width="200" Height="30" FontSize="14" />
+                            <Button Content="Tìm kiếm" Margin="5,0,0,0" Width="76"/>
+                        </StackPanel>
 
-        <oxy:PlotView Model="{Binding RevenueChart}" Margin="51,157,51,164" Width="535"/>
-        
-        <DataGrid x:Name="DoanhThuTable" Margin="54,263,69,22">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Tháng" Binding="{Binding Month}" Width="100"/>
-                <DataGridTextColumn Header="Doanh thu (VND)" Binding="{Binding TotalRevenue, StringFormat=N0}" Width="200"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                        <DataGrid x:Name="dataGridWarehouse" Grid.Row="1" Margin="10,10,10,47" AutoGenerateColumns="False" Height="235">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="STT" Width="50"/>
+                                <DataGridTextColumn Header="Tên sản phẩm" Width="*"/>
+                                <DataGridTextColumn Header="Tổng số lượng" Width="110"/>
+                                <DataGridTextColumn Header="Số lượng đã bán" Width="120"/>
+                                <DataGridTextColumn Header="Số lượng còn lại" Width="120"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,254,51,8" Grid.Row="1" BorderThickness="0" Height="30" Click="BtnStatistic_Click"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="23,259,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="51,257,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="193,259,0,0" Grid.Row="1" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="230,257,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+
+                    </Grid>
+                </TabItem>
+
+                <!-- Tab Hóa đơn -->
+                <TabItem Header="Hóa đơn" Padding="8" FontSize="14">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Width="305" VerticalAlignment="Top">
+                            <TextBox Width="200" Height="30" FontSize="14" />
+                            <Button Content="Tìm kiếm" Margin="5,0,0,0" Width="76" Height="34"/>
+                        </StackPanel>
+
+                        <DataGrid x:Name="dataGridInvoices" AutoGenerateColumns="False" Margin="10,57,10,0" VerticalAlignment="Top" Height="240" RenderTransformOrigin="0.5,0.5">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã hóa đơn" Width="100"/>
+                                <DataGridTextColumn Header="Ngày lập" Width="150"/>
+                                <DataGridTextColumn Header="Khách hàng" Width="*"/>
+                                <DataGridTextColumn Header="Tổng tiền" Width="100"/>
+                                <DataGridTextColumn Header="Trạng thái" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,305,51,6" BorderThickness="0" Height="30" Click="BtnStatistic_Click"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="23,310,0,0" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="51,308,0,0" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="193,310,0,0" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
+                        <DatePicker HorizontalAlignment="Left" Margin="230,308,0,0" VerticalAlignment="Top"/>
+
+                    </Grid>
+                </TabItem>
+
+                <!-- Tab Khách hàng thân quen -->
+                <TabItem Header="Khách hàng thân quen" Padding="8" FontSize="14">
+                    <Grid>
+                        <DataGrid x:Name="dataGridLoyalCustomers" Margin="10" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã KH" Width="100"/>
+                                <DataGridTextColumn Header="Tên khách hàng" Width="*"/>
+                                <DataGridTextColumn Header="Số lượng đơn hàng" Width="150"/>
+                                <DataGridTextColumn Header="Số tiền" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+
+                <!-- Tab Doanh thu -->
+                <TabItem Header="Doanh thu" Padding="8" FontSize="14">
+                    <Grid>
+                        <oxy:PlotView x:Name="plotView" Model="{Binding MyPlotModel}" Margin="10,47,10,10" />
+
+                        <ComboBox Height="25" SelectedIndex="01" x:Name="cbFilterType" VerticalAlignment="Top" Margin="26,7,471,0" SelectionChanged="CbFilterType_SelectionChanged">
+                            <ComboBoxItem>Theo tuần</ComboBoxItem>
+                            <ComboBoxItem>Theo tháng</ComboBoxItem>
+                            <ComboBoxItem>Theo năm</ComboBoxItem>
+                        </ComboBox>
+
+                        <ComboBox Height="22" SelectedIndex="0" x:Name="cbMonth" VerticalAlignment="Top" Margin="179,7,328,0"/>
+
+                        <ComboBox Height="22" SelectedIndex="0" x:Name="cbYear" VerticalAlignment="Top" Margin="307,7,202,0"/>
+
+                        <Button x:Name="btnStatistic" Content="Thống kê" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Width="80" Background="#FFF4D583" BorderThickness="0" Click="BtnStatistic_Click"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
     </Grid>
 </UserControl>

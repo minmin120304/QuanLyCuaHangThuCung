@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLyCuaHangThuCung.Models
@@ -25,5 +26,6 @@ namespace QuanLyCuaHangThuCung.Models
 
         [Required]
         public decimal price { get; set; }
+        public DateTime DateInput { get; set; }
     }
 }
