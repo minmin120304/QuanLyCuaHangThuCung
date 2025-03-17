@@ -22,7 +22,7 @@ namespace QuanLyCuaHangThuCung
         public DbSet<Service> Service { get; set; }
         public DbSet<Bill> Bill { get; set; }
         public DbSet<BillDetail> BillDetail { get; set; }
-        public DbSet<BuyHistory> BuyHistory { get; set; }
+        public DbSet<User> User { get; set; }
 
         public override int SaveChanges()
         {
