@@ -1,27 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using QuanLyCuaHangThuCung.Models;
+using QuanLyCuaHangThuCung.Utils;
 
 namespace QuanLyCuaHangThuCung.Views
 {
-    /// <summary>
-    /// Interaction logic for SignUp.xaml
-    /// </summary>
     public partial class SignUp : Window
     {
+        private AppDbContext Db = new AppDbContext();
+
         public SignUp()
         {
             InitializeComponent();
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Password;
+            string confirmPassword = txtConfirmPassword.Password;
+
+            if (password != confirmPassword)
+            {
+                MessageBox.Show("Mật khẩu không khớp!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (Db.User.Any(u => u.Username == username))
+            {
+                MessageBox.Show("Tài khoản đã tồn tại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var user = new User
+            {
+                Username = username,
+                PasswordHash = PasswordHelper.HashPassword(password), // Mã hóa mật khẩu
+                FullName = "Người dùng mới"
+            };
+
+            Db.User.Add(user);
+            Db.SaveChanges();
+
+            MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Mở lại Form đăng nhập
+            Login loginForm = new Login();
+            loginForm.Show();
+
+            // Đóng Form hiện tại
+            this.Close();
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            Login loginForm = new Login();
+            loginForm.Show();
+            this.Close();
         }
     }
 }
