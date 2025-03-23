@@ -47,7 +47,7 @@
                                      BorderThickness="0,0,0,1" FontSize="20"/>
                         </StackPanel>
 
-                        <StackPanel>
+                        <StackPanel Margin="0,0,0,10">
                             <!-- Mật khẩu -->
                             <TextBlock Text="Mật khẩu" Grid.Row="3"
                                     Margin="45,10,0,0"
@@ -63,11 +63,11 @@
                         </StackPanel>
 
                         <!-- Hiển thị mật khẩu -->
-                        <RadioButton x:Name="HienThiPassCheck" Grid.Row="5"
-                                 Content="Hiển thị mật khẩu" 
-                                 FontSize="14" Margin="45,20,0,0" Cursor="Hand" 
-                                 Checked="HienThiPassCheck_Checked"
-                                 Unchecked="HienThiPassCheck_Unchecked"/>
+                        <CheckBox x:Name="HienThiPassCheck"
+                                     Content="Hiển thị mật khẩu"
+                                     Margin="50,0,0,0"
+                                     Checked="HienThiPassCheck_Checked"
+                                     Unchecked="HienThiPassCheck_Unchecked"/>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2">
@@ -85,7 +85,6 @@
                                 BorderThickness="0"
                                 Click="Signup_Click" Foreground="#FF3064ED"/>
                         </StackPanel>
-
                     </StackPanel>
                 </Grid>
             </Grid>
