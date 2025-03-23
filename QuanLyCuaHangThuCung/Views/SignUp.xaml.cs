@@ -18,6 +18,8 @@ namespace QuanLyCuaHangThuCung.Views
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
+            string fullName = txtFullName.Text;
+            string email = txtEmail.Text;
             string username = txtUsername.Text;
             string password = txtPassword.Password;
             string confirmPassword = txtConfirmPassword.Password;
@@ -33,12 +35,19 @@ namespace QuanLyCuaHangThuCung.Views
                 MessageBox.Show("Tài khoản đã tồn tại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            
+            if (Db.User.Any(u => u.Email == email))
+            {
+                MessageBox.Show("Email đã tồn tại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             var user = new User
             {
+                FullName = fullName,
+                Email = email,
                 Username = username,
-                PasswordHash = PasswordHelper.HashPassword(password), // Mã hóa mật khẩu
-                FullName = "Người dùng mới"
+                PasswordHash = PasswordHelper.HashPassword(password) // Mã hóa mật khẩu
             };
 
             Db.User.Add(user);
