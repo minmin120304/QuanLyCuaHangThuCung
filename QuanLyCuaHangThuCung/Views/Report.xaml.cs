@@ -156,5 +156,15 @@ namespace QuanLyCuaHangThuCung.Views
             }
 
         }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

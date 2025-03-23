@@ -88,11 +88,6 @@ namespace QuanLyCuaHangThuCung.Views
             }
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Export_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "PDF Files|*.pdf" };
@@ -140,7 +135,8 @@ namespace QuanLyCuaHangThuCung.Views
             {
                 var filteredBills = Db.Bill
                     .Where(b => b.Id.Contains(searchText) ||
-                                Db.Customer.Any(c => c.Id == b.CustomerId && c.customerName.Contains(searchText)))
+                                Db.Customer.Any(c => c.Id == b.CustomerId && c.customerName.Contains(searchText))
+                                || b.CreatedDate.ToString().Contains(searchText))
                     .Select(b => new
                     {
                         Id = b.Id,
@@ -155,6 +151,30 @@ namespace QuanLyCuaHangThuCung.Views
             else
             {
                 LoadBills();
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            LoadBills();
+        }
+
+        private void BillTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void Detail_Click(object sender, RoutedEventArgs e)
+        {
+            if (BillTable.SelectedItem != null)
+            {
+                dynamic selectedBill = BillTable.SelectedItem;
+                BillForm billForm = new BillForm(selectedBill.Id); // Chỉnh sửa hóa đơn
+                billForm.ShowDialog();
+                LoadBills();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn cần xem.");
             }
         }
     }
