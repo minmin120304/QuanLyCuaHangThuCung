@@ -4,15 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
-             mc:Ignorable="d" Height="414" Width="637">
-    <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8">
-        <Grid Background="#FFFCE3B4" Width="637" Height="414">
+             mc:Ignorable="d">
+    <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8" Height="450">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35*"/>
-                <RowDefinition Height="34*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Rectangle HorizontalAlignment="Center" Height="156" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="617" Fill="White" StrokeThickness="0" RadiusX="20" RadiusY="20"/>
-            <Label Content="Trang chủ" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+
+            <Image Source="/Resourses/banner_home.jpg" Stretch="UniformToFill" Height="150" Grid.Row="0"/>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="10">
+                <TextBlock Text="Thống kê tổng quan" FontSize="18" FontWeight="Bold" Foreground="#FFA90F0F" TextDecorations="Underline" TextAlignment="Center" Margin="0,10"/>
+
+                <UniformGrid Columns="3" HorizontalAlignment="Stretch" Margin="0,29,0,10">
+                    <!-- Doanh thu -->
+                    <Border Background="#FFC3EBF3" CornerRadius="10" Padding="10,20,10,10" Height="100" Margin="0,0,19.8,0">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Label x:Name="doanhThu" Content="0 VND" FontSize="16" FontWeight="Bold" Foreground="#FF205D64" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Doanh thu" FontSize="16" FontWeight="Bold" Foreground="#FF205D64" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Sản phẩm hiện có -->
+                    <Border Background="#FF95B8AC" CornerRadius="10" Padding="10,20,10,0" Height="100" Margin="10,0,10,0">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Label x:Name="SLsp" Content="10" FontSize="16" FontWeight="Bold" Foreground="#FFDFF1A3" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Sản phẩm hiện có" FontSize="16" FontWeight="Bold" Foreground="#FFDFF1A3" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Loại hình dịch vụ -->
+                    <Border Background="#FFFFFAEC" CornerRadius="10" Padding="10,20,10,10" Height="100" Margin="20,0,0,0">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Label x:Name="slDV" Content="15" FontSize="16" FontWeight="Bold" Foreground="#FFAE2168" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Loại hình dịch vụ" FontSize="16" FontWeight="Bold" Foreground="#FFAE2168" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>
