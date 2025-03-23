@@ -26,6 +26,6 @@ namespace QuanLyCuaHangThuCung.Models
 
         [Required]
         public decimal price { get; set; }
-        public DateTime DateInput { get; set; }
+        public DateTime DateInput { get; set; } = DateTime.Now;
     }
 }

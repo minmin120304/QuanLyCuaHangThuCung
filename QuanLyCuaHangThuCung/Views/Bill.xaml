@@ -60,6 +60,7 @@
             <Button Content="Sửa" HorizontalAlignment="Left" Margin="237,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFFAEE7F" Click="Edit_Click"/>
             <Button Content="Xoá" HorizontalAlignment="Left" Margin="362,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFF47B60" Click="Delete_Click"/>
             <Button Content="Xuất file" HorizontalAlignment="Left" Margin="481,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
+            <Button Content="Xem chi tiết" HorizontalAlignment="Left" Margin="540,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFFFAA54" Click="Detail_Click"/>
         </Grid>
     </Border>
 </UserControl>

@@ -55,12 +55,6 @@
                         <TextBlock Text="Khách hàng" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource SidebarButton}" Click="Report_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="26"/>
-                        <TextBlock Text="Báo cáo" Margin="5,0,30,0"/>
-                    </StackPanel>
-                </Button>
                 <Button Style="{StaticResource SidebarButton}" Click="Employee_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AccountBoxMultiple" Width="30" Height="26"/>
@@ -71,6 +65,18 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CashRegister" Width="30" Height="26"/>
                         <TextBlock Text="Đơn hàng" Margin="5,0,20,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="Report_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ChartBar" Width="30" Height="26"/>
+                        <TextBlock Text="Thống kê" Margin="5,0,30,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SidebarButton}" Click="DX_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Logout" Width="30" Height="26"/>
+                        <TextBlock Text="Đăng xuất" Margin="5,0,30,0"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
