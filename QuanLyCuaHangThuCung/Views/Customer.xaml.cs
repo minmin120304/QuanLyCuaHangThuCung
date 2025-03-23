@@ -24,6 +24,10 @@ namespace QuanLyCuaHangThuCung.Views
         public Customer()
         {
             InitializeComponent();
+            LoadData();
+        }
+        void LoadData()
+        {
             CustomerTable.ItemsSource = db.Customer.ToList();
         }
         private bool validateInput()
@@ -54,7 +58,7 @@ namespace QuanLyCuaHangThuCung.Views
             tenKH_input.Text = "";
             textRange.Text = "";
             SDT_input.Text = "";
-            
+
             CustomerTable.SelectedIndex = -1;
             CustomerTable.SelectedItem = null;
             CustomerTable.ItemsSource = db.Customer.ToList();
@@ -88,7 +92,7 @@ namespace QuanLyCuaHangThuCung.Views
 
             string customerID = ((Models.Customer)CustomerTable.SelectedItem).Id;
             Models.Customer customer = db.Customer.FirstOrDefault(c => c.Id == customerID);
-  
+
             if (customer == null) return;
 
             TextRange textRange = new TextRange(diaChi_input.Document.ContentStart, diaChi_input.Document.ContentEnd);
@@ -148,6 +152,37 @@ namespace QuanLyCuaHangThuCung.Views
             else
             {
                 MessageBox.Show("Vui lòng chọn một khách hàng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim(); // Lấy nội dung từ ô tìm kiếm
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var filteredCus = db.Customer
+                    .Where(c => c.address.Contains(searchText) // Tìm kiếm theo địa chỉ
+                             || c.customerName.Contains(searchText) // Tìm theo tên
+                             || c.phoneNum.Contains(searchText)) // Tìm theo số điện thoại
+                    .Select(c => new
+                    {
+                        Id = c.Id,
+                        customerName = c.customerName,
+                        address = c.address,
+                        phoneNum = c.phoneNum
+                    }).ToList();
+
+                CustomerTable.ItemsSource = filteredCus;
+            }
+            else
+            {
+                LoadData();
             }
         }
     }

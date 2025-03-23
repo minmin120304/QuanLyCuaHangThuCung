@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
              mc:Ignorable="d" Height="450">
 
@@ -33,11 +34,10 @@
                     </WrapPanel>
 
                     <WrapPanel HorizontalAlignment="Center" Margin="10">
-                        <Button Content="Thêm mới" Background="#FF9FC7EE" Width="90" Height="30" Margin="0,10,30,0" Click="Add_Click"/>
-                        <Button Content="Sửa" Background="#FFFAEE7F" Width="90" Margin="5,10,30,0" Click="Edit_Click"/>
-                        <Button Content="Xoá" Background="#FFF47B60" Width="90" Margin="5,10,30,0" Click="Delete_Click"/>
-                        <Button Content="Bỏ chọn" Background="#FFF4B660" Width="90" Margin="5,10,30,0" Click="BoChon_Click"/>
-                        <Button Content="Xem lịch sử" Background="#FFB7F460" Width="90" Margin="5,10,0,0" Click="LS_Click"/>
+                        <Button Content="Thêm mới" Style="{StaticResource AddButton}" Width="90" Height="30" Margin="0,10,30,0" Click="Add_Click"/>
+                        <Button Content="Sửa" Style="{StaticResource EditButton}" Width="90" Margin="5,10,30,0" Click="Edit_Click"/>
+                        <Button Content="Xoá" Style="{StaticResource DeleteButton}" Width="90" Margin="5,10,30,0" Click="Delete_Click"/>
+                        <Button Content="Xem lịch sử" Style="{StaticResource DetailButton}" Width="90" Margin="5,10,0,0" Click="LS_Click"/>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -47,13 +47,25 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <!-- Chỉ cho tiêu đề -->
+                    <RowDefinition Height="Auto"/>
+
                     <RowDefinition Height="*"/>
                     <!-- Dành không gian còn lại cho DataGrid -->
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Danh sách khách hàng" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
 
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBox x:Name="SearchTextBox" TextWrapping="Wrap" Text="" Width="154" Height="25" FontSize="14"/>
+                    <Button Content="Tìm" Style="{StaticResource FindButton}" Width="64" Height="25" Click="Find_Click" Margin="10"/>
+                    <Button Style="{StaticResource LoadButton}" Click="Load_Click" Margin="0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">
+                            <materialDesign:PackIcon Kind="Reload" Width="30" Height="26"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
                     <DataGrid x:Name="CustomerTable" 
                               AutoGenerateColumns="False" 
                               ItemsSource="{Binding Customer}" 

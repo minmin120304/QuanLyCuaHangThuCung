@@ -24,6 +24,10 @@ namespace QuanLyCuaHangThuCung.Views
         public SanPham()
         {
             InitializeComponent();
+            LoadData();
+        }
+        void LoadData()
+        {
             ProductTable.ItemsSource = db.Product.ToList();
         }
         private bool validateInput()
@@ -218,6 +222,42 @@ namespace QuanLyCuaHangThuCung.Views
                     }
                 }
             }
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim(); // Lấy nội dung từ ô tìm kiếm
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var filteredProduct = db.Product
+                    .Where( p => p.productName.Contains(searchText)
+                             || p.type.Contains(searchText) 
+                             || p.origin.Contains(searchText)
+                             || p.unit.Contains(searchText))
+                    .Select(p => new
+                    {
+                        Id = p.Id,
+                        productName = p.productName,
+                        origin = p.origin,
+                        type = p.type,
+                        quantity = p.quantity,
+                        price = p.price,
+                        unit = p.unit
+                    }).ToList();
+
+                ProductTable.ItemsSource = filteredProduct;
+            }
+            else
+            {
+                LoadData();
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+           resetInput();
+           LoadData();
         }
     }
 }

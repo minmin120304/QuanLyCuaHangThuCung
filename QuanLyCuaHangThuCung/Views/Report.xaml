@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:oxy="http://oxyplot.org/wpf"
-             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="414" Width="637">
     <Grid Width="637" Height="414" >
         <Border CornerRadius="20" Padding="15" Background="Beige">
-            <TabControl>
+            <TabControl SelectionChanged="TabControl_SelectionChanged">
                 <!-- Tab Kho hàng -->
                 <TabItem Header="Kho hàng" Padding="8" FontSize="14">
                     <Grid>
@@ -16,13 +16,17 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" >
-                            <TextBox Width="200" Height="30" FontSize="14" />
-                            <Button Content="Tìm kiếm" Margin="5,0,0,0" Width="76"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                            <TextBox x:Name="SearchTextBox" TextWrapping="Wrap" Text="" Width="154" Height="25" FontSize="14" TextChanged="SearchTextBox_TextChanged"/>
+                            <Button Content="Tìm" Style="{StaticResource FindButton}" Width="64" Height="25" Click="Find_Click" Margin="10"/>
+                            <Button Style="{StaticResource LoadButton}" Click="Load_Click" Margin="0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">
+                                    <materialDesign:PackIcon Kind="Reload" Width="30" Height="26"/>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
 
-                        <DataGrid x:Name="dataGridWarehouse" Grid.Row="1" Margin="10,10,10,47" AutoGenerateColumns="False" Height="235">
+                        <DataGrid x:Name="dataGridWarehouse" Grid.Row="1" Margin="10,0,10,47" AutoGenerateColumns="False" Height="235">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="STT" Width="50"/>
                                 <DataGridTextColumn Header="Tên sản phẩm" Width="*"/>
@@ -36,37 +40,6 @@
                         <DatePicker HorizontalAlignment="Left" Margin="51,257,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="193,259,0,0" Grid.Row="1" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
                         <DatePicker HorizontalAlignment="Left" Margin="230,257,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-
-                    </Grid>
-                </TabItem>
-
-                <!-- Tab Hóa đơn -->
-                <TabItem Header="Hóa đơn" Padding="8" FontSize="14">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Width="305" VerticalAlignment="Top">
-                            <TextBox Width="200" Height="30" FontSize="14" />
-                            <Button Content="Tìm kiếm" Margin="5,0,0,0" Width="76" Height="34"/>
-                        </StackPanel>
-
-                        <DataGrid x:Name="dataGridInvoices" AutoGenerateColumns="False" Margin="10,57,10,0" VerticalAlignment="Top" Height="240" RenderTransformOrigin="0.5,0.5">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã hóa đơn" Width="100"/>
-                                <DataGridTextColumn Header="Ngày lập" Width="150"/>
-                                <DataGridTextColumn Header="Khách hàng" Width="*"/>
-                                <DataGridTextColumn Header="Tổng tiền" Width="100"/>
-                                <DataGridTextColumn Header="Trạng thái" Width="100"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,305,51,6" BorderThickness="0" Height="30" Click="BtnStatistic_Click"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="23,310,0,0" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="51,308,0,0" VerticalAlignment="Top"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="193,310,0,0" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="230,308,0,0" VerticalAlignment="Top"/>
 
                     </Grid>
                 </TabItem>

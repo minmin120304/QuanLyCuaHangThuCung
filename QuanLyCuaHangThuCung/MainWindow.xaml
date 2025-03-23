@@ -26,7 +26,7 @@
                 </LinearGradientBrush>
             </DockPanel.Background>
             <!-- Logo -->
-            <Image Source="/Resourses/Image1.png" Stretch="Uniform" Height="150" DockPanel.Dock="Top" Margin="0,16,0,0"/>
+            <Image Source="/Resourses/logo.jpg" Stretch="Uniform" Height="150" DockPanel.Dock="Top" Margin="0,16,0,0"/>
 
             <!-- Menu -->
             <StackPanel DockPanel.Dock="Top" Margin="20">

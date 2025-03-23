@@ -1,25 +1,25 @@
 ﻿<Window x:Class="QuanLyCuaHangThuCung.Views.SignUp"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Đăng ký" Height="390" Width="400" ResizeMode="NoResize">
-    <Grid Width="400" Margin="0,0,0,0">
-        <TextBlock Text="Đăng ký" HorizontalAlignment="Center" FontSize="36" FontFamily="Sitka Small" FontWeight="Bold" Margin="0,37,0,290" Width="158"/>
-        <TextBlock Text="Email:" Margin="83,145,278,209" FontSize="14"/>
-        <TextBox x:Name="txtEmail" Width="200" Height="25" Margin="127,122,73,188"/>
+        Title="Đăng ký" Height="400" Width="450" ResizeMode="NoResize">
+    <Grid Height="370">
+        <TextBlock Text="Đăng ký" HorizontalAlignment="Center" FontSize="36" FontFamily="Sitka Small" FontWeight="Bold" Margin="0,37,0,288" Width="158"/>
+        <TextBlock Text="Email:" Margin="0,146,307,206" FontSize="14" HorizontalAlignment="Right"/>
+        <TextBox x:Name="txtEmail" Width="200" Margin="127,142,73,201"/>
 
-        <TextBlock Text="Tài khoản:" Margin="56,179,278,176" FontSize="14"/>
-        <TextBox x:Name="txtUsername" Width="200" Height="25" Margin="127,156,73,154"/>
+        <TextBlock Text="Tài khoản:" Margin="0,184,307,170" FontSize="14" HorizontalAlignment="Right"/>
+        <TextBox x:Name="txtUsername" Width="200" Margin="127,180,73,163"/>
 
-        <TextBlock Text="Mật khẩu:" Margin="57,213,278,140" FontSize="14"/>
-        <PasswordBox x:Name="txtPassword" Width="200" Height="25" Margin="127,190,73,120"/>
+        <TextBlock Text="Mật khẩu:" Margin="0,221,307,130" FontSize="14" HorizontalAlignment="Right"/>
+        <PasswordBox x:Name="txtPassword" Width="200" Margin="127,217,73,126"/>
 
-        <TextBlock Text="Nhập lại:" Margin="62,247,279,107" FontSize="14"/>
-        <PasswordBox x:Name="txtConfirmPassword" Width="200" Height="25" Margin="127,224,73,86"/>
+        <TextBlock Text="Nhập lại:" Margin="0,258,307,95" FontSize="14" HorizontalAlignment="Right"/>
+        <PasswordBox x:Name="txtConfirmPassword" Width="200" Margin="127,254,73,89"/>
 
-        <Button Content="Đăng ký" Margin="246,285,54,55" Click="Register_Click" Background="#FFFFE580" BorderThickness="0" FontSize="14"/>
-        <TextBlock Text="Bạn đã có tài khoản?" Margin="30,297,254,62"/>
-        <Button Content="Đăng nhập" Height="30" Margin="142,290,182,54" Click="Login_Click" Background="{x:Null}" BorderThickness="0" Foreground="#FF3B39DC"/>
-        <TextBlock Text="Họ và tên:" Margin="57,110,278,243" FontSize="14"/>
-        <TextBox x:Name="txtFullName" Width="200" Height="25" Margin="127,89,73,221"/>
+        <Button Content="Đăng ký" Margin="284,300,47,38" Click="Register_Click" Background="#FFFFE580" BorderThickness="0" FontSize="14"/>
+        <TextBlock Text="Bạn đã có tài khoản?" Margin="43,312,288,39"/>
+        <Button Content="Đăng nhập" Margin="162,304,198,34" Click="Login_Click" Background="{x:Null}" BorderThickness="0" Foreground="#FF3B39DC"/>
+        <TextBlock Text="Họ và tên:" Margin="0,111,307,241" FontSize="14" HorizontalAlignment="Right"/>
+        <TextBox x:Name="txtFullName" Width="200" Margin="127,106,73,236"/>
     </Grid>
 </Window>
