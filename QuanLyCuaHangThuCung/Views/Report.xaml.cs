@@ -43,7 +43,6 @@ namespace QuanLyCuaHangThuCung.Views
             DateTime toDate = DateTime.Now; // Hiện tại
 
             LoadWarehouseStatistics(fromDate, toDate);
-            LoadInvoiceStatistics();
             LoadLoyalCustomers();
             LoadRevenueChart();
         }
@@ -77,22 +76,6 @@ namespace QuanLyCuaHangThuCung.Views
 
             dataGridWarehouse.ItemsSource = warehouseData;
         }
-
-        private void LoadInvoiceStatistics()
-        {
-            var invoiceData = Db.Bill
-                .Select(hd => new
-                {
-                    hd.Id,
-                    hd.CreatedDate,
-                    Customer = Db.Customer.FirstOrDefault(c => c.Id == hd.CustomerId).customerName,
-                    hd.TotalAmount,
-                    hd.Note
-                }).ToList();
-
-            dataGridInvoices.ItemsSource = invoiceData;
-        }
-
         private void LoadLoyalCustomers()
         {
             var loyalCustomers = Db.Customer

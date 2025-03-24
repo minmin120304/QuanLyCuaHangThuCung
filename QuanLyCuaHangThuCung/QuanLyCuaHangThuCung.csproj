@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202503230602365_All.Designer.cs">
       <DependentUpon>202503230602365_All.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202503241536151_UCFull.cs" />
+    <Compile Include="Migrations\202503241536151_UCFull.Designer.cs">
+      <DependentUpon>202503241536151_UCFull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BillDetail.cs" />
@@ -290,6 +294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503230602365_All.resx">
       <DependentUpon>202503230602365_All.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503241536151_UCFull.resx">
+      <DependentUpon>202503241536151_UCFull.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
