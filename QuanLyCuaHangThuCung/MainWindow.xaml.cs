@@ -1,4 +1,5 @@
-﻿using QuanLyCuaHangThuCung.Views;
+﻿using QuanLyCuaHangThuCung.Models;
+using QuanLyCuaHangThuCung.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,12 @@ namespace QuanLyCuaHangThuCung
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
         public MainWindow()
         {
             InitializeComponent();
             MainContent.Content = new Home();
+            this.DataContext = CurrentSession.Instance;
         }
-
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new Home();
@@ -41,12 +40,12 @@ namespace QuanLyCuaHangThuCung
 
         private void Service_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new Service();
+            MainContent.Content = new Views.Service();
         }
 
         private void Customer_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new Customer();
+            MainContent.Content = new Views.Customer();
         }
 
         private void Report_Click(object sender, RoutedEventArgs e)
@@ -56,12 +55,12 @@ namespace QuanLyCuaHangThuCung
 
         private void Employee_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new Employee();
+            MainContent.Content = new Views.Employee();
         }
 
         private void Bill_Click(object sender, RoutedEventArgs e)
         {
-            MainContent.Content = new Bill();
+            MainContent.Content = new Views.Bill();
         }
         
         private void DX_Click(object sender, RoutedEventArgs e)
@@ -69,6 +68,11 @@ namespace QuanLyCuaHangThuCung
             Login login = new Login();
             login.Show();
             this.Close();
+        }
+
+        private void Account_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new Account();
         }
     }
 }

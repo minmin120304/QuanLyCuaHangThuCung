@@ -26,10 +26,19 @@
                 </LinearGradientBrush>
             </DockPanel.Background>
             <!-- Logo -->
-            <Image Source="/Resourses/logo.jpg" Stretch="Uniform" Height="150" DockPanel.Dock="Top" Margin="0,16,0,0"/>
+            <StackPanel DockPanel.Dock="Top"> 
+                <Image Source="/Resourses/logo.jpg" Stretch="Uniform" Height="179" Margin="0,16,0,0"/>
+                
+                <Button Style="{StaticResource SidebarButton}" Click="Account_Click" Padding="20,10,10,10">
+                    <StackPanel Orientation="Horizontal" Height="70" Width="auto">
+                        <TextBlock x:Name="accountName" Text="{Binding FullName, Mode=OneWay}" Foreground="White" Width="150" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20"/>
+                        <materialDesign:PackIcon Kind="Pencil" Width="30" Height="33" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
 
             <!-- Menu -->
-            <StackPanel DockPanel.Dock="Top" Margin="20">
+            <StackPanel DockPanel.Dock="Top" Margin="20,0,20,20">
                 <Button Style="{StaticResource SidebarButton}" Click="Home_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="HomeAccount" Width="30" Height="26"/>

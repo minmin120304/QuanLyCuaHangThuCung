@@ -35,6 +35,7 @@ namespace QuanLyCuaHangThuCung.Views
             LoadProducts();
             LoadServices();
 
+
             SpDvTable.ItemsSource = BillDetails; // Gán dữ liệu vào bảng
 
             if (billId != null)
@@ -74,6 +75,29 @@ namespace QuanLyCuaHangThuCung.Views
 
             MessageBox.Show($"Đã tải {Customers.Count} khách hàng!");
         }
+        //private void LoadCustomers()
+        //{
+        //    Customers.Clear();
+        //    var customerList = Db.Customer.ToList();
+
+        //    // Kiểm tra nếu không có dữ liệu
+        //    if (customerList.Count == 0)
+        //    {
+        //        MessageBox.Show("Không có khách hàng nào trong database!");
+        //        return;
+        //    }
+
+        //    foreach (var customer in customerList)
+        //    {
+        //        Customers.Add(customer);
+        //    }
+
+        //    cbKhachHang.ItemsSource = Customers;
+        //    cbKhachHang.DisplayMemberPath = "customerName";
+        //    cbKhachHang.SelectedValuePath = "Id";
+
+        //    MessageBox.Show($"Đã tải {Customers.Count} khách hàng!");
+        //}
 
         private void LoadProducts()
         {
