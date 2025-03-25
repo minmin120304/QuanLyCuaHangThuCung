@@ -8,7 +8,7 @@
              mc:Ignorable="d" Height="414" Width="637">
     <Grid Width="637" Height="414" >
         <Border CornerRadius="20" Padding="15" Background="Beige">
-            <TabControl SelectionChanged="TabControl_SelectionChanged">
+            <TabControl>
                 <!-- Tab Kho hàng -->
                 <TabItem Header="Kho hàng" Padding="8" FontSize="14">
                     <Grid>
@@ -17,7 +17,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                            <TextBox x:Name="SearchTextBox" TextWrapping="Wrap" Text="" Width="154" Height="25" FontSize="14" TextChanged="SearchTextBox_TextChanged"/>
+                            <TextBox x:Name="SearchTextBox" TextWrapping="Wrap" Text="" Width="154" Height="25" FontSize="14"/>
                             <Button Content="Tìm" Style="{StaticResource FindButton}" Width="64" Height="25" Click="Find_Click" Margin="10"/>
                             <Button Style="{StaticResource LoadButton}" Click="Load_Click" Margin="0">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">

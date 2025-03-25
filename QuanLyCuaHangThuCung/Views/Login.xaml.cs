@@ -32,7 +32,8 @@ namespace QuanLyCuaHangThuCung.Views
             if (PasswordHelper.VerifyPassword(password, user.PasswordHash))
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                
+                CurrentSession.Instance.UserId = user.Username;
+                CurrentSession.Instance.FullName = user.FullName;
                 // Mở màn hình chính
                 MainWindow main = new MainWindow();
                 main.Show();
