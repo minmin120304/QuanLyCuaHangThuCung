@@ -96,6 +96,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\AlternationIndexToColorConverter.cs" />
     <Compile Include="AppDbContext.cs" />
     <Compile Include="IndexConverter.cs" />
     <Compile Include="Migrations\202502280913074_Product-Test.cs" />

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuanLyCuaHangThuCung"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="660" Width="937"
+        Title="Quản lý cửa hàng thú cưng" Height="660" Width="937"
         MinHeight="600" MinWidth="900">
 
     <Grid>

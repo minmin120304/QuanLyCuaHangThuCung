@@ -9,6 +9,10 @@
         SizeToContent="WidthAndHeight"
         MinWidth="800"
         MinHeight="450" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:AlternationIndexToColorConverter x:Key="IndexToColorConverter"/>
+    </Window.Resources>
+    
     <Grid Background="#FFFCE3B4" HorizontalAlignment="Center" Width="800" Height="456">
         <Rectangle HorizontalAlignment="Left" Height="104" Margin="456,93,0,0" VerticalAlignment="Top" Width="321" Fill="White"/>
         <TextBlock x:Name="TileBillForm" Margin="0,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1" HorizontalAlignment="Center"><Run Language="ja-jp" Text="Thêm hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
@@ -40,7 +44,14 @@
                     <Setter Property="VerticalAlignment" Value="Center"/>
                 </Style>
             </DataGrid.Resources>
-
+            
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" 
+                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                </Style>
+            </DataGrid.RowStyle>
+            
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="STT" MinWidth="50">
                     <DataGridTemplateColumn.CellTemplate>
@@ -59,23 +70,22 @@
                 <DataGridTextColumn Header="Thành tiền" Binding="{Binding TotalPrice, StringFormat=\{0:N0\} VND}" MinWidth="80" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Lưu hoá đơn" HorizontalAlignment="Left" Margin="513,414,0,0" VerticalAlignment="Top" Width="94" Height="30" Background="#FF9FC7EE" Click="Save_Click"/>
+        <Button x:Name="SaveBTN" Content="Lưu hoá đơn" HorizontalAlignment="Left" Margin="513,414,0,0" VerticalAlignment="Top" Width="94" Height="30" Background="#FF9FC7EE" Click="Save_Click"/>
         <Button Content="Xuất hoá đơn" HorizontalAlignment="Left" Margin="633,414,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="48,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Text="Danh sách sản phẩm/dịch vụ trong hoá đơn"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="23,110,0,0" TextWrapping="Wrap" Text="Tên khách hàng" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbKhachHang" IsEnabled="False" HorizontalAlignment="Left" Margin="121,106,0,0" Text="" VerticalAlignment="Top" Width="156" Height="24" DisplayMemberPath="customerName" SelectedValuePath="Id"/>
         <TextBlock HorizontalAlignment="Left" Margin="23,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="N"/><Run Text="hân viên lập hoá đơn"/></TextBlock>
-        <TextBox x:Name="tenNV_input" IsEnabled="False" HorizontalAlignment="Left" Margin="150,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="151" Height="24"/>
         <TextBlock HorizontalAlignment="Left" Margin="469,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Tên sản phẩm"/></TextBlock>
         <TextBox x:Name="tenSP_input" HorizontalAlignment="Left" Margin="546,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="79" Height="24" IsEnabled="False"/>
         <TextBlock Visibility="Hidden" HorizontalAlignment="Left" Margin="297,424,0,0" TextWrapping="Wrap" Text="Chiết khấu" VerticalAlignment="Top"/>
-        <TextBox x:Name="chietKhau_input" HorizontalAlignment="Left" Margin="362,420,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" Height="24"/>
+        <TextBox x:Name="chietKhau_input" Visibility="Hidden" HorizontalAlignment="Left" Margin="362,420,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" Height="24"/>
         <TextBlock Margin="467,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1" HorizontalAlignment="Left"><Run Language="ja-jp" Text="Sản phẩm"/><LineBreak/><Run/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="489,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Đơn giá"/></TextBlock>
         <TextBox x:Name="price_input" IsEnabled="False" HorizontalAlignment="Left" Margin="544,163,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="79" Height="24"/>
         <TextBlock HorizontalAlignment="Left" Margin="637,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="ja-jp" Text="Số lượng"/></TextBlock>
         <TextBox x:Name="SL_input" HorizontalAlignment="Left" Margin="692,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="62" Height="24"/>
-        <Button Content="Thêm" HorizontalAlignment="Left" Margin="637,165,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddSP_Click"/>
+        <Button x:Name="addSP" Content="Thêm" HorizontalAlignment="Left" Margin="637,165,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddSP_Click"/>
         <Button Content="Xoá" x:Name="XoaSPBtn" HorizontalAlignment="Left" Margin="702,165,0,0" VerticalAlignment="Top" Width="63" Height="20" Background="#FFF47B60" Click="DelSP_Click"/>
 
         <DataGrid x:Name="ProductTable" 
@@ -104,7 +114,14 @@
                     <Setter Property="VerticalAlignment" Value="Center"/>
                 </Style>
             </DataGrid.Resources>
-
+            
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" 
+                Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                </Style>
+            </DataGrid.RowStyle>
+            
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="STT" MinWidth="50">
                     <DataGridTemplateColumn.CellTemplate>
@@ -121,11 +138,11 @@
         <Rectangle HorizontalAlignment="Left" Height="224" Margin="862,98,0,0" Stroke="Black" VerticalAlignment="Top" Width="444" OpacityMask="#FFEBD9D9"/>
         <ComboBox x:Name="serviceList" HorizontalAlignment="Left" Margin="533,61,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" ItemsSource="{Binding serviceName}" />
         <TextBlock HorizontalAlignment="Left" Margin="460,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18"><Run Language="ja-jp" Text="Chọn dịch vụ"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
-        <Button Content="Thêm" HorizontalAlignment="Left" Margin="662,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddDV_Click"/>
-        <Button Content="Xoá" Background="#FFF47B60" HorizontalAlignment="Left" Margin="725,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Click="DelDV_Click"/>
+        <Button x:Name="addDv" Content="Thêm" HorizontalAlignment="Left" Margin="662,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Background="#FF9FC7EE" Click="AddDV_Click"/>
+        <Button x:Name="delDV" Content="Xoá" Background="#FFF47B60" HorizontalAlignment="Left" Margin="725,61,0,0" VerticalAlignment="Top" Width="52" Height="20" Click="DelDV_Click"/>
         <RadioButton x:Name="rbKhachQuen"  Content="Khách quen" HorizontalAlignment="Left" Margin="291,100,0,0" VerticalAlignment="Top" Checked="rbKhachQuen_CheckedChanged"/>
         <RadioButton x:Name="rbKhachVangLai" Content="Khách vãng lai" HorizontalAlignment="Left" Margin="291,124,0,0" VerticalAlignment="Top" Checked="rbKhachVangLai_CheckedChanged"/>
         <Label x:Name="totalLabel" Content="Tổng tiền: 0 VND" HorizontalAlignment="Left" Margin="16,418,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <ComboBox x:Name="cbNhanVien" HorizontalAlignment="Left" Margin="155,64,0,0" Text="" VerticalAlignment="Top" Width="156" Height="24"/>
+        <ComboBox x:Name="cbNhanVien" HorizontalAlignment="Left" Margin="155,63,0,0" Text="" VerticalAlignment="Top" Width="156" Height="24"/>
     </Grid>
 </Window>
