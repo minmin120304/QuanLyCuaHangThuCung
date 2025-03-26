@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="414" Width="680">
+    <UserControl.Resources>
+        <local:AlternationIndexToColorConverter x:Key="IndexToColorConverter"/>
+    </UserControl.Resources>
 
     <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8">
         <Grid Background="#FFFCE3B4">
@@ -14,7 +17,6 @@
             <DataGrid x:Name="BillTable" 
                       AutoGenerateColumns="False" 
                       ItemsSource="{Binding Bill}" 
-                      AlternatingRowBackground="#E3F2FD"
                       SelectionMode="Single" 
                       SelectionUnit="FullRow" 
                       BorderBrush="Gray" 
@@ -38,6 +40,13 @@
                     </Style>
                 </DataGrid.Resources>
 
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" 
+                Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="STT" MinWidth="50">
                         <DataGridTemplateColumn.CellTemplate>
@@ -49,8 +58,9 @@
 
                     <DataGridTextColumn Header="Mã đơn hàng" Binding="{Binding Id}" MinWidth="50" Width="auto"/>
                     <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" MinWidth="80" Width="auto"/>
-                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" MinWidth="150" Width="auto"/>
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total, StringFormat=\{0:N0\} VND}" MinWidth="120" Width="auto"/>
+                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" Width="*"/>
+                    <DataGridTextColumn Header="Nhân viên" Binding="{Binding Employee}" Width="*"/>
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total, StringFormat=\{0:N0\} VND}" MinWidth="100" Width="auto"/>
                     <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>

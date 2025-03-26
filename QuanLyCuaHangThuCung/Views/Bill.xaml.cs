@@ -28,6 +28,7 @@ namespace QuanLyCuaHangThuCung.Views
                     Id = b.Id,
                     Date = b.CreatedDate,
                     Customer = Db.Customer.FirstOrDefault(c => c.Id == b.CustomerId).customerName,
+                    Employee = Db.Employee.FirstOrDefault(e => e.Id == b.EmployeeId).employeeName,
                     Total = b.TotalAmount,
                     Note = b.Note
                 }).ToList();
@@ -45,7 +46,7 @@ namespace QuanLyCuaHangThuCung.Views
             if (BillTable.SelectedItem != null)
             {
                 dynamic selectedBill = BillTable.SelectedItem;
-                BillForm billForm = new BillForm(selectedBill.Id); // Chỉnh sửa hóa đơn
+                BillForm billForm = new BillForm(selectedBill.Id, false); // Chỉnh sửa hóa đơn
                 billForm.ShowDialog();
                 LoadBills();
             }
@@ -110,6 +111,7 @@ namespace QuanLyCuaHangThuCung.Views
                     table.AddCell(new PdfPCell(new Phrase("Mã hóa đơn", vietnameseFont)));
                     table.AddCell(new PdfPCell(new Phrase("Ngày lập", vietnameseFont)));
                     table.AddCell(new PdfPCell(new Phrase("Khách hàng", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Nhân viên lập", vietnameseFont)));
                     table.AddCell(new PdfPCell(new Phrase("Tổng tiền", vietnameseFont)));
 
                     foreach (dynamic item in BillTable.Items)
@@ -117,6 +119,7 @@ namespace QuanLyCuaHangThuCung.Views
                         table.AddCell(new PdfPCell(new Phrase(item.Id.ToString(), vietnameseFont)));
                         table.AddCell(new PdfPCell(new Phrase(item.Date.ToString(), vietnameseFont)));
                         table.AddCell(new PdfPCell(new Phrase(item.Customer, vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(item.Employee, vietnameseFont)));
                         table.AddCell(new PdfPCell(new Phrase(item.Total.ToString(), vietnameseFont)));
                     }
 
@@ -168,7 +171,7 @@ namespace QuanLyCuaHangThuCung.Views
             if (BillTable.SelectedItem != null)
             {
                 dynamic selectedBill = BillTable.SelectedItem;
-                BillForm billForm = new BillForm(selectedBill.Id); // Chỉnh sửa hóa đơn
+                BillForm billForm = new BillForm(selectedBill.Id, true);
                 billForm.ShowDialog();
                 LoadBills();
             }
