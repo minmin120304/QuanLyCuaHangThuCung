@@ -369,7 +369,18 @@ namespace QuanLyCuaHangThuCung.Views
             // Gán ID hóa đơn vào từng chi tiết hóa đơn
             foreach (var detail in BillDetails)
             {
-                detail.BillId = currentBill.Id; // Đảm bảo mỗi chi tiết có BillId hợp lệ
+                //detail.BillId = currentBill.Id; // Đảm bảo mỗi chi tiết có BillId hợp lệ
+                //var existingDetail = Db.BillDetail.Find(detail.Id);
+                //if (existingDetail == null)
+                //{
+                //    Db.BillDetail.Add(detail);
+                //}
+                detail.BillId = currentBill.Id;
+                if (string.IsNullOrEmpty(detail.Id))
+                {
+                    detail.Id = Guid.NewGuid().ToString();
+                }
+
                 var existingDetail = Db.BillDetail.Find(detail.Id);
                 if (existingDetail == null)
                 {

@@ -96,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\202503281037187_TestFullUC.cs" />
+    <Compile Include="Migrations\202503281037187_TestFullUC.Designer.cs">
+      <DependentUpon>202503281037187_TestFullUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AlternationIndexToColorConverter.cs" />
     <Compile Include="AppDbContext.cs" />
     <Compile Include="IndexConverter.cs" />
@@ -326,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202503250645445_UCFull3.resx">
       <DependentUpon>202503250645445_UCFull3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503281037187_TestFullUC.resx">
+      <DependentUpon>202503281037187_TestFullUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

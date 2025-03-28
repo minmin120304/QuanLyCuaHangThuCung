@@ -8,8 +8,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using static iTextSharp.text.pdf.events.IndexEvents;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace QuanLyCuaHangThuCung
 {
@@ -68,7 +66,6 @@ namespace QuanLyCuaHangThuCung
             else if (entityType == typeof(Employee)) prefix = "NV";
             else if (entityType == typeof(Service)) prefix = "DV";
             else if (entityType == typeof(Bill)) prefix = "HD";
-            else if (entityType == typeof(BillDetail)) prefix = "CTHD";
             else throw new InvalidOperationException("Entity type is not supported");
 
             var property = entityType.GetProperty("Id");

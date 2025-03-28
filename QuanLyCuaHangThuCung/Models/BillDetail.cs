@@ -7,7 +7,6 @@ namespace QuanLyCuaHangThuCung.Models
     public class BillDetail : IHasID
     {
         [Key]
-        [StringLength(10)]
         public string Id { get; set; }
         public string BillId { get; set; }
 
