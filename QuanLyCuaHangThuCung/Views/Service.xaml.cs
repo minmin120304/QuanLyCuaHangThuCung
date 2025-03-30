@@ -13,6 +13,10 @@ namespace QuanLyCuaHangThuCung.Views
         public Service()
         {
             InitializeComponent();
+            LoadData();
+        }
+        void LoadData()
+        {
             ServiceTable.ItemsSource = db.Service.ToList();
         }
         private bool validateInput()
@@ -155,6 +159,38 @@ namespace QuanLyCuaHangThuCung.Views
                     }
                 }
             }
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim(); // Lấy nội dung từ ô tìm kiếm
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var filteredService = db.Service
+                    .Where(s => s.serviceName.Contains(searchText)
+                             || s.serviceType.Contains(searchText))
+                    .Select(s => new
+                    {
+                        Id = s.Id,
+                        price = s.price,
+                        serviceName = s.serviceName,
+                        note = s.note,
+                        serviceType = s.serviceType
+                    }).ToList();
+
+                ServiceTable.ItemsSource = filteredService;
+            }
+            else
+            {
+                LoadData();
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            resetInput();
+            LoadData();
         }
     }
 }

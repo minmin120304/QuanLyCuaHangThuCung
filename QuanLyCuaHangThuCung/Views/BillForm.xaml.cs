@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Text;
+using System.Diagnostics;
 
 namespace QuanLyCuaHangThuCung.Views
 {
@@ -26,14 +27,28 @@ namespace QuanLyCuaHangThuCung.Views
         private decimal totalAmount = 0;
         private Product SelectedProduct;
         public ObservableCollection<Models.Customer> Customers { get; set; } = new ObservableCollection<Models.Customer>();
+        public ObservableCollection<Models.Employee> Employees { get; set; } = new ObservableCollection<Models.Employee>();
         public ObservableCollection<Models.Service> Services { get; set; } = new ObservableCollection<Models.Service>();
         public ObservableCollection<Models.BillDetail> BillDetails { get; set; } = new ObservableCollection<Models.BillDetail>();
-        public BillForm(string billId)
+        public BillForm(string billId, bool isReadOnly = false)
         {
             InitializeComponent();
             LoadCustomers();
             LoadProducts();
             LoadServices();
+            LoadEmployees();
+
+            if (isReadOnly)
+            {
+                SaveBTN.IsEnabled = false;
+                addSP.IsEnabled = false;
+                addDv.IsEnabled = false;
+                delDV.IsEnabled = false;
+                XoaSPBtn.IsEnabled = false;
+                cbKhachHang.IsEnabled = false;
+                cbNhanVien.IsEnabled = false;
+                serviceList.IsEnabled = false;
+            }
 
             SpDvTable.ItemsSource = BillDetails; // Gán dữ liệu vào bảng
 
@@ -74,6 +89,29 @@ namespace QuanLyCuaHangThuCung.Views
 
             MessageBox.Show($"Đã tải {Customers.Count} khách hàng!");
         }
+        private void LoadEmployees()
+        {
+            Employees.Clear();
+            var employeeList = Db.Employee.ToList();
+
+            // Kiểm tra nếu không có dữ liệu
+            if (employeeList.Count == 0)
+            {
+                MessageBox.Show("Không có nhân viên nào trong database!");
+                return;
+            }
+
+            foreach (var employee in employeeList)
+            {
+                Employees.Add(employee);
+            }
+
+            cbNhanVien.ItemsSource = Employees;
+            cbNhanVien.DisplayMemberPath = "employeeName";
+            cbNhanVien.SelectedValuePath = "Id";
+
+            MessageBox.Show($"Đã tải {Employees.Count} nhân viên!");
+        }
 
         private void LoadProducts()
         {
@@ -106,7 +144,12 @@ namespace QuanLyCuaHangThuCung.Views
 
         private void LoadBillData(string billId)
         {
-            currentBill = Db.Bill.Find(billId);
+            TileBillForm.Text = "Chi tiết hóa đơn";
+            currentBill = Db.Bill
+                .Include(b => b.Employee)
+                .Include(b => b.Customer)
+                .FirstOrDefault(b => b.Id == billId); // Dùng Include để load quan hệ
+
             if (currentBill != null)
             {
                 BillDetails = new ObservableCollection<BillDetail>(
@@ -116,6 +159,40 @@ namespace QuanLyCuaHangThuCung.Views
                     .Include(bd => bd.Service) // Load Service
                 );
                 SpDvTable.ItemsSource = BillDetails;
+                totalAmount = BillDetails.Sum(bd => bd.TotalPrice);
+                UpdateTotal(); // Cập nhật hiển thị tổng tiền
+
+                // Kiểm tra thông tin nhân viên
+                if (currentBill.Employee != null)
+                {
+                    cbNhanVien.SelectedItem = cbNhanVien.Items
+                        .Cast<Models.Employee>()
+                        .FirstOrDefault(e => e.Id == currentBill.EmployeeId);
+                    Debug.WriteLine($"Nhân viên: {currentBill.Employee.employeeName}");
+                }
+                else
+                {
+                    Debug.WriteLine("Không tìm thấy nhân viên.");
+                }
+
+                // Kiểm tra thông tin khách hàng
+                if (currentBill.Customer != null)
+                {
+                    rbKhachQuen.IsChecked = true;
+                    rbKhachQuen.IsEnabled = false;
+                    rbKhachVangLai.IsEnabled = false;
+                    cbKhachHang.SelectedItem = cbKhachHang.Items
+                        .Cast<Models.Customer>()
+                        .FirstOrDefault(c => c.Id == currentBill.CustomerId);
+                    Debug.WriteLine($"Khách hàng: {currentBill.Customer.customerName}");
+                }
+                else
+                {
+                    rbKhachVangLai.IsChecked = true;
+                    rbKhachQuen.IsEnabled = false;
+                    rbKhachVangLai.IsEnabled = false;
+                    Debug.WriteLine("Không tìm thấy khách hàng.");
+                }
             }
         }
 
@@ -123,6 +200,7 @@ namespace QuanLyCuaHangThuCung.Views
         {
             InitializeComponent();
             LoadCustomers();
+            LoadEmployees();
             LoadProducts();
             LoadServices();
             this.DataContext = this;
@@ -267,7 +345,7 @@ namespace QuanLyCuaHangThuCung.Views
                 discount = Math.Round(totalAmount * (discountValue / 100), 2);
             }
 
-            totalLabel.Content = $"Tổng tiền: {totalAmount - discount:C}";
+            totalLabel.Content = $"Tổng tiền: {totalAmount - discount:N0} VNĐ";
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
@@ -279,6 +357,7 @@ namespace QuanLyCuaHangThuCung.Views
 
             currentBill.TotalAmount = totalAmount;
             currentBill.CustomerId = cbKhachHang.SelectedValue?.ToString();
+            currentBill.EmployeeId = cbNhanVien.SelectedValue?.ToString();
 
             // Nếu Bill chưa có trong database, cần lưu trước
             if (Db.Bill.Find(currentBill.Id) == null)
@@ -290,7 +369,18 @@ namespace QuanLyCuaHangThuCung.Views
             // Gán ID hóa đơn vào từng chi tiết hóa đơn
             foreach (var detail in BillDetails)
             {
-                detail.BillId = currentBill.Id; // Đảm bảo mỗi chi tiết có BillId hợp lệ
+                //detail.BillId = currentBill.Id; // Đảm bảo mỗi chi tiết có BillId hợp lệ
+                //var existingDetail = Db.BillDetail.Find(detail.Id);
+                //if (existingDetail == null)
+                //{
+                //    Db.BillDetail.Add(detail);
+                //}
+                detail.BillId = currentBill.Id;
+                if (string.IsNullOrEmpty(detail.Id))
+                {
+                    detail.Id = Guid.NewGuid().ToString();
+                }
+
                 var existingDetail = Db.BillDetail.Find(detail.Id);
                 if (existingDetail == null)
                 {

@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:oxy="http://oxyplot.org/wpf"
-             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="414" Width="637">
+    
+    <UserControl.Resources>
+        <local:AlternationIndexToColorConverter x:Key="IndexToColorConverter"/>
+    </UserControl.Resources>
+    
     <Grid Width="637" Height="414" >
         <Border CornerRadius="20" Padding="15" Background="Beige">
             <TabControl>
@@ -16,57 +21,55 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" >
-                            <TextBox Width="200" Height="30" FontSize="14" />
-                            <Button Content="Tìm kiếm" Margin="5,0,0,0" Width="76"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                            <TextBox x:Name="SearchTextBox" TextWrapping="Wrap" Text="" Width="154" Height="25" FontSize="14"/>
+                            <Button Content="Tìm" Style="{StaticResource FindButton}" Width="64" Height="25" Click="Find_Click" Margin="10"/>
+                            <Button Style="{StaticResource LoadButton}" Click="Load_Click" Margin="0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">
+                                    <materialDesign:PackIcon Kind="Reload" Width="30" Height="26"/>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
 
-                        <DataGrid x:Name="dataGridWarehouse" Grid.Row="1" Margin="10,10,10,47" AutoGenerateColumns="False" Height="235">
+                        <DataGrid x:Name="dataGridWarehouse" 
+                                  Grid.Row="1" 
+                                  Margin="10,0,10,42" 
+                                  AutoGenerateColumns="False" 
+                                  RenderTransformOrigin="0.5,0.5"
+                                  AlternationCount="1000">
+                            <DataGrid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="0.387"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="0.793"/>
+                                </TransformGroup>
+                            </DataGrid.RenderTransform>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" 
+                                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                                </Style>
+                            </DataGrid.RowStyle>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="STT" Width="50"/>
-                                <DataGridTextColumn Header="Tên sản phẩm" Width="*"/>
-                                <DataGridTextColumn Header="Tổng số lượng" Width="110"/>
-                                <DataGridTextColumn Header="Số lượng đã bán" Width="120"/>
-                                <DataGridTextColumn Header="Số lượng còn lại" Width="120"/>
+                                <DataGridTemplateColumn Header="STT" MinWidth="50">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}, Path=AlternationIndex, Converter={StaticResource IndexConverter}}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Tên sản phẩm" Width="*" Binding="{Binding productName}"/>
+                                <DataGridTextColumn Header="Tổng số lượng" Width="110" Binding="{Binding TongSoLuong}"/>
+                                <DataGridTextColumn Header="Số lượng đã bán" Width="120" Binding="{Binding SoLuongDaBan}"/>
+                                <DataGridTextColumn Header="Số lượng còn lại" Width="120" Binding="{Binding SoLuongConLai}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,254,51,8" Grid.Row="1" BorderThickness="0" Height="30" Click="BtnStatistic_Click"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="23,259,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="51,257,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="193,259,0,0" Grid.Row="1" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="230,257,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-
-                    </Grid>
-                </TabItem>
-
-                <!-- Tab Hóa đơn -->
-                <TabItem Header="Hóa đơn" Padding="8" FontSize="14">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Width="305" VerticalAlignment="Top">
-                            <TextBox Width="200" Height="30" FontSize="14" />
-                            <Button Content="Tìm kiếm" Margin="5,0,0,0" Width="76" Height="34"/>
-                        </StackPanel>
-
-                        <DataGrid x:Name="dataGridInvoices" AutoGenerateColumns="False" Margin="10,57,10,0" VerticalAlignment="Top" Height="240" RenderTransformOrigin="0.5,0.5">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã hóa đơn" Width="100"/>
-                                <DataGridTextColumn Header="Ngày lập" Width="150"/>
-                                <DataGridTextColumn Header="Khách hàng" Width="*"/>
-                                <DataGridTextColumn Header="Tổng tiền" Width="100"/>
-                                <DataGridTextColumn Header="Trạng thái" Width="100"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,305,51,6" BorderThickness="0" Height="30" Click="BtnStatistic_Click"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="23,310,0,0" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="51,308,0,0" VerticalAlignment="Top"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="193,310,0,0" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
-                        <DatePicker HorizontalAlignment="Left" Margin="230,308,0,0" VerticalAlignment="Top"/>
+                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,242,51,0" Grid.Row="1" BorderThickness="0" Height="30" Click="BtnFilter_Click" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="23,247,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
+                        <DatePicker x:Name="dpFromDate" SelectedDate="{Binding FromDate}" HorizontalAlignment="Left" Margin="51,245,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                        <TextBlock HorizontalAlignment="Left" Margin="193,247,0,0" Grid.Row="1" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
+                        <DatePicker x:Name="dpToDate" SelectedDate="{Binding ToDate}" HorizontalAlignment="Left" Margin="230,245,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
                     </Grid>
                 </TabItem>
@@ -74,12 +77,23 @@
                 <!-- Tab Khách hàng thân quen -->
                 <TabItem Header="Khách hàng thân quen" Padding="8" FontSize="14">
                     <Grid>
-                        <DataGrid x:Name="dataGridLoyalCustomers" Margin="10" AutoGenerateColumns="False">
+                        <DataGrid x:Name="dataGridLoyalCustomers" 
+                                  Margin="10" 
+                                  AutoGenerateColumns="False"
+                                  AlternationCount="1000">
+                            
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" 
+                                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã KH" Width="100"/>
-                                <DataGridTextColumn Header="Tên khách hàng" Width="*"/>
-                                <DataGridTextColumn Header="Số lượng đơn hàng" Width="150"/>
-                                <DataGridTextColumn Header="Số tiền" Width="100"/>
+                                <DataGridTextColumn Header="Mã KH" Width="100" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="Tên khách hàng" Width="*" Binding="{Binding customerName}"/>
+                                <DataGridTextColumn Header="Số lượng đơn hàng" Width="150" Binding="{Binding SoLuongDonHang}"/>
+                                <DataGridTextColumn Header="Số tiền" Width="100" Binding="{Binding SoTien}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -90,17 +104,18 @@
                     <Grid>
                         <oxy:PlotView x:Name="plotView" Model="{Binding MyPlotModel}" Margin="10,47,10,10" />
 
-                        <ComboBox Height="25" SelectedIndex="01" x:Name="cbFilterType" VerticalAlignment="Top" Margin="26,7,471,0" SelectionChanged="CbFilterType_SelectionChanged">
-                            <ComboBoxItem>Theo tuần</ComboBoxItem>
-                            <ComboBoxItem>Theo tháng</ComboBoxItem>
-                            <ComboBoxItem>Theo năm</ComboBoxItem>
+                        <ComboBox Height="25" SelectedIndex="0" x:Name="cbFilterType" VerticalAlignment="Top" Margin="13,10,484,0" SelectionChanged="CbFilterType_SelectionChanged">
+                            <ComboBoxItem Tag="month">Theo tháng</ComboBoxItem>
+                            <ComboBoxItem Tag="year">Theo năm</ComboBoxItem>
                         </ComboBox>
 
-                        <ComboBox Height="22" SelectedIndex="0" x:Name="cbMonth" VerticalAlignment="Top" Margin="179,7,328,0"/>
+                        <ComboBox Height="25" SelectedIndex="0" x:Name="cbYear" VerticalAlignment="Top" Margin="178,10,331,0"/>
 
-                        <ComboBox Height="22" SelectedIndex="0" x:Name="cbYear" VerticalAlignment="Top" Margin="307,7,202,0"/>
+                        <ComboBox Height="22" SelectedIndex="0" x:Name="cbFromYear" Visibility="Collapsed" VerticalAlignment="Top" Margin="179,12,328,0"/>
 
-                        <Button x:Name="btnStatistic" Content="Thống kê" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Width="80" Background="#FFF4D583" BorderThickness="0" Click="BtnStatistic_Click"/>
+                        <ComboBox Height="22" SelectedIndex="0" x:Name="cbToYear" Visibility="Collapsed" VerticalAlignment="Top" Margin="307,12,202,0"/>
+
+                        <Button x:Name="btnStatistic" Content="Thống kê" HorizontalAlignment="Left" Margin="442,9,0,0" VerticalAlignment="Top" Height="26" Width="80" Background="#FFF4D583" BorderThickness="0" Click="BtnStatistic_Click"/>
                     </Grid>
                 </TabItem>
             </TabControl>

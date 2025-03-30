@@ -1,0 +1,23 @@
+﻿<Window x:Class="QuanLyCuaHangThuCung.Views.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+        mc:Ignorable="d"
+        Title="Window1" Height="639" Width="720">
+    <Grid>
+        <TextBlock TextWrapping="Wrap" Text="Thay đổi thông tin cá nhân" Margin="0,56,331,529" FontSize="24" HorizontalAlignment="Right" Width="305" FontWeight="Bold" TextDecorations="Underline"/>
+        <TextBox HorizontalAlignment="Left" Margin="430,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="29" FontSize="18"/>
+        <TextBlock TextWrapping="Wrap" Text="Họ và tên" Margin="0,153,303,445" FontSize="18" HorizontalAlignment="Right"/>
+        <TextBox HorizontalAlignment="Left" Margin="430,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="28" FontSize="18"/>
+        <TextBlock TextWrapping="Wrap" Text="Email" Margin="0,209,303,389" FontSize="18" HorizontalAlignment="Right"/>
+        <TextBox HorizontalAlignment="Left" Margin="430,264,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" Height="29" FontSize="18"/>
+        <TextBlock TextWrapping="Wrap" Text="Số điện thoại" Margin="0,263,303,335" FontSize="18" HorizontalAlignment="Right"/>
+        <RichTextBox HorizontalAlignment="Left" Margin="430,315,0,0" VerticalAlignment="Top" Width="184" Height="71" FontSize="18"/>
+        <TextBlock TextWrapping="Wrap" Text="Địa chỉ" Margin="363,319,0,279" FontSize="18" HorizontalAlignment="Left"/>
+        <Button Content="Lưu" HorizontalAlignment="Left" Margin="390,426,0,0" VerticalAlignment="Top" Height="35" Width="100" FontSize="22" FontWeight="Bold" Foreground="White" Background="#FFF4AC26"/>
+        <Image Margin="61,154,433,237" Source="/Resourses/user-profile-account-or-contacts-silhouette-icon-isolated-on-white-background-free-vector.jpg" Stretch="Fill"/>
+
+    </Grid>
+</Window>

@@ -28,6 +28,7 @@ namespace QuanLyCuaHangThuCung.Views
                     Id = b.Id,
                     Date = b.CreatedDate,
                     Customer = Db.Customer.FirstOrDefault(c => c.Id == b.CustomerId).customerName,
+                    Employee = Db.Employee.FirstOrDefault(e => e.Id == b.EmployeeId).employeeName,
                     Total = b.TotalAmount,
                     Note = b.Note
                 }).ToList();
@@ -45,7 +46,7 @@ namespace QuanLyCuaHangThuCung.Views
             if (BillTable.SelectedItem != null)
             {
                 dynamic selectedBill = BillTable.SelectedItem;
-                BillForm billForm = new BillForm(selectedBill.Id); // Chỉnh sửa hóa đơn
+                BillForm billForm = new BillForm(selectedBill.Id, false); // Chỉnh sửa hóa đơn
                 billForm.ShowDialog();
                 LoadBills();
             }
@@ -88,11 +89,6 @@ namespace QuanLyCuaHangThuCung.Views
             }
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Export_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "PDF Files|*.pdf" };
@@ -115,6 +111,7 @@ namespace QuanLyCuaHangThuCung.Views
                     table.AddCell(new PdfPCell(new Phrase("Mã hóa đơn", vietnameseFont)));
                     table.AddCell(new PdfPCell(new Phrase("Ngày lập", vietnameseFont)));
                     table.AddCell(new PdfPCell(new Phrase("Khách hàng", vietnameseFont)));
+                    table.AddCell(new PdfPCell(new Phrase("Nhân viên lập", vietnameseFont)));
                     table.AddCell(new PdfPCell(new Phrase("Tổng tiền", vietnameseFont)));
 
                     foreach (dynamic item in BillTable.Items)
@@ -122,6 +119,7 @@ namespace QuanLyCuaHangThuCung.Views
                         table.AddCell(new PdfPCell(new Phrase(item.Id.ToString(), vietnameseFont)));
                         table.AddCell(new PdfPCell(new Phrase(item.Date.ToString(), vietnameseFont)));
                         table.AddCell(new PdfPCell(new Phrase(item.Customer, vietnameseFont)));
+                        table.AddCell(new PdfPCell(new Phrase(item.Employee, vietnameseFont)));
                         table.AddCell(new PdfPCell(new Phrase(item.Total.ToString(), vietnameseFont)));
                     }
 
@@ -140,7 +138,8 @@ namespace QuanLyCuaHangThuCung.Views
             {
                 var filteredBills = Db.Bill
                     .Where(b => b.Id.Contains(searchText) ||
-                                Db.Customer.Any(c => c.Id == b.CustomerId && c.customerName.Contains(searchText)))
+                                Db.Customer.Any(c => c.Id == b.CustomerId && c.customerName.Contains(searchText))
+                                || b.CreatedDate.ToString().Contains(searchText))
                     .Select(b => new
                     {
                         Id = b.Id,
@@ -155,6 +154,30 @@ namespace QuanLyCuaHangThuCung.Views
             else
             {
                 LoadBills();
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            LoadBills();
+        }
+
+        private void BillTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void Detail_Click(object sender, RoutedEventArgs e)
+        {
+            if (BillTable.SelectedItem != null)
+            {
+                dynamic selectedBill = BillTable.SelectedItem;
+                BillForm billForm = new BillForm(selectedBill.Id, true);
+                billForm.ShowDialog();
+                LoadBills();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn cần xem.");
             }
         }
     }

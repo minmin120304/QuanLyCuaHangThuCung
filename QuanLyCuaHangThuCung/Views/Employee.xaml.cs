@@ -24,6 +24,10 @@ namespace QuanLyCuaHangThuCung.Views
         public Employee()
         {
             InitializeComponent();
+            LoadData();
+        }
+        void LoadData()
+        {
             EmployeeTable.ItemsSource = db.Employee.ToList();
         }
         private bool validateInput()
@@ -126,7 +130,37 @@ namespace QuanLyCuaHangThuCung.Views
                 SDT_input.Text = employee.phoneNum;
             }
         }
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.Trim(); // Lấy nội dung từ ô tìm kiếm
 
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                var filteredEmp = db.Employee
+                    .Where(em => em.address.Contains(searchText) // Tìm kiếm theo địa chỉ
+                             || em.employeeName.Contains(searchText) // Tìm theo tên
+                             || em.phoneNum.Contains(searchText)) // Tìm theo số điện thoại
+                    .Select(em => new
+                    {
+                        Id = em.Id,
+                        employeeName = em.employeeName,
+                        address = em.address,
+                        phoneNum = em.phoneNum
+                    }).ToList();
+
+                EmployeeTable.ItemsSource = filteredEmp;
+            }
+            else
+            {
+                LoadData();
+            }
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+            resetInput();
+        }
         private void ProductTable_LoadingRow(object sender, DataGridRowEventArgs e)
         {
             e.Row.Header = (e.Row.GetIndex() + 1).ToString(); // STT bắt đầu từ 1

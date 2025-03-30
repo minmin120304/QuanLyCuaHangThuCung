@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+             xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="450">
 
+    <UserControl.Resources>
+        <local:AlternationIndexToColorConverter x:Key="IndexToColorConverter"/>
+    </UserControl.Resources>
+    
     <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8">
         <Grid Background="#FFFCE3B4" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
@@ -53,13 +57,24 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <!-- Chỉ cho tiêu đề -->
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <!-- Dành không gian còn lại cho DataGrid -->
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Danh sách dịch vụ" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
-
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBox x:Name="SearchTextBox" TextWrapping="Wrap" Text="" Width="154" Height="25" FontSize="14"/>
+                    <Button Content="Tìm" Style="{StaticResource FindButton}" Width="64" Height="25" Click="Find_Click" Margin="10"/>
+                    <Button Style="{StaticResource LoadButton}" Click="Load_Click" Margin="0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Height="29">
+                            <materialDesign:PackIcon Kind="Reload" Width="30" Height="26"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
                     <DataGrid x:Name="ServiceTable" 
                               AutoGenerateColumns="False" 
                               ItemsSource="{Binding Services}" 
@@ -88,7 +103,12 @@
                                 <Setter Property="VerticalAlignment" Value="Center"/>
                             </Style>
                         </DataGrid.Resources>
-
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" 
+Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                            </Style>
+                        </DataGrid.RowStyle>
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="STT" MinWidth="50">
                                 <DataGridTemplateColumn.CellTemplate>

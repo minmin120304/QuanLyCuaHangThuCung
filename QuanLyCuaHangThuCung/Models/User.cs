@@ -24,7 +24,9 @@ namespace QuanLyCuaHangThuCung.Models
         public string FullName { get; set; } // Họ tên
 
         [StringLength(100)]
-        public string Email { get; set; } // Email (nếu cần)
+        public string Email { get; set; } 
+        public string phoneNum { get; set; } 
+        public string Address { get; set; } 
 
         public DateTime CreatedAt { get; set; } = DateTime.Now; // Ngày tạo
 

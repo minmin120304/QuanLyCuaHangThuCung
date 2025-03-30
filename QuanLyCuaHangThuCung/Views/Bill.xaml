@@ -4,16 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyCuaHangThuCung.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" Height="414" Width="680">
+    <UserControl.Resources>
+        <local:AlternationIndexToColorConverter x:Key="IndexToColorConverter"/>
+    </UserControl.Resources>
 
     <Border CornerRadius="20" Background="#FFFCE3B4" Padding="8">
         <Grid Background="#FFFCE3B4">
-            <TextBlock HorizontalAlignment="Left" Margin="318,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="318,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Đơn hàng"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
 
             <DataGrid x:Name="BillTable" 
                       AutoGenerateColumns="False" 
                       ItemsSource="{Binding Bill}" 
-                      AlternatingRowBackground="#E3F2FD"
                       SelectionMode="Single" 
                       SelectionUnit="FullRow" 
                       BorderBrush="Gray" 
@@ -21,7 +24,7 @@
                       Background="White" 
                       RowHeaderWidth="0" 
                       HeadersVisibility="Column" 
-                      SelectionChanged="DataGrid_SelectionChanged"
+                      SelectionChanged="BillTable_SelectionChanged"
                       CanUserAddRows="False" Margin="12,111,8,51" 
                       AlternationCount="1000">
                 <DataGrid.Resources>
@@ -37,6 +40,13 @@
                     </Style>
                 </DataGrid.Resources>
 
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" 
+                Value="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex), Converter={StaticResource IndexToColorConverter}}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="STT" MinWidth="50">
                         <DataGridTemplateColumn.CellTemplate>
@@ -45,22 +55,28 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
-                    <DataGridTextColumn Header="Mã hoá đơn" Binding="{Binding Id}" MinWidth="50" Width="auto"/>
+
+                    <DataGridTextColumn Header="Mã đơn hàng" Binding="{Binding Id}" MinWidth="50" Width="auto"/>
                     <DataGridTextColumn Header="Ngày nhập" Binding="{Binding Date}" MinWidth="80" Width="auto"/>
-                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" MinWidth="200" Width="auto"/>
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total, StringFormat=\{0:N0\} VND}" MinWidth="120" Width="auto"/>
+                    <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer}" MinWidth="100" Width="auto"/>
+                    <DataGridTextColumn Header="Nhân viên" Binding="{Binding Employee}" MinWidth="100" Width="auto"/>
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Total, StringFormat=\{0:N0\} VND}" MinWidth="100" Width="auto"/>
                     <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" MinWidth="120" Width="auto"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="385,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="25" FontSize="14"/>
-            <Button Content="Tìm" HorizontalAlignment="Left" Margin="553,49,0,0" VerticalAlignment="Top" Width="90" Height="25" Background="#FFD5AEFF" Click="Find_Click"/>
-            <TextBlock HorizontalAlignment="Left" Margin="271,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Danh sách hoá đơn"/><LineBreak/><Run Language="ja-jp"/></TextBlock>
-            <Button Content="Thêm mới" HorizontalAlignment="Left" Margin="110,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF9FC7EE" Click="Add_Click"/>
-            <Button Content="Sửa" HorizontalAlignment="Left" Margin="237,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFFAEE7F" Click="Edit_Click"/>
-            <Button Content="Xoá" HorizontalAlignment="Left" Margin="362,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFF47B60" Click="Delete_Click"/>
-            <Button Content="Xuất file" HorizontalAlignment="Left" Margin="481,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF73CE5E" Click="Export_Click"/>
-            <Button Content="Xem chi tiết" HorizontalAlignment="Left" Margin="540,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FFFFAA54" Click="Detail_Click"/>
+            <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Margin="377,49,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Height="25" FontSize="14"/>
+            <Button Content="Tìm" Style="{StaticResource FindButton}" HorizontalAlignment="Left" Margin="545,49,0,0" VerticalAlignment="Top" Width="64" Height="25" Click="Find_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="271,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" FontSize="16" FontWeight="Bold" Grid.RowSpan="1"><Run Language="ja-jp" Text="Danh sách đơn hàng"/></TextBlock>
+            <Button Content="Thêm mới" Style="{StaticResource AddButton}" HorizontalAlignment="Left" Margin="46,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Add_Click"/>
+            <Button Content="Sửa" Style="{StaticResource EditButton}" HorizontalAlignment="Left" Margin="173,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Edit_Click"/>
+            <Button Content="Xoá" Style="{StaticResource DeleteButton}" HorizontalAlignment="Left" Margin="298,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Delete_Click"/>
+            <Button Content="Xuất file" Style="{StaticResource ExportButton}" HorizontalAlignment="Left" Margin="422,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Export_Click"/>
+            <Button Content="Xem chi tiết" Style="{StaticResource DetailButton}" HorizontalAlignment="Left" Margin="540,361,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Detail_Click"/>
+            <Button Style="{StaticResource LoadButton}" Click="Load_Click" Margin="618,44,13,320">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="29">
+                    <materialDesign:PackIcon Kind="Reload" Width="30" Height="26"/>
+                </StackPanel>
+            </Button>
         </Grid>
     </Border>
 </UserControl>
