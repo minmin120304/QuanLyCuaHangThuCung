@@ -1,0 +1,35 @@
+[33mcommit 0506640eb9b041062d697b73c45012839ce5fa65[m
+Author: Nguyen Anh Ngoc Minh <22010476@st.phenikaa-uni.edu.vn>
+Date:   Sun Mar 30 23:05:46 2025 +0700
+
+    Bỏ ignore file bị bỏ qua
+
+[33mcommit 32e8153aca2fc86fa165b9a8d6a72277e93c4f31[m
+Author: Nguyen Anh Ngoc Minh <22010476@st.phenikaa-uni.edu.vn>
+Date:   Fri Mar 7 23:42:36 2025 +0700
+
+    Update database + UI
+
+[33mcommit ba283216e1133b03e04972f3cc0417ddeb28890c[m
+Author: Nguyen Anh Ngoc Minh <22010476@st.phenikaa-uni.edu.vn>
+Date:   Wed Mar 5 18:12:41 2025 +0700
+
+    Update CSDL, UI
+
+[33mcommit 510eb0384aad0258932db9676fe0323a97f1cf0b[m
+Author: Nguyen Anh Ngoc Minh <22010476@st.phenikaa-uni.edu.vn>
+Date:   Tue Mar 4 18:15:11 2025 +0700
+
+    Update
+
+[33mcommit b5f8664087bf54c47f9f6bcccf7ff3e2f08c4451[m
+Author: Nguyen Anh Ngoc Minh <22010476@st.phenikaa-uni.edu.vn>
+Date:   Mon Mar 3 00:29:11 2025 +0700
+
+    Update Customer UC
+
+[33mcommit c586bae2cb672490c1cffdc6a9d34ee55db54d5e[m
+Author: Nguyen Anh Ngoc Minh <22010476@st.phenikaa-uni.edu.vn>
+Date:   Fri Feb 28 19:05:09 2025 +0700
+
+    update Product UC

@@ -96,70 +96,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\202503281037187_TestFullUC.cs" />
-    <Compile Include="Migrations\202503281037187_TestFullUC.Designer.cs">
-      <DependentUpon>202503281037187_TestFullUC.cs</DependentUpon>
+    <Compile Include="Migrations\202503301805196_Test1.cs" />
+    <Compile Include="Migrations\202503301805196_Test1.Designer.cs">
+      <DependentUpon>202503301805196_Test1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Views\AlternationIndexToColorConverter.cs" />
     <Compile Include="AppDbContext.cs" />
     <Compile Include="IndexConverter.cs" />
-    <Compile Include="Migrations\202502280913074_Product-Test.cs" />
-    <Compile Include="Migrations\202502280913074_Product-Test.Designer.cs">
-      <DependentUpon>202502280913074_Product-Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503011029398_Cus-Test.cs" />
-    <Compile Include="Migrations\202503011029398_Cus-Test.Designer.cs">
-      <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503071547013_FixProductTable.cs" />
-    <Compile Include="Migrations\202503071547013_FixProductTable.Designer.cs">
-      <DependentUpon>202503071547013_FixProductTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503071639533_FixProductTable2.cs" />
-    <Compile Include="Migrations\202503071639533_FixProductTable2.Designer.cs">
-      <DependentUpon>202503071639533_FixProductTable2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503101013197_FixProductTable3.cs" />
-    <Compile Include="Migrations\202503101013197_FixProductTable3.Designer.cs">
-      <DependentUpon>202503101013197_FixProductTable3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503101114004_FixProductTable31.cs" />
-    <Compile Include="Migrations\202503101114004_FixProductTable31.Designer.cs">
-      <DependentUpon>202503101114004_FixProductTable31.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503101410066_hd.cs" />
-    <Compile Include="Migrations\202503101410066_hd.Designer.cs">
-      <DependentUpon>202503101410066_hd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503120651576_AllUC.cs" />
-    <Compile Include="Migrations\202503120651576_AllUC.Designer.cs">
-      <DependentUpon>202503120651576_AllUC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503120802515_AllUC2.cs" />
-    <Compile Include="Migrations\202503120802515_AllUC2.Designer.cs">
-      <DependentUpon>202503120802515_AllUC2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503160828048_AllUCTest.cs" />
-    <Compile Include="Migrations\202503160828048_AllUCTest.Designer.cs">
-      <DependentUpon>202503160828048_AllUCTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503230602365_All.cs" />
-    <Compile Include="Migrations\202503230602365_All.Designer.cs">
-      <DependentUpon>202503230602365_All.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503241536151_UCFull.cs" />
-    <Compile Include="Migrations\202503241536151_UCFull.Designer.cs">
-      <DependentUpon>202503241536151_UCFull.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503242301402_UCFull2.cs" />
-    <Compile Include="Migrations\202503242301402_UCFull2.Designer.cs">
-      <DependentUpon>202503242301402_UCFull2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202503250645445_UCFull3.cs" />
-    <Compile Include="Migrations\202503250645445_UCFull3.Designer.cs">
-      <DependentUpon>202503250645445_UCFull3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BillDetail.cs" />
     <Compile Include="Models\CurrentSession.cs" />
@@ -289,50 +233,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202502280913074_Product-Test.resx">
-      <DependentUpon>202502280913074_Product-Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503011029398_Cus-Test.resx">
-      <DependentUpon>202503011029398_Cus-Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503071547013_FixProductTable.resx">
-      <DependentUpon>202503071547013_FixProductTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503071639533_FixProductTable2.resx">
-      <DependentUpon>202503071639533_FixProductTable2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503101013197_FixProductTable3.resx">
-      <DependentUpon>202503101013197_FixProductTable3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503101114004_FixProductTable31.resx">
-      <DependentUpon>202503101114004_FixProductTable31.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503101410066_hd.resx">
-      <DependentUpon>202503101410066_hd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503120651576_AllUC.resx">
-      <DependentUpon>202503120651576_AllUC.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503120802515_AllUC2.resx">
-      <DependentUpon>202503120802515_AllUC2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503160828048_AllUCTest.resx">
-      <DependentUpon>202503160828048_AllUCTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503230602365_All.resx">
-      <DependentUpon>202503230602365_All.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503241536151_UCFull.resx">
-      <DependentUpon>202503241536151_UCFull.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503242301402_UCFull2.resx">
-      <DependentUpon>202503242301402_UCFull2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503250645445_UCFull3.resx">
-      <DependentUpon>202503250645445_UCFull3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202503281037187_TestFullUC.resx">
-      <DependentUpon>202503281037187_TestFullUC.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202503301805196_Test1.resx">
+      <DependentUpon>202503301805196_Test1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
