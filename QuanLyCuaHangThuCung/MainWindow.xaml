@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:QuanLyCuaHangThuCung"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Quản lý cửa hàng thú cưng" Height="660" Width="937"
-        MinHeight="600" MinWidth="900">
+        Title="Quản lý cửa hàng thú cưng" Height="770" Width="1020"
+        MinHeight="770" MinWidth="1020">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -26,9 +26,9 @@
                 </LinearGradientBrush>
             </DockPanel.Background>
             <!-- Logo -->
-            <StackPanel DockPanel.Dock="Top"> 
+            <StackPanel DockPanel.Dock="Top">
                 <Image Source="/Resourses/logo.jpg" Stretch="Uniform" Height="179" Margin="0,16,0,0"/>
-                
+
                 <Button Style="{StaticResource SidebarButton}" Click="Account_Click" Padding="20,10,10,10">
                     <StackPanel Orientation="Horizontal" Height="70" Width="auto">
                         <TextBlock x:Name="accountName" Text="{Binding FullName, Mode=OneWay}" Foreground="White" Width="150" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20"/>
