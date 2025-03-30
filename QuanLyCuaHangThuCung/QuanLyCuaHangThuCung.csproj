@@ -150,7 +150,6 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="NameConverter.cs" />
     <Compile Include="Utils\PasswordHelper.cs" />
-    <Compile Include="ViewModel\ReportViewModel.cs" />
     <Compile Include="Views\BillForm.xaml.cs">
       <DependentUpon>BillForm.xaml</DependentUpon>
     </Compile>
