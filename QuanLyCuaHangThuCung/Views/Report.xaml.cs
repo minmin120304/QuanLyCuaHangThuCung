@@ -112,7 +112,7 @@ namespace QuanLyCuaHangThuCung.Views
             MyPlotModel = new PlotModel { Title = "Doanh Thu" };
 
             // Trục Y là CategoryAxis (cần thiết cho BarSeries)
-            var categoryAxis = new CategoryAxis { Position = AxisPosition.Left, Title = "Thời gian" };
+            var categoryAxis = new CategoryAxis { Position = AxisPosition.Left, Title = "Thời gian", AxisTitleDistance = 8 };
 
             // Trục X là LinearAxis (để hiển thị doanh thu theo giá trị số)
             var valueAxis = new LinearAxis
@@ -164,7 +164,7 @@ namespace QuanLyCuaHangThuCung.Views
                 if (selectedType == "month")
                 {
                     int year = int.Parse(cbYear.SelectedItem.ToString());
-                    LoadRevenueChart("month", 0, year);
+                    LoadRevenueChart("month", year);
                 }
                 else if (selectedType == "year")
                 {
