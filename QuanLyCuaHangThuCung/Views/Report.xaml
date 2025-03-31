@@ -35,8 +35,22 @@
                                   Grid.Row="1" 
                                   Margin="10,0,10,42" 
                                   AutoGenerateColumns="False" 
+                                  HeadersVisibility="Column" 
                                   RenderTransformOrigin="0.5,0.5"
                                   AlternationCount="1000">
+                            <DataGrid.Resources>
+                                <!-- Style căn giữa tiêu đề -->
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+
+                                <!-- Style căn giữa nội dung -->
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            
                             <DataGrid.RenderTransform>
                                 <TransformGroup>
                                     <ScaleTransform/>
@@ -65,7 +79,7 @@
                                 <DataGridTextColumn Header="Số lượng còn lại" Width="120" Binding="{Binding SoLuongConLai}"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,242,51,0" Grid.Row="1" BorderThickness="0" Height="30" Click="BtnFilter_Click" VerticalAlignment="Top"/>
+                        <Button Content="Thống kê" Background="#FFF4D583" Margin="468,242,51,0" Grid.Row="1" BorderThickness="0" Height="30" Cursor="Hand" Click="BtnFilter_Click" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="23,247,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Từ" VerticalAlignment="Top" FontSize="16"/>
                         <DatePicker x:Name="dpFromDate" SelectedDate="{Binding FromDate}" HorizontalAlignment="Left" Margin="51,245,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                         <TextBlock HorizontalAlignment="Left" Margin="193,247,0,0" Grid.Row="1" TextWrapping="Wrap" Text="đến" VerticalAlignment="Top" FontSize="16"/>
@@ -80,6 +94,7 @@
                         <DataGrid x:Name="dataGridLoyalCustomers" 
                                   Margin="10" 
                                   AutoGenerateColumns="False"
+                                  HeadersVisibility="Column" 
                                   AlternationCount="1000">
                             
                             <DataGrid.RowStyle>
@@ -89,9 +104,30 @@
                                 </Style>
                             </DataGrid.RowStyle>
                             
+                            <DataGrid.Resources>
+                                <!-- Style căn giữa tiêu đề -->
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                </Style>
+
+                                <!-- Style căn giữa nội dung -->
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã KH" Width="100" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Tên khách hàng" Width="*" Binding="{Binding customerName}"/>
+                                <DataGridTextColumn Header="Mã KH" Width="100" Binding="{Binding Id}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Tên khách hàng" Width="*" Binding="{Binding customerName}"/>
                                 <DataGridTextColumn Header="Số lượng đơn hàng" Width="150" Binding="{Binding SoLuongDonHang}"/>
                                 <DataGridTextColumn Header="Số tiền" Width="100" Binding="{Binding SoTien}"/>
                             </DataGrid.Columns>
@@ -115,7 +151,7 @@
 
                         <ComboBox Height="22" SelectedIndex="0" x:Name="cbToYear" Visibility="Collapsed" VerticalAlignment="Top" Margin="307,12,202,0"/>
 
-                        <Button x:Name="btnStatistic" Content="Thống kê" HorizontalAlignment="Left" Margin="442,9,0,0" VerticalAlignment="Top" Height="26" Width="80" Background="#FFF4D583" BorderThickness="0" Click="BtnStatistic_Click"/>
+                        <Button x:Name="btnStatistic" Content="Thống kê" HorizontalAlignment="Left" Margin="442,9,0,0" VerticalAlignment="Top" Height="26" Width="80" Background="#FFF4D583" Cursor="Hand" BorderThickness="0" Click="BtnStatistic_Click"/>
                     </Grid>
                 </TabItem>
             </TabControl>
